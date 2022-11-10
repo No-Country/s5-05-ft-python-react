@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    'rest_framework',
+    'multiselectfield',
+    'main',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +82,7 @@ DATABASES = {
         'NAME': 'padelDb', 
         'USER': 'postgres', 
         'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1', 
+        'HOST': 'localhost', 
         'PORT': '5432',
     }
 }
