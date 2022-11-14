@@ -1,13 +1,14 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { PlayerList } from "./components/PlayerList/PlayerList";
+import { HomeCourt } from "./pages/HomeCourt";
 
-function App() {
+export const App = () => {
   return (
-    <div className="App">
-      <h1>App no Country</h1>
-      <PlayerList />
-    </div>
+    <Routes>
+      <Route path="/" element={<HomeCourt />} />
+      <Route path="/profile" />
+      <Route path="/login" />
+      <Route path="/register" />
+    </Routes>
   );
-}
-
-export default App;
+};
