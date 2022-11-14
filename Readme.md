@@ -2,8 +2,8 @@
 
 | Developer          | Rol       | LinkedIn                                      | GitHub                               |
 | ------------------ | --------- | ----------------------------------------------| -------------------------------------|
-| Santiago Muñoz     | Back-End  |https://www.linkedin.com/in/santiago-mu%C3%B1oz-b4833a236/|                           |
-| Jesus Leal         | Back-End  |https://www.linkedin.com/in/jesus-leal-6908291b2/|                                    |
+| Santiago Muñoz     | Back-End  |https://www.linkedin.com/in/santiago-mu%C3%B1oz-b4833a236/| https://github.com/SantiagoEzequielMunioz |
+| Jesus Leal         | Back-End  |https://www.linkedin.com/in/jesus-leal-6908291b2/| https://github.com/imjesusleal     |
 | German Carchi      | Back-End  |                                               |                                      |
 | Matias Cañadas     | Analista Funcional & QA |https://www.linkedin.com/in/matiascanadas/| https://github.com/Hotbones |
 | Diego Nieves       | Front-End |                                               |                                      |
