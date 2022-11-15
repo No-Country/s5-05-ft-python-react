@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
+
+:root {
+	/* VARS LIST COLORS */
+	--color--navy: #2365bb;
+	--color--blue: #3282c3;
+	--color--light--blue: #b3c6e1;
+	--color--white: #dbe1ef;
+	--color--green: #bbd9a8;
+
+	/* VAR FONT FAMILY */
+	--ff--lato: "Lato", sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
