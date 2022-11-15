@@ -1,10 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from multiselectfield import MultiSelectField
+from django.conf import settings
 
-class Dias(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    opciones = [
+
+class User(AbstractUser):
+    is_jugador = models.BooleanField(default=False)
+    is_complejo = models.BooleanField(default=False)
+
+class Jugador(models.Model):
+    usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    op_dias = [
         (1, 'Lunes'),
         (2, 'Martes'),
         (3, 'Miercoles'),
@@ -13,29 +21,59 @@ class Dias(models.Model):
         (6, 'Sabado'),
         (7, 'Domingo'),
     ]
-    dias = MultiSelectField(choices=opciones,max_length=50,null=True, blank=True)
+    dias = MultiSelectField(choices=op_dias,max_length=7,null=True, blank=True)
 
-class Horas(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    opciones = [
-        (1, '08:00'),(2, '09:00'),(3, '10:00'),
-        (4, '11:00'),(5, '12:00'),(6, '13:00'),
-        (7, '14:00'),(8, '15:00'),(9, '16:00'),
-        (10, '17:00'),(11, '18:00'),(12, '19:00'),
-        (13, '20:00'),(14, '21:00'),(15, '22:00'),
-        (16, '23:00')
+    op_turnos = [
+        ('M', 'Mañana'),
+        ('T', 'Tarde'),
+        ('N', 'Noche'),
     ]
-    horas = MultiSelectField(choices=opciones,max_length=50,null=True, blank=True)
-
-class Disponibilidad(models.Model):
-    dias = models.ForeignKey(Dias, on_delete=models.CASCADE)
-    horas = models.ForeignKey(Horas, on_delete=models.CASCADE)
-
-class Perfil(models.Model):
+    turnos = MultiSelectField(choices=op_turnos,max_length=3,null=True, blank=True)
+    
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
-    dni = models.IntegerField(unique=True, error_messages ={"unique":"Este DNI ya está registrado."},null=True, blank=True)
-    fecha_nacimiento = models.DateField(null=True, blank=True, default='1990-10-10')
-    ciudad = models.CharField(max_length=100,null=True, blank=True)
-    telefono = models.CharField(max_length=10, help_text='Número sin 0 ni 15',null=True, blank=True)
-    disponibilidad = models.OneToOneField(Disponibilidad, on_delete=models.CASCADE)
+
+    MASCULINO='M'
+    FEMENINO='F'
+    SEXOS = [
+        (MASCULINO, 'Masculino'),
+        (FEMENINO, 'Femenino'),
+    ]
+    
+    sexo = models.CharField(max_length=1, choices=SEXOS)
+    nivel = models.SmallIntegerField(choices=[(i,i) for i in range(1,8)])
+    telefono = models.CharField(max_length=10, help_text='Número sin 0 ni 15')
+
+    class Meta:
+        verbose_name = 'Jugador'
+        verbose_name_plural = 'Jugadores'
+
+    def str(self):
+        return (f'Nombre: {self.nombre} Apellido:{self.apellido}')
+
+
+class Complejo(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=100)
+    
+    direccion = models.CharField(max_length=150)
+
+    class Meta:
+        verbose_name = 'Complejo'
+        verbose_name_plural = 'Complejos'
+
+    def str(self):
+        return self.nombre
+
+class Cancha(models.Model):
+
+    techada = models.BooleanField(default=False)     # si es T es aire libre
+    piso_sint = models.BooleanField(default=False)     # si es T es cemento
+    pared_blindex = models.BooleanField(default=False)    # si es T es sintex
+    complejo = models.ForeignKey(Complejo, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Cancha'
+        verbose_name_plural = 'Canchas'
+
+
