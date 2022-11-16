@@ -10,6 +10,14 @@
 
 	/* VAR FONT FAMILY */
 	--ff--lato: "Lato", sans-serif;
+
+	/* VAR FONT SIZE */
+	--fs--xbig: 22px;
+	--fs--big: 20px;
+	--fs--medium: 18px;
+	--fs--normal: 16px;
+	--fs--small: 14px;
+	--fs--xsmall: 12px;
 }
 
 * {
