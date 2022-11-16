@@ -1,6 +1,83 @@
 .container--profilePlayer {
 	width: 100%;
 	min-height: 100vh;
-	background-color: purple;
 	font-family: var(--ff--lato);
+}
+
+.container--profilePlayer--avatar--name {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.profilePlayer--avatar {
+	border-radius: 50%;
+	width: 80px;
+	height: 80px;
+	margin: 15px;
+}
+
+.container--profilePlayer--name {
+	margin-left: 15px;
+	display: flex;
+	flex-direction: column;
+}
+
+.profilePlayer--lastName {
+	text-transform: capitalize;
+	font-size: var(--fs--big);
+	font-weight: 700;
+	color: var(--color--navy);
+}
+.profilePlayer--name {
+	text-transform: capitalize;
+	font-size: var(--fs--big);
+	font-weight: 700;
+	color: var(--color--navy);
+}
+.profilePlayer--lastName--span {
+	font-size: var(--fs--big);
+	font-weight: 700;
+	color: var(--color--green);
+}
+.container--profilePlayer--info {
+	display: flex;
+	flex-direction: column;
+}
+.profilePlayer--info--icon {
+	width: 40px;
+	margin: 15px;
+}
+.container--profilePlayer--info--level {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.profilePlayer--info--level--text {
+}
+.profilePlayer--info--level--number {
+}
+
+.container--profilePlayer--info--available {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.profilePlayer--info--available--text {
+}
+
+.container--profilePlayer--info--contact {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.profilePlayer--info--contact--number {
+}
+
+.container--profilePlayer--info--genre {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.profilePlayer--info--genre--text {
 }
