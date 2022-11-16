@@ -1,13 +1,28 @@
-.container--profilePlayer {
+.container--section--profilePlayer {
 	width: 100%;
 	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	background-image: url("../../assets/profile/bg_profile_1.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.container--profilePlayer {
+	width: 600px;
+	padding: 0px 40px;
 	font-family: var(--ff--lato);
+	background-color: rgba(255, 255, 255, 0.637);
+	display: flex;
+	flex-direction: column;
 }
 
 .container--profilePlayer--avatar--name {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	align-self: center;
 }
 
 .profilePlayer--avatar {
@@ -54,16 +69,40 @@
 	align-items: center;
 }
 .profilePlayer--info--level--text {
+	font-weight: 700;
+	color: var(--color--navy);
 }
 .profilePlayer--info--level--number {
+	width: 35px;
+	height: 35px;
+	line-height: 33px;
+	border-radius: 50%;
+	margin-left: 15px;
+	color: var(--color--navy);
+	border: 1px solid var(--color--green);
+	text-align: center;
 }
 
+.container--profilePlayer--info--position {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.profilePlayer--position--text {
+	font-weight: 700;
+}
+.profilePlayer--position--value {
+	font-weight: 700;
+	color: var(--color--navy);
+}
 .container--profilePlayer--info--available {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
+
 .profilePlayer--info--available--text {
+	font-weight: 700;
 }
 
 .container--profilePlayer--info--contact {
@@ -71,7 +110,19 @@
 	flex-direction: row;
 	align-items: center;
 }
+
 .profilePlayer--info--contact--number {
+	font-weight: 700;
+	padding: 10px 15px;
+	border: 1px solid var(--color--navy);
+	border-radius: 25px;
+	cursor: pointer;
+	transition: all 0.05s linear;
+}
+.profilePlayer--info--contact--number:hover {
+	transition: all 0.05s linear;
+	border-bottom: 3px solid var(--color--navy);
+	border-left: 2px solid var(--color--navy);
 }
 
 .container--profilePlayer--info--genre {
@@ -80,4 +131,5 @@
 	align-items: center;
 }
 .profilePlayer--info--genre--text {
+	font-weight: 700;
 }
