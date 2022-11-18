@@ -4,7 +4,7 @@ const user = {
 	name: "Nombre",
 	lastName: "Apellido",
 	position: "Drive",
-	available: "",
+	available: "Lista de Horarios",
 	contact: "1234567899",
 	genre: "Hombre",
 };
@@ -37,6 +37,15 @@ export const ProfileUpdatePlayer = ({ updateData }) => {
 				className='profile--updatePlayer--input'
 				type='text'
 				placeholder={user.position}
+				disabled={updateData ? false : true}
+			/>
+			<label className='profile--updatePlayer--label'>
+				{updateData ? "Horarios" : ""}
+			</label>
+			<input
+				className='profile--updatePlayer--input'
+				type='text'
+				placeholder={user.available}
 				disabled={updateData ? false : true}
 			/>
 			<label className='profile--updatePlayer--label'>
