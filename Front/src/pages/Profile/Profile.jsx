@@ -1,22 +1,26 @@
 import { useState } from "react";
 // import FemalePlayer from "../../assets/profile/female_player.png";
-import AvailableIcon from "../../assets/profile/available_icon.png";
-import GenreIcon from "../../assets/profile/genre_icon.png";
-import LevelIcon from "../../assets/profile/level_icon.png";
-import MalePlayer from "../../assets/profile/male_player.png";
-import PositionIcon from "../../assets/profile/position_icon.png";
-import WtsIcon from "../../assets/profile/wts_icon.png";
-import { openInNewTab } from "../../helpers/openInNewTab";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./profile.css";
-import { ProfileUpdateComplex } from "./ProfileUpdate/Complex/ProfileUpdateComplex";
-import { ProfileUpdatePlayer } from "./ProfileUpdate/Player/ProfileUpdatePlayer";
+import { ProfileUpdateComplex } from "./ProfileUpdate/ProfileUpdateComplex";
+import { ProfileUpdatePlayer } from "./ProfileUpdate/ProfileUpdatePlayer";
 export const Profile = () => {
 	const [user, setUser] = useState("player");
 	const [updateData, setUpdateData] = useState(false);
 
 	const handleUpdateData = () => {
+		updateData && notify();
 		setUpdateData(!updateData);
 	};
+
+	const notify = () =>
+		toast("Cambios guardados", {
+			position: toast.POSITION.BOTTOM_CENTER,
+			className: "profile--update--toast",
+			draggablePercent: 60,
+			autoClose: 1000,
+		});
 
 	return (
 		<div className='container--section--profile'>
@@ -36,6 +40,7 @@ export const Profile = () => {
 					<ProfileUpdateComplex updateData={updateData} />
 				)}
 			</div>
+			<ToastContainer />
 		</div>
 	);
 };
