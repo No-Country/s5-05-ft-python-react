@@ -1,8 +1,9 @@
+import { useState } from "react";
 import AvatarCourt from "../../../assets/profile/img_complex.jpg";
 import PhotoIcon from "../../../assets/profile/photo_icon.png";
 
 const complex = {
-	name: "Nombre de las canchas",
+	name: "Nombre de la cancha",
 	address: "Direccion XXXXX",
 	country: "Pais XXXXX",
 	city: "Ciudad XXXXX",
@@ -11,6 +12,13 @@ const complex = {
 };
 
 export const ProfileUpdateComplex = ({ updateData }) => {
+	const [nameUpdate, setNameUpdate] = useState();
+	const [adressUpdate, setAdressUpdate] = useState();
+	const [cityUpdate, setCityUpdate] = useState();
+	const [countryUpdate, setCountryUpdate] = useState();
+	const [availableUpdate, setAvailableUpdate] = useState();
+	const [contactUpdate, setContactUpdate] = useState();
+
 	return (
 		<div className='container--profile--update'>
 			<div className='container--profile--avatar'>
@@ -21,7 +29,7 @@ export const ProfileUpdateComplex = ({ updateData }) => {
 				/>
 				{updateData && (
 					<img
-						className='profile--update--cameraIcon'
+						className='profile--updateComplex--cameraIcon'
 						src={PhotoIcon}
 						alt='camera icon'
 					/>
@@ -38,6 +46,7 @@ export const ProfileUpdateComplex = ({ updateData }) => {
 				type='text'
 				placeholder={complex.name}
 				disabled={updateData ? false : true}
+				onChange={(e) => setNameUpdate(e.target.value)}
 			/>
 			<label
 				className={`profile--update--label ${
@@ -50,6 +59,7 @@ export const ProfileUpdateComplex = ({ updateData }) => {
 				type='text'
 				placeholder={complex.address}
 				disabled={updateData ? false : true}
+				onChange={(e) => setAdressUpdate(e.target.value)}
 			/>
 			<label
 				className={`profile--update--label ${
@@ -62,6 +72,7 @@ export const ProfileUpdateComplex = ({ updateData }) => {
 				type='text'
 				placeholder={complex.city}
 				disabled={updateData ? false : true}
+				onChange={(e) => setCityUpdate(e.target.value)}
 			/>
 			<label
 				className={`profile--update--label ${
@@ -74,6 +85,7 @@ export const ProfileUpdateComplex = ({ updateData }) => {
 				type='text'
 				placeholder={complex.country}
 				disabled={updateData ? false : true}
+				onChange={(e) => setCountryUpdate(e.target.value)}
 			/>
 			<label
 				className={`profile--update--label ${
@@ -86,6 +98,7 @@ export const ProfileUpdateComplex = ({ updateData }) => {
 				type='text'
 				placeholder={complex.available}
 				disabled={updateData ? false : true}
+				onChange={(e) => setAvailableUpdate(e.target.value)}
 			/>
 			<label
 				className={`profile--update--label ${
@@ -98,6 +111,7 @@ export const ProfileUpdateComplex = ({ updateData }) => {
 				type='text'
 				placeholder={complex.contact}
 				disabled={updateData ? false : true}
+				onChange={(e) => setContactUpdate(e.target.value)}
 			/>
 		</div>
 	);
