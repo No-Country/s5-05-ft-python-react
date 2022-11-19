@@ -1,3 +1,6 @@
+// import FemalePlayer from "../../../assets/profile/female_player.png";
+import MalePlayer from "../../../assets/profile/male_player.png";
+import PhotoIcon from "../../../assets/profile/photo_icon.png";
 const user = {
 	name: "Nombre",
 	lastName: "Apellido",
@@ -10,6 +13,20 @@ const user = {
 export const ProfileUpdatePlayer = ({ updateData }) => {
 	return (
 		<div className='container--profile--update'>
+			<div className='container--profile--avatar'>
+				<img
+					className='profilePlayer--avatar'
+					src={MalePlayer}
+					alt='avatar icon'
+				/>
+				{updateData && (
+					<img
+						className='profile--update--cameraIcon'
+						src={PhotoIcon}
+						alt='camera icon'
+					/>
+				)}
+			</div>
 			<label
 				className={`profile--update--label ${
 					updateData ? "show_time_1" : ""
