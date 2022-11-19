@@ -12,6 +12,17 @@
 	color: var(--color--green);
 	text-transform: capitalize;
 	font-weight: 700;
+	text-align: center;
+}
+.profile--update--toast--icon {
+	width: 35px;
+}
+.profile--update--toast--error {
+	background-color: var(--color--green);
+	color: var(--color--navy);
+	text-transform: capitalize;
+	font-weight: 700;
+	text-align: center;
 }
 
 .container--section--profile {
@@ -61,11 +72,26 @@
 	display: flex;
 	flex-direction: column;
 	font-family: var(--ff--lato);
+	padding: 30px 0px;
+}
+
+.container--profile--avatar {
+	position: relative;
+	width: max-content;
+	align-self: center;
+}
+
+.profile--update--cameraIcon {
+	width: 15px;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	z-index: 2;
 }
 
 .profile--update--label {
 	height: 20px;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 	color: var(--color--navy);
 	font-weight: 500;
 	letter-spacing: 0.5px;
@@ -74,7 +100,7 @@
 
 .profile--update--input {
 	width: 240px;
-	height: 30px;
+	height: 40px;
 	padding-left: 15px;
 	background-color: transparent;
 	border: none;
