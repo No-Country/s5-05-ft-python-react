@@ -1,4 +1,5 @@
 // import FemalePlayer from "../../../assets/profile/female_player.png";
+import { useState } from "react";
 import MalePlayer from "../../../assets/profile/male_player.png";
 import PhotoIcon from "../../../assets/profile/photo_icon.png";
 const user = {
@@ -11,6 +12,13 @@ const user = {
 };
 
 export const ProfileUpdatePlayer = ({ updateData }) => {
+	const [nameUpdate, setNameUpdate] = useState();
+	const [lastNameUpdate, setLastNameUpdate] = useState();
+	const [positionUpdate, setPositionUpdate] = useState();
+	const [availableUpdate, setAvailableUpdate] = useState();
+	const [contactUpdate, setContactUpdate] = useState();
+	const [genreUpdate, setGenreUpdate] = useState();
+
 	return (
 		<div className='container--profile--update'>
 			<div className='container--profile--avatar'>
@@ -38,6 +46,7 @@ export const ProfileUpdatePlayer = ({ updateData }) => {
 				type='text'
 				placeholder={user.name}
 				disabled={updateData ? false : true}
+				onChange={(e) => setNameUpdate(e.target.value)}
 			/>
 			<label
 				className={`profile--update--label ${
@@ -50,6 +59,7 @@ export const ProfileUpdatePlayer = ({ updateData }) => {
 				type='text'
 				placeholder={user.lastName}
 				disabled={updateData ? false : true}
+				onChange={(e) => setLastNameUpdate(e.target.value)}
 			/>
 			<label
 				className={`profile--update--label ${
@@ -62,6 +72,7 @@ export const ProfileUpdatePlayer = ({ updateData }) => {
 				type='text'
 				placeholder={user.position}
 				disabled={updateData ? false : true}
+				onChange={(e) => setPositionUpdate(e.target.value)}
 			/>
 			<label
 				className={`profile--update--label ${
@@ -74,6 +85,7 @@ export const ProfileUpdatePlayer = ({ updateData }) => {
 				type='text'
 				placeholder={user.available}
 				disabled={updateData ? false : true}
+				onChange={(e) => setAvailableUpdate(e.target.value)}
 			/>
 			<label
 				className={`profile--update--label ${
@@ -86,6 +98,7 @@ export const ProfileUpdatePlayer = ({ updateData }) => {
 				type='text'
 				placeholder={user.contact}
 				disabled={updateData ? false : true}
+				onChange={(e) => setContactUpdate(e.target.value)}
 			/>
 			<label
 				className={`profile--update--label ${
@@ -98,6 +111,7 @@ export const ProfileUpdatePlayer = ({ updateData }) => {
 				type='text'
 				placeholder={user.genre}
 				disabled={updateData ? false : true}
+				onChange={(e) => setGenreUpdate(e.target.value)}
 			/>
 		</div>
 	);
