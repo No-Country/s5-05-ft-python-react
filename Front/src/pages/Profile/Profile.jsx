@@ -2,11 +2,12 @@ import { useState } from "react";
 // import FemalePlayer from "../../assets/profile/female_player.png";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SuccesIcon from "../../assets/profile/succes_icon.png";
 import "./profile.css";
 import { ProfileUpdateComplex } from "./ProfileUpdate/ProfileUpdateComplex";
 import { ProfileUpdatePlayer } from "./ProfileUpdate/ProfileUpdatePlayer";
 export const Profile = () => {
-	const [user, setUser] = useState("player");
+	const [user, setUser] = useState("complex");
 	const [updateData, setUpdateData] = useState(false);
 
 	const handleUpdateData = () => {
@@ -14,13 +15,27 @@ export const Profile = () => {
 		setUpdateData(!updateData);
 	};
 
-	const notify = () =>
-		toast("Cambios guardados", {
-			position: toast.POSITION.BOTTOM_CENTER,
-			className: "profile--update--toast",
-			draggablePercent: 60,
-			autoClose: 1000,
-		});
+	const notify = (resolve = true) =>
+		resolve
+			? toast("Cambios guardados", {
+					position: toast.POSITION.BOTTOM_CENTER,
+					className: "profile--update--toast",
+					draggablePercent: 60,
+					autoClose: 1000,
+					icon: () => (
+						<img
+							className='profile--update--toast--icon'
+							src={SuccesIcon}
+							alt='icon'
+						/>
+					),
+			  })
+			: toast.error("Ocurrio un error", {
+					position: toast.POSITION.BOTTOM_CENTER,
+					className: "profile--update--toast--error",
+					draggablePercent: 60,
+					autoClose: 1000,
+			  });
 
 	return (
 		<div className='container--section--profile'>
