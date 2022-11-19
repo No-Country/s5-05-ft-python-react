@@ -93,9 +93,19 @@
 	bottom: 10px;
 	right: 10px;
 	z-index: 2;
-	background-color: white;
 	border-radius: 5px;
 	cursor: pointer;
+}
+
+.profile--updateComplex--cameraIcon {
+	width: 15px;
+	position: absolute;
+	bottom: 30px;
+	right: 10px;
+	z-index: 2;
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: white;
 }
 
 .profile--update--label {
