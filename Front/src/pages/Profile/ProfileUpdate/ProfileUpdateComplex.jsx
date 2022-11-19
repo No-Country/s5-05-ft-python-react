@@ -1,3 +1,6 @@
+import AvatarCourt from "../../../assets/profile/img_complex.jpg";
+import PhotoIcon from "../../../assets/profile/photo_icon.png";
+
 const complex = {
 	name: "Nombre de las canchas",
 	address: "Direccion XXXXX",
@@ -10,6 +13,20 @@ const complex = {
 export const ProfileUpdateComplex = ({ updateData }) => {
 	return (
 		<div className='container--profile--update'>
+			<div className='container--profile--avatar'>
+				<img
+					className='profileComplex--avatar'
+					src={AvatarCourt}
+					alt='avatar icon'
+				/>
+				{updateData && (
+					<img
+						className='profile--update--cameraIcon'
+						src={PhotoIcon}
+						alt='camera icon'
+					/>
+				)}
+			</div>
 			<label
 				className={`profile--update--label  ${
 					updateData ? "show_time_1" : ""
