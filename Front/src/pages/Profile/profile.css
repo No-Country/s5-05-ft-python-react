@@ -79,6 +79,12 @@
 	position: relative;
 	width: max-content;
 	align-self: center;
+	padding: 20px 0px;
+}
+
+.profileComplex--avatar {
+	width: 300px;
+	border-radius: 5px;
 }
 
 .profile--update--cameraIcon {
@@ -87,6 +93,9 @@
 	bottom: 10px;
 	right: 10px;
 	z-index: 2;
+	background-color: white;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
 .profile--update--label {
