@@ -6,7 +6,7 @@ from .models import User, Jugador
 @receiver (post_save, sender=User) #creo perfil Jugador al momento de crear User.
 def update_save_jugador_perfil(sender, instance, created, **kwargs):
     user = instance
-    if created: 
+    if created and user.is_superuser == False: 
         jugador = Jugador.objects.create(usuario = user)
         jugador.save()
 

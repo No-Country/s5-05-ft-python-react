@@ -3,9 +3,6 @@ from .models import User, Jugador
 
 class UserSerializer(serializers.ModelSerializer):
     
-    dias = serializers.SerializerMethodField()
-    turnos = serializers.SerializerMethodField()
-    
     class Meta:
         model= User
         fields = "__all__"
