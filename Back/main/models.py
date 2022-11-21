@@ -47,6 +47,12 @@ class User(AbstractUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    # def get_dias(self, obj):
+    #     return obj.get_dias_display()
+    
+    # def get_turnos(self, obj):
+    #     return obj.get_turnos_display()
+
 class Jugador(models.Model):
     
     op_dias = [
@@ -72,11 +78,11 @@ class Jugador(models.Model):
         (FEMENINO, 'Femenino'),
     ]
     
-    usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='Jugador')
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     sexo = models.CharField(max_length=1, choices=SEXOS)
-    nivel = models.SmallIntegerField(choices=[(i,i) for i in range(1,8)])
+    nivel = models.SmallIntegerField(choices=[(i,i) for i in range(1,8)], null = True, blank = True)
     telefono = models.CharField(max_length=10, help_text='Número sin 0 ni 15')
     dias = MultiSelectField(choices=op_dias,max_length=7,null=True, blank=True)
     turnos = MultiSelectField(choices=op_turnos,max_length=3,null=True, blank=True)

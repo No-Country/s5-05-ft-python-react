@@ -1,25 +1,42 @@
-from django.shortcuts import render
-from rest_framework.generics import GenericAPIView
+from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializer import JugadorSerializer
+from .serializer import UserSerializer, JugadorSerializer
 from django.http import JsonResponse
-from .models import Jugador
+from .models import Jugador, User
 
-# Create your views here.
-# class RegistrationAPI(GenericAPIView):
-#     serializer = JugadorSerializer
-
-#     def post(self,request, *args, **kwargs):
-#         serializer = self.get.serializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         user=serializer.save()
-#         return Response({
-#             'user':JugadorSerializer(user,context=self.get_serializer_context()).data,
-#         })
+@api_view(['GET', 'POST'])
+def user_api_view(request):
+        if request.method == 'GET':    
+            users = User.objects.all()
+            user_serializer = UserSerializer(users, many = True)
+            user_serializer.get_turnos_display()
+            return Response(user_serializer.data)
 
 
-def lista_jugador(request):
+@api_view(['GET', 'POST'])
+def jugador_api_view(request):
+        if request.method == 'GET':    
+            jugador = Jugador.objects.all()
+            jugador_serializer = JugadorSerializer(jugador, many = True)
+            return Response(jugador_serializer.data)
+
+
+
+@api_view(['GET', 'POST'])
+def jugador_detail_view(request, pk):
+
     if request.method == 'GET':
-        jugador = Jugador.objects.all()
-        serializer = JugadorSerializer(jugador, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        if pk is not None:
+            jugador = Jugador.objects.filter(id = pk).first()
+            jugador_serializer = JugadorSerializer(jugador)
+            return Response(jugador_serializer.data)
+
+
+
+# def lista_jugador(request):
+#     if request.method == 'GET':
+#         jugador = Jugador.objects.all()
+#         serializer = JugadorSerializer(jugador, many=True)
+#         return JsonResponse(serializer.data, safe=False)
