@@ -24,7 +24,7 @@ def jugador_api_view(request):
 
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def jugador_detail_view(request, pk):
 
     if request.method == 'GET':
@@ -32,11 +32,3 @@ def jugador_detail_view(request, pk):
             jugador = Jugador.objects.filter(id = pk).first()
             jugador_serializer = JugadorSerializer(jugador)
             return Response(jugador_serializer.data)
-
-
-
-# def lista_jugador(request):
-#     if request.method == 'GET':
-#         jugador = Jugador.objects.all()
-#         serializer = JugadorSerializer(jugador, many=True)
-#         return JsonResponse(serializer.data, safe=False)

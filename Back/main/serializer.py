@@ -3,8 +3,8 @@ from .models import User, Jugador
 
 class UserSerializer(serializers.ModelSerializer):
     
-    dias = serializers.SerializerMethodField()
-    turnos = serializers.SerializerMethodField()
+    # dias = serializers.SerializerMethodField()
+    # turnos = serializers.SerializerMethodField()
     
     class Meta:
         model= User
