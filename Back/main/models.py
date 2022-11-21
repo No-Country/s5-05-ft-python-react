@@ -40,18 +40,12 @@ class User(AbstractUser, PermissionsMixin):
     is_jugador = models.BooleanField(default=False)
     is_complejo = models.BooleanField(default=False)
     fecha_ingreso = models.DateTimeField(default=datetime.now, blank=True)
-    #username = models.CharField('username', max_length=255, unique = True)
 
     objects = CustomUserManager()
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    # def get_dias(self, obj):
-    #     return obj.get_dias_display()
-    
-    # def get_turnos(self, obj):
-    #     return obj.get_turnos_display()
 
 class Jugador(models.Model):
     
@@ -120,7 +114,6 @@ class Complejo(models.Model):
     ciudad = models.CharField(max_length = 155, verbose_name = 'Ciudad')
     calle = models.IntegerField(verbose_name = 'Calle')
     año = models.IntegerField(verbose_name = 'Año')
-
 
 
     class Meta:
