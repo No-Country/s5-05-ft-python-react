@@ -3,6 +3,7 @@ import "./App.css";
 
 import { Complex } from "./pages/Complex/Complex";
 import { Players } from "./pages/Players/Players";
+import { Registers } from "./pages/Registers/Registers";
 import { ProfileComplex } from "./pages/ProfileComplex/ProfileComplex";
 import { ProfilePlayer } from "./pages/ProfilePlayer/ProfilePlayer";
 
@@ -16,7 +17,7 @@ export const App = () => {
       <Route path="/profile/player/:idPlayer" element={<ProfilePlayer />} />
       <Route path="/profile" element={<ProfilePlayer />} />
       <Route path="/login" />
-      <Route path="/register" />
+      <Route path="/register" element={<Registers />} />
     </Routes>
   );
 };
