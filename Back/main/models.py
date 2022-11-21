@@ -33,8 +33,6 @@ class CustomUserManager(BaseUserManager):
 
         return user
 
-
-
 class User(AbstractUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
@@ -49,9 +47,14 @@ class User(AbstractUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-class Jugador(models.Model):
-    usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # def get_dias(self, obj):
+    #     return obj.get_dias_display()
+    
+    # def get_turnos(self, obj):
+    #     return obj.get_turnos_display()
 
+class Jugador(models.Model):
+    
     op_dias = [
         (1, 'Lunes'),
         (2, 'Martes'),
@@ -61,17 +64,12 @@ class Jugador(models.Model):
         (6, 'Sabado'),
         (7, 'Domingo'),
     ]
-    dias = MultiSelectField(choices=op_dias,max_length=7,null=True, blank=True)
-
+    
     op_turnos = [
         ('M', 'Mañana'),
         ('T', 'Tarde'),
         ('N', 'Noche'),
     ]
-    turnos = MultiSelectField(choices=op_turnos,max_length=3,null=True, blank=True)
-    
-    nombre = models.CharField(max_length=100)
-    apellido = models.CharField(max_length=100)
 
     MASCULINO='M'
     FEMENINO='F'
@@ -80,29 +78,56 @@ class Jugador(models.Model):
         (FEMENINO, 'Femenino'),
     ]
     
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='Jugador')
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
     sexo = models.CharField(max_length=1, choices=SEXOS)
-    nivel = models.SmallIntegerField(choices=[(i,i) for i in range(1,8)])
+    nivel = models.SmallIntegerField(choices=[(i,i) for i in range(1,8)], null = True, blank = True)
     telefono = models.CharField(max_length=10, help_text='Número sin 0 ni 15')
-
+    dias = MultiSelectField(choices=op_dias,max_length=7,null=True, blank=True)
+    turnos = MultiSelectField(choices=op_turnos,max_length=3,null=True, blank=True)
+    
     class Meta:
         verbose_name = 'Jugador'
         verbose_name_plural = 'Jugadores'
 
-    def str(self):
+    def __str__(self):
         return (f'Nombre: {self.nombre} Apellido:{self.apellido}')
 
-
+        
 class Complejo(models.Model):
+    OP_COBERTURA = [
+        (1, 'Techada'),
+        (2, 'Aire Libre')
+    ]
+
+    OP_SUPERFICIE = [
+        (1, 'Cemento'),
+        (2, 'Sintetico')
+    ]
+
+    OP_TIPO_PARED = [ 
+        (1, 'Cemento'),
+        (2, 'Blindex')
+    ]
+
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=100)
-    
-    direccion = models.CharField(max_length=150)
+    cobertura = models.IntegerField(choices = OP_COBERTURA, default = 1)
+    superficie = models.IntegerField(choices = OP_SUPERFICIE, default = 1)
+    tipo_pared = models.IntegerField(choices = OP_TIPO_PARED, default = 1)
+    pais = models.CharField(max_length = 155, verbose_name = 'Pais')
+    ciudad = models.CharField(max_length = 155, verbose_name = 'Ciudad')
+    calle = models.IntegerField(verbose_name = 'Calle')
+    año = models.IntegerField(verbose_name = 'Año')
+
+
 
     class Meta:
         verbose_name = 'Complejo'
         verbose_name_plural = 'Complejos'
 
-    def str(self):
+    def __str__(self):
         return self.nombre
 
 class Cancha(models.Model):
@@ -111,6 +136,7 @@ class Cancha(models.Model):
     piso_sint = models.BooleanField(default=False)     # si es T es cemento
     pared_blindex = models.BooleanField(default=False)    # si es T es sintex
     complejo = models.ForeignKey(Complejo, on_delete=models.CASCADE)
+    jugador = models.ManyToManyField(Jugador)
 
     class Meta:
         verbose_name = 'Cancha'

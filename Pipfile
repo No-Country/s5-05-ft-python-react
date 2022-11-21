@@ -15,6 +15,7 @@ pytz = "==2022.6"
 sqlparse = "==0.4.3"
 tzdata = "==2022.6"
 django-multiselectfield = "*"
+django-extensions = "*"
 
 [dev-packages]
 
