@@ -1,5 +1,3 @@
-from rest_framework import generics
-from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializer import UserSerializer, JugadorSerializer
@@ -11,9 +9,14 @@ def user_api_view(request):
         if request.method == 'GET':    
             users = User.objects.all()
             user_serializer = UserSerializer(users, many = True)
-            user_serializer.get_turnos_display()
             return Response(user_serializer.data)
 
+        elif request.method == 'POST':    
+            user_serializer = UserSerializer(data = request.data)
+            if user_serializer.is_valid():
+                user_serializer.save()
+                return Response(user_serializer.data)
+            return Response(user_serializer.errors)
 
 @api_view(['GET', 'POST'])
 def jugador_api_view(request):
@@ -24,13 +27,18 @@ def jugador_api_view(request):
 
 
 
-@api_view(['GET'])
-def jugador_detail_view(request, pk):
+@api_view(['GET','PUT'])
+def jugador_detail_view(request,pk=None):
 
     if request.method == 'GET':
-        if pk is not None:
-            jugador = Jugador.objects.filter(id = pk).first()
-            jugador_serializer = JugadorSerializer(jugador)
+        jugador = Jugador.objects.filter(id = pk).first()
+        jugador_serializer = JugadorSerializer(jugador)
+        return Response(jugador_serializer.data)
+
+    elif request.method == 'PUT':
+        jugador = Jugador.objects.filter(id = pk).first()
+        jugador_serializer = JugadorSerializer(instance=jugador, data=request.data)
+        if jugador_serializer.is_valid():
+            jugador_serializer.save()
             return Response(jugador_serializer.data)
-
-
+        return Response(jugador_serializer.errors)
