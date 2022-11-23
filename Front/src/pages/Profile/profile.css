@@ -104,6 +104,11 @@
 	cursor: pointer;
 }
 
+.profile--button--saveData--disabled {
+	background-color: grey;
+	color: white;
+}
+
 .container--profile--update {
 	width: 100%;
 	display: flex;
