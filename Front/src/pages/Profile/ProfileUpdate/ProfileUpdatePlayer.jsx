@@ -192,7 +192,7 @@ export const ProfileUpdatePlayer = ({
 						errorContact && "borderColor--input--error"
 					} `}
 					type='text'
-					placeholder={contactUpdate}
+					value={contactUpdate}
 					disabled={updateData ? false : true}
 					onChange={(e) => handleContact(e.target.value)}
 				/>
