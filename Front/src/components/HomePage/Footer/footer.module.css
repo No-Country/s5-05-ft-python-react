@@ -1,0 +1,21 @@
+.footer{
+    width: 100%;
+    padding: 20px;
+    background-color: var(--color--navy);
+}
+
+.footer__part_1{
+    padding: 20px 0px;
+    color: white;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.footer__part_2{
+    font-size: 11px;
+    text-align: center;
+    color: white;
+    line-height: 20px;
+    padding: 20px 0px;
+    border-top: 1px solid #fff;
+}
