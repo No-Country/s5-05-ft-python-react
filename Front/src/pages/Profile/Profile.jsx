@@ -7,8 +7,8 @@ import "./profile.css";
 import { ProfileUpdateComplex } from "./ProfileUpdate/ProfileUpdateComplex";
 import { ProfileUpdatePlayer } from "./ProfileUpdate/ProfileUpdatePlayer";
 export const Profile = () => {
-	const [user, setUser] = useState("complex");
-	// const [user, setUser] = useState("player");
+	// const [user, setUser] = useState("complex");
+	const [user, setUser] = useState("player");
 	const [updateData, setUpdateData] = useState(false);
 
 	const handleUpdateData = () => {
@@ -51,9 +51,15 @@ export const Profile = () => {
 					{updateData ? "Guardar Cambios" : "Actualizar Perfil"}
 				</button>
 				{user === "player" ? (
-					<ProfileUpdatePlayer updateData={updateData} />
+					<ProfileUpdatePlayer
+						updateData={updateData}
+						setUpdateData={setUpdateData}
+					/>
 				) : (
-					<ProfileUpdateComplex updateData={updateData} />
+					<ProfileUpdateComplex
+						updateData={updateData}
+						setUpdateData={setUpdateData}
+					/>
 				)}
 			</div>
 			<ToastContainer />
