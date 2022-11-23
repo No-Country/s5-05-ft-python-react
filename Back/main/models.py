@@ -47,6 +47,58 @@ class User(AbstractUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
 
+class Complejo(models.Model):
+    
+
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=100)
+
+    pais = models.CharField(max_length = 155, verbose_name = 'Pais')
+    ciudad = models.CharField(max_length = 155, verbose_name = 'Ciudad')
+    calle = models.CharField(max_length = 155)
+    altura = models.IntegerField()
+
+
+    class Meta:
+        verbose_name = 'Complejo'
+        verbose_name_plural = 'Complejos'
+
+    def __str__(self):
+        return self.nombre
+
+
+class Cancha(models.Model):
+
+    OP_COBERTURA = [
+        (1, 'Techada'),
+        (2, 'Aire Libre')
+    ]
+
+    OP_SUPERFICIE = [
+        (1, 'Cemento'),
+        (2, 'Sintetico')
+    ]
+
+    OP_TIPO_PARED = [ 
+        (1, 'Cemento'),
+        (2, 'Blindex')
+    ]
+
+    cobertura = models.IntegerField(choices = OP_COBERTURA, default = 1)
+    superficie = models.IntegerField(choices = OP_SUPERFICIE, default = 1)
+    tipo_pared = models.IntegerField(choices = OP_TIPO_PARED, default = 1)
+
+    # techada = models.BooleanField(default=False)     # si es T es aire libre
+    # piso_sint = models.BooleanField(default=False)     # si es T es cemento
+    # pared_blindex = models.BooleanField(default=False)    # si es T es sintex
+    complejo = models.ForeignKey(Complejo, on_delete=models.CASCADE)
+    
+
+    class Meta:
+        verbose_name = 'Cancha'
+        verbose_name_plural = 'Canchas'
+
+
 class Jugador(models.Model):
     
     OP_DIAS = [
@@ -78,8 +130,10 @@ class Jugador(models.Model):
     sexo = models.CharField(max_length=1, choices=SEXOS)
     nivel = models.SmallIntegerField(choices=[(i,i) for i in range(1,8)], null = True, blank = True)
     telefono = models.CharField(max_length=10, help_text='Número sin 0 ni 15')
-    dias = MultiSelectField(choices = OP_DIAS, null = True, blank = True, max_length = 8)
-    turnos = MultiSelectField(choices=op_turnos,max_length=3,null=True, blank=True)
+    dias = MultiSelectField(choices = OP_DIAS, null = True, blank = True, max_length = 20)
+    turnos = MultiSelectField(choices=op_turnos,max_length=5,null=True, blank=True)
+
+    jugador = models.ManyToManyField(Cancha)
     
     class Meta:
         verbose_name = 'Jugador'
@@ -89,50 +143,6 @@ class Jugador(models.Model):
         return (f'Nombre: {self.nombre} Apellido:{self.apellido}')
 
         
-class Complejo(models.Model):
-    OP_COBERTURA = [
-        (1, 'Techada'),
-        (2, 'Aire Libre')
-    ]
 
-    OP_SUPERFICIE = [
-        (1, 'Cemento'),
-        (2, 'Sintetico')
-    ]
-
-    OP_TIPO_PARED = [ 
-        (1, 'Cemento'),
-        (2, 'Blindex')
-    ]
-
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    nombre = models.CharField(max_length=100)
-    cobertura = models.IntegerField(choices = OP_COBERTURA, default = 1)
-    superficie = models.IntegerField(choices = OP_SUPERFICIE, default = 1)
-    tipo_pared = models.IntegerField(choices = OP_TIPO_PARED, default = 1)
-    pais = models.CharField(max_length = 155, verbose_name = 'Pais')
-    ciudad = models.CharField(max_length = 155, verbose_name = 'Ciudad')
-    calle = models.IntegerField(verbose_name = 'Calle')
-    año = models.IntegerField(verbose_name = 'Año')
-
-
-    class Meta:
-        verbose_name = 'Complejo'
-        verbose_name_plural = 'Complejos'
-
-    def __str__(self):
-        return self.nombre
-
-class Cancha(models.Model):
-
-    techada = models.BooleanField(default=False)     # si es T es aire libre
-    piso_sint = models.BooleanField(default=False)     # si es T es cemento
-    pared_blindex = models.BooleanField(default=False)    # si es T es sintex
-    complejo = models.ForeignKey(Complejo, on_delete=models.CASCADE)
-    jugador = models.ManyToManyField(Jugador)
-
-    class Meta:
-        verbose_name = 'Cancha'
-        verbose_name_plural = 'Canchas'
 
 
