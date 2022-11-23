@@ -10,6 +10,7 @@ export const Profile = () => {
 	// const [user, setUser] = useState("complex");
 	const [user, setUser] = useState("player");
 	const [updateData, setUpdateData] = useState(false);
+	const [disableButton, setDisableButton] = useState(false);
 
 	const handleUpdateData = () => {
 		updateData && notify();
@@ -42,11 +43,13 @@ export const Profile = () => {
 		<div className='container--section--profile'>
 			<div className='container--profile'>
 				<button
-					className={
+					disabled={disableButton}
+					className={`${
 						updateData
 							? "profile--button--updateData"
 							: "profile--button--saveData"
 					}
+						${disableButton ? "profile--button--saveData--disabled" : ""}`}
 					onClick={handleUpdateData}>
 					{updateData ? "Guardar Cambios" : "Actualizar Perfil"}
 				</button>
@@ -54,6 +57,7 @@ export const Profile = () => {
 					<ProfileUpdatePlayer
 						updateData={updateData}
 						setUpdateData={setUpdateData}
+						setDisableButton={setDisableButton}
 					/>
 				) : (
 					<ProfileUpdateComplex
