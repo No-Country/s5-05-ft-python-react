@@ -49,14 +49,14 @@ class User(AbstractUser, PermissionsMixin):
 
 class Jugador(models.Model):
     
-    op_dias = [
-        (1, 'Lunes'),
-        (2, 'Martes'),
-        (3, 'Miercoles'),
-        (4, 'Jueves'),
-        (5, 'Viernes'),
-        (6, 'Sabado'),
-        (7, 'Domingo'),
+    OP_DIAS = [
+        ('Lu', 'Lunes'),
+        ('Ma', 'Martes'),
+        ('Mi', 'Miercoles'),
+        ('Ju', 'Jueves'),
+        ('Vi', 'Viernes'),
+        ('Sa', 'Sabado'),
+        ('Do', 'Domingo'),
     ]
     
     op_turnos = [
@@ -78,7 +78,7 @@ class Jugador(models.Model):
     sexo = models.CharField(max_length=1, choices=SEXOS)
     nivel = models.SmallIntegerField(choices=[(i,i) for i in range(1,8)], null = True, blank = True)
     telefono = models.CharField(max_length=10, help_text='Número sin 0 ni 15')
-    dias = MultiSelectField(choices=op_dias,max_length=7,null=True, blank=True)
+    dias = MultiSelectField(choices = OP_DIAS, null = True, blank = True, max_length = 8)
     turnos = MultiSelectField(choices=op_turnos,max_length=3,null=True, blank=True)
     
     class Meta:
