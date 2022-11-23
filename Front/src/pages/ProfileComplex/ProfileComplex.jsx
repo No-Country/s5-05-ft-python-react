@@ -58,7 +58,7 @@ export const ProfileComplex = () => {
 							alt='complex courts'
 						/>
 						<div className='profileComplex--info--courts--text'>
-							Cantidad de Canchas
+							Canchas
 						</div>
 						<div className='profileComplex--info--courts--name'>
 							3
@@ -74,7 +74,7 @@ export const ProfileComplex = () => {
 
 						<div className='profileComplex--info--data'>
 							<div className='profileComplex--info--surface--text'>
-								Superficie de Canchas
+								Superficie
 							</div>
 							<div className='profileComplex--info--surface--name'>
 								Sintetico
@@ -91,7 +91,7 @@ export const ProfileComplex = () => {
 
 						<div className='profileComplex--info--data'>
 							<div className='profileComplex--info--walls--text'>
-								Paredes de Canchas
+								Paredes
 							</div>
 							<div className='profileComplex--info--walls--name'>
 								Blindex
@@ -107,7 +107,7 @@ export const ProfileComplex = () => {
 						/>
 						<div className='profileComplex--info--data'>
 							<div className='profileComplex--info--cover--text'>
-								Cubierta de Canchas
+								Cubierta
 							</div>
 							<div className='profileComplex--info--cover--name'>
 								Aire Libre
