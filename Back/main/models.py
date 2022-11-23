@@ -7,13 +7,13 @@ from datetime import datetime
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password, **extra_fields):
+    def create_user(self, email, password, is_jugador, is_complejo, **extra_fields):
         if not email:
             raise ValueError('El usuario debe contener un email')   
         
         email = self.normalize_email(email)
         user = self.model(
-            email = email, 
+            email = email,
             **extra_fields
             )
 
@@ -112,8 +112,8 @@ class Complejo(models.Model):
     tipo_pared = models.IntegerField(choices = OP_TIPO_PARED, default = 1)
     pais = models.CharField(max_length = 155, verbose_name = 'Pais')
     ciudad = models.CharField(max_length = 155, verbose_name = 'Ciudad')
-    calle = models.IntegerField(verbose_name = 'Calle')
-    año = models.IntegerField(verbose_name = 'Año')
+    calle = models.IntegerField(verbose_name = 'Calle', null = True, blank = True)
+    año = models.IntegerField(verbose_name = 'Año', null = True, blank = True)
 
 
     class Meta:
@@ -121,7 +121,7 @@ class Complejo(models.Model):
         verbose_name_plural = 'Complejos'
 
     def __str__(self):
-        return self.nombre
+        return (f'Nombre: {self.nombre}')
 
 class Cancha(models.Model):
 

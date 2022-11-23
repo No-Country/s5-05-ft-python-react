@@ -27,7 +27,19 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model= User
-        fields = "__all__"
+        exclude = [
+                'password', 
+                'last_login', 
+                'is_superuser', 
+                #'username', 
+                'first_name', 
+                'last_name', 
+                'date_joined',  
+                'is_staff', 
+                'fecha_ingreso',
+                'groups',
+                'user_permissions'
+    ]
 
 
 
@@ -45,7 +57,7 @@ class JugadorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Jugador
-        fields = ["id", "nombre", "apellido", "sexo", "telefono", "nivel", "dias", "turnos"]
+        fields = ["id", "nombre", "apellido", "sexo", "telefono", "nivel", "dias", "turnos", "usuario"]
         read_only_fields = ('id',)
 
     # def create(self):
