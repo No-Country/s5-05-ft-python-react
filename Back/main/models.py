@@ -64,7 +64,7 @@ class Complejo(models.Model):
         verbose_name_plural = 'Complejos'
 
     def __str__(self):
-        return self.nombre
+        return (f'Nombre: {self.nombre}')
 
 
 class Cancha(models.Model):
