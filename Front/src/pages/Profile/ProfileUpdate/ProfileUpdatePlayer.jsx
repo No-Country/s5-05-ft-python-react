@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FemalePlayer from "../../../assets/profile/female_player.png";
 import MalePlayer from "../../../assets/profile/male_player.png";
 import PhotoIcon from "../../../assets/profile/photo_icon.png";
@@ -16,7 +16,11 @@ const user = {
 	genre: "h",
 };
 
-export const ProfileUpdatePlayer = ({ updateData, setUpdateData }) => {
+export const ProfileUpdatePlayer = ({
+	updateData,
+	setUpdateData,
+	setDisableButton,
+}) => {
 	//updaters
 	const [nameUpdate, setNameUpdate] = useState(user.name);
 	const [lastNameUpdate, setLastNameUpdate] = useState(user.lastName);
@@ -31,6 +35,12 @@ export const ProfileUpdatePlayer = ({ updateData, setUpdateData }) => {
 	const [errorContact, setErrorContact] = useState(false);
 
 	const [buttonCancel, setButtonCancel] = useState(false);
+
+	useEffect(() => {
+		errorName || errorLastName || errorContact
+			? setDisableButton(true)
+			: setDisableButton(false);
+	}, [errorName, errorLastName, errorContact, setDisableButton]);
 
 	//function handlers
 	const handleName = (e) => {
@@ -98,7 +108,9 @@ export const ProfileUpdatePlayer = ({ updateData, setUpdateData }) => {
 					{updateData ? "Nombre" : ""}
 				</label>
 				<input
-					className='profile--update--input'
+					className={`profile--update--input ${
+						errorName && "borderColor--input--error"
+					} `}
 					type='text'
 					value={nameUpdate}
 					disabled={updateData ? false : true}
@@ -119,7 +131,9 @@ export const ProfileUpdatePlayer = ({ updateData, setUpdateData }) => {
 					{updateData ? "Apellido" : ""}
 				</label>
 				<input
-					className='profile--update--input'
+					className={`profile--update--input ${
+						errorLastName && "borderColor--input--error"
+					} `}
 					type='text'
 					value={lastNameUpdate}
 					disabled={updateData ? false : true}
@@ -174,7 +188,9 @@ export const ProfileUpdatePlayer = ({ updateData, setUpdateData }) => {
 					{updateData ? "Contacto" : ""}
 				</label>
 				<input
-					className='profile--update--input'
+					className={`profile--update--input ${
+						errorContact && "borderColor--input--error"
+					} `}
 					type='text'
 					placeholder={contactUpdate}
 					disabled={updateData ? false : true}
