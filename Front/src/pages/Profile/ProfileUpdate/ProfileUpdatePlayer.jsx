@@ -1,30 +1,84 @@
-// import FemalePlayer from "../../../assets/profile/female_player.png";
 import { useState } from "react";
+import FemalePlayer from "../../../assets/profile/female_player.png";
 import MalePlayer from "../../../assets/profile/male_player.png";
 import PhotoIcon from "../../../assets/profile/photo_icon.png";
+import {
+	validStringLength,
+	validStringLetters,
+	validStringNumber,
+} from "../../../helpers/validations";
 const user = {
 	name: "Nombre",
 	lastName: "Apellido",
-	position: "Drive",
+	position: "drive",
 	available: "Lista de Horarios",
 	contact: "1234567899",
-	genre: "Hombre",
+	genre: "h",
 };
 
-export const ProfileUpdatePlayer = ({ updateData }) => {
-	const [nameUpdate, setNameUpdate] = useState();
-	const [lastNameUpdate, setLastNameUpdate] = useState();
-	const [positionUpdate, setPositionUpdate] = useState();
-	const [availableUpdate, setAvailableUpdate] = useState();
-	const [contactUpdate, setContactUpdate] = useState();
-	const [genreUpdate, setGenreUpdate] = useState();
+export const ProfileUpdatePlayer = ({ updateData, setUpdateData }) => {
+	//updaters
+	const [nameUpdate, setNameUpdate] = useState(user.name);
+	const [lastNameUpdate, setLastNameUpdate] = useState(user.lastName);
+	const [positionUpdate, setPositionUpdate] = useState(user.position);
+	const [availableUpdate, setAvailableUpdate] = useState(user.available);
+	const [contactUpdate, setContactUpdate] = useState(user.contact);
+	const [genreUpdate, setGenreUpdate] = useState(user.genre);
+
+	// errors
+	const [errorName, setErrorName] = useState(false);
+	const [errorLastName, setErrorLastName] = useState(false);
+	const [errorContact, setErrorContact] = useState(false);
+
+	const [buttonCancel, setButtonCancel] = useState(false);
+
+	//function handlers
+	const handleName = (e) => {
+		validStringLength(e) && validStringLetters(e)
+			? setErrorName(false)
+			: setErrorName(true);
+		setNameUpdate(e);
+	};
+
+	const handleLastName = (e) => {
+		validStringLength(e) && validStringLetters(e)
+			? setErrorLastName(false)
+			: setErrorLastName(true);
+		setLastNameUpdate(e);
+	};
+
+	const handleContact = (e) => {
+		validStringNumber(e) ? setErrorContact(false) : setErrorContact(true);
+		setContactUpdate(e);
+	};
+
+	const handleCancelButton = () => {
+		setErrorName(false);
+		setErrorLastName(false);
+		setErrorContact(false);
+		setNameUpdate(user.name);
+		setLastNameUpdate(user.lastName);
+		setPositionUpdate(user.position);
+		setAvailableUpdate(user.available);
+		setContactUpdate(user.contact);
+		setGenreUpdate(user.genre);
+		setUpdateData(false);
+		setButtonCancel(true);
+	};
 
 	return (
 		<div className='container--profile--update'>
+			{updateData && (
+				<button
+					className='button--profile--cancel'
+					onClick={handleCancelButton}>
+					Cancelar Cambios
+				</button>
+			)}
 			<div className='container--profile--avatar'>
 				<img
 					className='profilePlayer--avatar'
-					src={MalePlayer}
+					src={genreUpdate === "h" ? MalePlayer : FemalePlayer}
 					alt='avatar icon'
 				/>
 				{updateData && (
@@ -35,84 +89,120 @@ export const ProfileUpdatePlayer = ({ updateData }) => {
 					/>
 				)}
 			</div>
-			<label
-				className={`profile--update--label ${
-					updateData ? "show_time_1" : ""
-				}`}>
-				{updateData ? "Nombre" : ""}
-			</label>
-			<input
-				className='profile--update--input'
-				type='text'
-				placeholder={user.name}
-				disabled={updateData ? false : true}
-				onChange={(e) => setNameUpdate(e.target.value)}
-			/>
-			<label
-				className={`profile--update--label ${
-					updateData ? "show_time_2" : ""
-				}`}>
-				{updateData ? "Apellido" : ""}
-			</label>
-			<input
-				className='profile--update--input'
-				type='text'
-				placeholder={user.lastName}
-				disabled={updateData ? false : true}
-				onChange={(e) => setLastNameUpdate(e.target.value)}
-			/>
-			<label
-				className={`profile--update--label ${
-					updateData ? "show_time_3" : ""
-				}`}>
-				{updateData ? "Posición" : ""}
-			</label>
-			<input
-				className='profile--update--input'
-				type='text'
-				placeholder={user.position}
-				disabled={updateData ? false : true}
-				onChange={(e) => setPositionUpdate(e.target.value)}
-			/>
-			<label
-				className={`profile--update--label ${
-					updateData ? "show_time_4" : ""
-				}`}>
-				{updateData ? "Horarios" : ""}
-			</label>
-			<input
-				className='profile--update--input'
-				type='text'
-				placeholder={user.available}
-				disabled={updateData ? false : true}
-				onChange={(e) => setAvailableUpdate(e.target.value)}
-			/>
-			<label
-				className={`profile--update--label ${
-					updateData ? "show_time_5" : ""
-				}`}>
-				{updateData ? "Contacto" : ""}
-			</label>
-			<input
-				className='profile--update--input'
-				type='text'
-				placeholder={user.contact}
-				disabled={updateData ? false : true}
-				onChange={(e) => setContactUpdate(e.target.value)}
-			/>
-			<label
-				className={`profile--update--label ${
-					updateData ? "show_time_6" : ""
-				}`}>
-				{updateData ? "Genero" : ""}
-			</label>
-			<input
-				className='profile--update--input'
-				type='text'
-				placeholder={user.genre}
-				disabled={updateData ? false : true}
-				onChange={(e) => setGenreUpdate(e.target.value)}
-			/>
+
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_1" : ""
+					}`}>
+					{updateData ? "Nombre" : ""}
+				</label>
+				<input
+					className='profile--update--input'
+					type='text'
+					value={nameUpdate}
+					disabled={updateData ? false : true}
+					onChange={(e) => handleName(e.target.value)}
+				/>
+				{errorName && (
+					<div className='profile--update--error'>
+						Nombre debe ser válido y mayor a 3 caracteres
+					</div>
+				)}
+			</div>
+
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_2" : ""
+					}`}>
+					{updateData ? "Apellido" : ""}
+				</label>
+				<input
+					className='profile--update--input'
+					type='text'
+					value={lastNameUpdate}
+					disabled={updateData ? false : true}
+					onChange={(e) => handleLastName(e.target.value)}
+				/>
+				{errorLastName && (
+					<div className='profile--update--error'>
+						Apellido debe ser válido y mayor a 3 caracteres
+					</div>
+				)}
+			</div>
+
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_3" : ""
+					}`}>
+					{updateData ? "Posición" : ""}
+				</label>
+				<select
+					className='profile--update--input'
+					disabled={updateData ? false : true}
+					value={positionUpdate}
+					onChange={(e) => setPositionUpdate(e.target.value)}>
+					<option value='reves'>Reves</option>
+					<option value='drive'>Drive</option>
+					<option value='allCourt'>Toda la Cancha</option>
+				</select>
+			</div>
+
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_4" : ""
+					}`}>
+					{updateData ? "Horarios" : ""}
+				</label>
+				<input
+					className='profile--update--input'
+					type='text'
+					value={availableUpdate}
+					disabled={updateData ? false : true}
+					onChange={(e) => setAvailableUpdate(e.target.value)}
+				/>
+			</div>
+
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_5" : ""
+					}`}>
+					{updateData ? "Contacto" : ""}
+				</label>
+				<input
+					className='profile--update--input'
+					type='text'
+					placeholder={contactUpdate}
+					disabled={updateData ? false : true}
+					onChange={(e) => handleContact(e.target.value)}
+				/>
+				{errorContact && (
+					<div className='profile--update--error'>
+						Debe ser número válido y mayor a 8 caracteres
+					</div>
+				)}
+			</div>
+
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_6" : ""
+					}`}>
+					{updateData ? "Genero" : ""}
+				</label>
+				<select
+					className='profile--update--input'
+					disabled={updateData ? false : true}
+					value={genreUpdate}
+					onChange={(e) => setGenreUpdate(e.target.value)}>
+					<option value='m'>Mujer</option>
+					<option value='h'>Hombre</option>
+				</select>
+			</div>
 		</div>
 	);
 };
