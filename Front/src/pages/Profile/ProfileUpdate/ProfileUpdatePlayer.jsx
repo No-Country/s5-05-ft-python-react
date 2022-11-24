@@ -6,7 +6,7 @@ import {
 	validStringLength,
 	validStringLetters,
 	validStringNumber,
-} from "../../../helpers/validations";
+} from "../../../helper/validations";
 const user = {
 	name: "Nombre",
 	lastName: "Apellido",

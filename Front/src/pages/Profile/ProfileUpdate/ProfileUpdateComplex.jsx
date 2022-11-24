@@ -4,7 +4,7 @@ import PhotoIcon from "../../../assets/profile/photo_icon.png";
 import {
 	validStringLength,
 	validStringNumber,
-} from "../../../helpers/validations";
+} from "../../../helper/validations";
 
 const complex = {
 	name: "Nombre de la cancha",

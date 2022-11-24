@@ -5,7 +5,7 @@ import LevelIcon from "../../assets/profile/level_icon.png";
 import MalePlayer from "../../assets/profile/male_player.png";
 import PositionIcon from "../../assets/profile/position_icon.png";
 import WtsIcon from "../../assets/profile/wts_icon.png";
-import { openInNewTab } from "../../helpers/openInNewTab";
+import { openInNewTab } from "../../helper/openInNewTab";
 import "./profilePlayer.css";
 
 export const ProfilePlayer = () => {
