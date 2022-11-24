@@ -2,8 +2,8 @@
   {
     "name": "Gabriel",
     "level": "5",
-    "time": "morning",
-    "court": "Cancha 4",
+    "position": "reves",
+    "time": "Horario 4",
     "phone": "123456789",
     "gender": "M",
     "id": 1
@@ -11,8 +11,8 @@
   {
     "name": "Juan",
     "level": "4",
-    "time": "afternoon",
-    "court": "Cancha 1",
+    "position": "derecha",
+    "time": "Horario 1",
     "phone": "123456789",
     "gender": "M",
     "id": 2
@@ -20,8 +20,8 @@
   {
     "name": "Maria",
     "level": "5",
-    "time": "morning",
-    "court": "Cancha 1",
+    "position": "reves",
+    "time": "Horario 1",
     "phone": "123456789",
     "gender": "F",
     "id": 3
@@ -29,8 +29,8 @@
   {
     "name": "Francisco",
     "level": "2",
-    "time": "night",
-    "court": "Cancha 3",
+    "position": "ambas",
+    "time": "Horario 3",
     "phone": "123456789",
     "gender": "M",
     "id": 4
@@ -38,10 +38,19 @@
   {
     "name": "Lionel",
     "level": "1",
-    "time": "morning",
-    "court": "Cancha 4",
+    "position": "reves",
+    "time": "Horario 4",
     "phone": "123456789",
     "gender": "M",
     "id": 5
+  },
+  {
+    "name": "Lionel",
+    "level": "4",
+    "position": "reves",
+    "time": "Horario 3",
+    "phone": "123456789",
+    "gender": "M",
+    "id": 6
   }
 ]
