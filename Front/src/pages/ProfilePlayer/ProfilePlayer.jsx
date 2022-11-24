@@ -24,13 +24,7 @@ export const ProfilePlayer = () => {
 					alt='avatar icon'
 				/> */}
 					<div className='container--profilePlayer--name'>
-						<div className='profilePlayer--lastName'>
-							apellido{" "}
-							<span className='profilePlayer--lastName--span'>
-								,
-							</span>
-						</div>
-						<div className='profilePlayer--name'>nombre</div>
+						apellido nombre
 					</div>
 				</div>
 				<div className='container--profilePlayer--info'>
