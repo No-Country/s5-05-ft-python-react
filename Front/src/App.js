@@ -6,11 +6,12 @@ import { Players } from "./pages/Players/Players";
 import { Registers } from "./pages/Registers/Registers";
 import { ProfileComplex } from "./pages/ProfileComplex/ProfileComplex";
 import { ProfilePlayer } from "./pages/ProfilePlayer/ProfilePlayer";
+import { Homepage } from "./pages/HomePage/HomePage";
 
 export const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<h1>Home</h1>} />
+      <Route path="/" element={<Homepage />} />
       <Route path="/complex" element={<Complex />} />
       <Route path="/players" element={<Players />} />
       <Route path="/profile/complex/:idComplex" element={<ProfileComplex />} />
