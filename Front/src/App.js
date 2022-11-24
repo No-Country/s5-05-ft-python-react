@@ -7,6 +7,7 @@ import { Registers } from "./pages/Registers/Registers";
 import { ProfileComplex } from "./pages/ProfileComplex/ProfileComplex";
 import { ProfilePlayer } from "./pages/ProfilePlayer/ProfilePlayer";
 import { Homepage } from "./pages/HomePage/HomePage";
+import { Login } from "./pages/login/Login";
 
 export const App = () => {
   return (
@@ -17,7 +18,7 @@ export const App = () => {
       <Route path="/profile/complex/:idComplex" element={<ProfileComplex />} />
       <Route path="/profile/player/:idPlayer" element={<ProfilePlayer />} />
       <Route path="/profile" element={<ProfilePlayer />} />
-      <Route path="/login" />
+      <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Registers />} />
     </Routes>
   );
