@@ -3,5 +3,19 @@
     max-width: 1440px;
     width: 100%;
     margin: 0px auto;
+    padding-top: 16px;
+    background-color: var(--color--light--blue);
+}
+
+.title__container {
     background-color: var(--color--blue);
+    margin-bottom: 16px;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+    font-family: var(--ff--lato);
+    color: var(--color--light--blue);
+    text-transform: uppercase;
 }

@@ -4,6 +4,8 @@
     justify-content: center;
     background-color: var(--color--light--blue);
     font-family: var(--ff--lato);
+    padding: 16px 0px;
+    min-height: 320px;
 }
 
 .bar__container {
@@ -57,6 +59,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    max-height: 350px;
 }
 
 .row {
@@ -78,13 +81,46 @@
     background-color: var(--color--white);
     width: 90%;
     border-radius: 8px;
-    box-shadow: 1px 1px 5px 0px rgba(87,87,87,0.75);
+    /* box-shadow: 1px 1px 5px 0px rgba(87,87,87,0.75);
     -webkit-box-shadow: 1px 1px 5px 0px rgba(87,87,87,0.75);
-    -moz-box-shadow: 1px 1px 5px 0px rgba(87,87,87,0.75);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(87,87,87,0.75); */
 }
 
 .row__data > div, .row > div {
     padding: 5px 8px;
     width: 150px;
     text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+
+    .table {
+        overflow-x: scroll;
+        overflow-y: scroll;
+        scrollbar-width: thin;
+        scrollbar-color: var(--color--blue);
+        padding: 0px 16px;
+    }
+
+    .table::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    .table::-webkit-scrollbar-track {
+        background-color: var(--color--light--blue);
+    }
+
+    .table::-webkit-scrollbar-thumb {
+        background-color: var(--color--navy);
+        border-radius: 16px;
+        border: 3px solid var(--color--light--blue);
+    }
+
+    .row, .row__data {
+        width: 720px;
+    }
+
+    .row__data > div, .row > div {
+        width: 120px;
+    }
 }

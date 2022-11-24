@@ -4,23 +4,25 @@ import { ModalCard } from '../ModalCard/ModalCard';
 
 import classes from './Card.module.css';
 
+const { card, img, text__container, text, btn } = classes;
+
 export const Card = ({imgUrl}) => {
 
 const [openModal, setOpenModal] = useState(false)
 
   return (
-    <div className={classes.card}>
+    <div className={card}>
       {
         openModal && <Modal children={<ModalCard setOpenModal={setOpenModal} imgUrl={imgUrl}/>}/>
       }
-        <img src={imgUrl} alt="complejo" className={classes.img}/>
-        <div className={classes.text}>
-            <h2>Complejo 1</h2>
-            <p>Calificación</p>
-            <p>Ubicación</p>
-            <p>Cantidad de canchas</p>
-            <p>Turnos</p>
-            <button className={classes.btn} onClick={() => setOpenModal(true)}>Inscribirse</button>
+        <img src={imgUrl} alt="complejo" className={img}/>
+        <div className={text__container}>
+          <div className={text}>
+              <h2>Complejo 1</h2>
+              <p>Cantidad de canchas: 3</p>
+              <p>Horarios: 8AM - 23PM</p>
+          </div>
+          <button className={btn} onClick={() => setOpenModal(true)}>Inscribirse</button>
         </div>
     </div>
   )
