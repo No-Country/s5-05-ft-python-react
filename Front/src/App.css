@@ -10,10 +10,27 @@
 
 	/* VAR FONT FAMILY */
 	--ff--lato: "Lato", sans-serif;
+
+	/* VAR FONT SIZE */
+	--fs--xbig: 22px;
+	--fs--big: 20px;
+	--fs--medium: 18px;
+	--fs--normal: 16px;
+	--fs--small: 14px;
+	--fs--xsmall: 12px;
 }
 
 * {
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
+}
+
+@media only screen and (max-width: 600px) {
+	:root {
+		--fs--xbig: 20px;
+		--fs--big: 18px;
+		--fs--medium: 16px;
+		--fs--normal: 14px;
+	}
 }
