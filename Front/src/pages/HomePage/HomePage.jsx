@@ -49,7 +49,7 @@ export const Homepage = () => {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
               corporis autem numquam, repellat, neque, praesentium eius natus
             </p>
-            <HomeButton name={"Registrate ahora"} />
+            <HomeButton name={"Registrate ahora"} to="/register" />
           </div>
         </div>
       </header>
@@ -73,8 +73,9 @@ export const Homepage = () => {
             </div>
           </div>
           <HomeButton
-            name={"Mira nuestras canchas destacadas"}
+            name={"Explora canchas"}
             color="#3282c3"
+            to="/complex"
             w="19px"
           />
         </div>

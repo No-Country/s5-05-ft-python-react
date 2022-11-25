@@ -1,9 +1,11 @@
-import { useState } from "react";
-import classes from "./navbar.module.css";
 import { HomeButton } from "../HomeButton/HomeButton";
+import { Link, useLocation } from "react-router-dom";
+import classes from "./navbar.module.css";
+import { useState } from "react";
 
 export const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const location = useLocation().pathname;
 
   window.onscroll = () => {
     setOpenMenu(false);
@@ -19,13 +21,14 @@ export const Navbar = () => {
     menu__buttons__container,
     middle,
     bottom,
+    resalt__link
   } = classes;
 
   return (
     <nav className={nav}>
       <div className={nav__container}>
         <div className={nav__logo}>
-          <a href="/">LogoPadel</a>
+          <Link to="/">LogoPadel</Link>
         </div>
         <label htmlFor="check" className={bar}>
           <input
@@ -40,13 +43,17 @@ export const Navbar = () => {
         </label>
         <div className={nav__menu} style={{ left: openMenu ? "0px" : "-100%" }}>
           <ul>
-            <li>Canchas</li>
-            <li>Usuarios</li>
+            <li className={location === "/complex" ? resalt__link : "" } >
+              <Link to="/complex">Canchas</Link>
+            </li>
+            <li className={location === "/players" ? resalt__link : "" }>
+              <Link to="/players">Usuarios</Link>
+            </li>
           </ul>
           <div className={menu__buttons__container}>
-            <HomeButton name={"Registrate"} color="#3282c3" />
-            <HomeButton name={"Registra una cancha"} color="#3282c3" />
-            <HomeButton name={"Inicia sesion"} color="#3282c3" />
+            <HomeButton name={"Registrate"} to="/register" color="#3282c3" />
+            <HomeButton name={"Registra una cancha"} to="/register" color="#3282c3" />
+            <HomeButton name={"Inicia sesion"} to="/login" color="#3282c3" />
           </div>
         </div>
       </div>

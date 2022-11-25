@@ -1,9 +1,10 @@
 import classes from "./homeButton.module.css";
+import { Link } from "react-router-dom";
 
-export const HomeButton = ({ name, color = "white" }) => {
+export const HomeButton = ({ name, to, color = "white" }) => {
   return (
-    <button className={classes.btn__primary} style={{ "--color": color }}>
+    <Link to={to} className={classes.btn__primary} style={{ "--color": color }}>
       {name}
-    </button>
+    </Link>
   );
 };
