@@ -45,45 +45,19 @@ class UserSerializer(serializers.ModelSerializer):
 
 class JugadorSerializer(serializers.ModelSerializer):
 
-    # nombre = serializers.SerializerMethodField()
-    #apellido = serializers.SerializerMethodField()
-    #dias = serializers.SerializerMethodField()
-    #turnos = serializers.SerializerMethodField()
-    #sexo = serializers.SerializerMethodField()
-
     sexo = ChoiceField(choices = Jugador.SEXOS)
+    rol = ChoiceField(choices=Jugador.ROLES)
     dias = serializers.MultipleChoiceField(choices = Jugador.OP_DIAS)
-    turnos = serializers.MultipleChoiceField(choices = Jugador.op_turnos)
+    turnos = serializers.MultipleChoiceField(choices = Jugador.OP_TURNOS)
+    cancha_specs = serializers.MultipleChoiceField(choices = Jugador.SPECS)
+    # superficie = ChoiceField(choices = Jugador.OP_SUPERFICIE)
+    # tipo_pared = serializers.MultipleChoiceField(choices = Jugador.OP_TIPO_PARED)
 
     class Meta:
         model = Jugador
-        fields = ["id", "nombre", "apellido", "sexo", "telefono", "nivel", "dias", "turnos", "usuario"]
-        read_only_fields = ('id',)
+        fields = ["id", "nombre", "apellido", "sexo", "rol", "nivel", "telefono",
+                "dias", "turnos", "cancha_specs","editado","creado"]
+        read_only_fields = ('id',"usuario","editado","creado")
 
-    # def create(self):
-    #     user = User.objects.create()
-    #     Jugador.objects.create(user=user)
-    #     return user
-
-    # def update(self, instance, validated_data):
-    #     instance.name = validated_data.get('nombre', instance.nombre)
-    #     instance.save()
-    #     return instance
-
-    # def get_nombre(self, obj):
-    #     return obj.nombre.capitalize()
-
-    # def get_apellido(self, obj):
-    #     return obj.apellido.capitalize()
-
-    # def get_dias(self, obj):
-    #     var = obj.get_dias_display().split(', ')
-    #     return var
-
-    # def get_turnos(self, obj):
-    #     var = obj.get_turnos_display().split(', ')
-    #     return var
-
-    # def get_sexo(self, obj):
-    #     return obj.get_sexo_display()
+ 
         

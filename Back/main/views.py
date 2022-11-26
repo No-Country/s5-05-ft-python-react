@@ -1,7 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializer import UserSerializer, JugadorSerializer
-from django.http import JsonResponse
 from .models import Jugador, User
 
 @api_view(['GET', 'POST'])
