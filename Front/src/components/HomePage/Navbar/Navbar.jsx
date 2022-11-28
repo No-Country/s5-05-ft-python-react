@@ -1,3 +1,4 @@
+import images from "../../../assets/HomePage/imagesHomePage"
 import { HomeButton } from "../HomeButton/HomeButton";
 import { Link, useLocation } from "react-router-dom";
 import classes from "./navbar.module.css";
@@ -28,7 +29,7 @@ export const Navbar = () => {
     <nav className={nav}>
       <div className={nav__container}>
         <div className={nav__logo}>
-          <Link to="/">LogoPadel</Link>
+          <Link to="/"><img src={images.Logo} alt="" /></Link>
         </div>
         <label htmlFor="check" className={bar}>
           <input
@@ -52,7 +53,6 @@ export const Navbar = () => {
           </ul>
           <div className={menu__buttons__container}>
             <HomeButton name={"Registrate"} to="/register" color="#3282c3" />
-            <HomeButton name={"Registra una cancha"} to="/register" color="#3282c3" />
             <HomeButton name={"Inicia sesion"} to="/login" color="#3282c3" />
           </div>
         </div>

@@ -39,15 +39,16 @@ export const Homepage = () => {
       <header className={header}>
         <div className={`${header__container} ${container}`}>
           <div className={header__img__container}>
-            <h1 className={header__title}>PADEL TITLE</h1>
+            <h1 className={header__title}>PADDLE BALL</h1>
             <picture className={header__img}>
               <img src={images.HeaderBg} alt="Header Img" />
             </picture>
           </div>
           <div className={header__info__container}>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-              corporis autem numquam, repellat, neque, praesentium eius natus
+              Ofrecemos una gran cantidad de canchas de padel, en las cuales
+              podrás pasar un buen tiempo con compañeros, amigos, familiares o
+              conocer personas nuevas.
             </p>
             <HomeButton name={"Registrate ahora"} to="/register" />
           </div>
@@ -56,10 +57,10 @@ export const Homepage = () => {
       <section className={about_us}>
         <div className={container}>
           <Subtitle name={"Sobre Nosotros"} />
-          <h3>UBICADO EN ...</h3>
+          <h3>BUSCAMOS FACILITAR TU EVENTO</h3>
           <p className={paragraph}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-            veniam, nisi aliquid dolorum iure dicta rerum
+            Nuestra intencion es ahorrarte tiempo y que te olvides lo tedioso
+            que puede ser organizar un evento de padel.
           </p>
           <div className={abaut__us__img__container}>
             <div className={flex__center}>
@@ -82,9 +83,18 @@ export const Homepage = () => {
       </section>
       <section className={services}>
         <div className={services__container}>
-          <HomeCard />
-          <HomeCard />
-          <HomeCard />
+          <HomeCard
+            name="DONDE SEA"
+            description="Con nuestro sencillo servicio puedes organizar encuentros desde la comodidad de tu casa. Se acabo lo de tener que ir a hablar con x persona para hacer una reserva."
+          />
+          <HomeCard
+            name="HORARIOS"
+            description="Contamos con numerosas fechas disponibles, cada cancha tiene horarios disponibles. Podras elegir la que más se adapte a tu disponibilidad horaria."
+          />
+          <HomeCard
+            name="NIVEL"
+            description="Incrementa tu reputacion como jugador. Haste respetar con los demas jugadores y genera un nombre en la cancha."
+          />
         </div>
       </section>
       <section className={motivation}>
@@ -93,8 +103,8 @@ export const Homepage = () => {
           <div className={motivation__info}>
             <Subtitle name={"Sube tu motivacion"} />
             <p className={paragraph}>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste
-              exercitationem ducimus minus accusantium quos corporis! Numquam{" "}
+              Nunca pares, nunca te conformes, hasta que lo bueno sea mejor y lo
+              mejor exelente.
             </p>
           </div>
         </div>
@@ -106,12 +116,12 @@ export const Homepage = () => {
         <div className={container}>
           <Subtitle name={"¿Como funciona?"} />
           <p className={paragraph}>
-            Te ayudamos a encontrar la cancha perfecta para que puedas
-            reservarla fácilmente.
+            Te ayudamos a publicar y encontrar la cancha perfecta, para que
+            puedas organizar eventos de paddle facilmente.
           </p>
           <div className={functionality__container__cards}>
             <div className={card__functionality}>
-              <h4>Reserva tu cancha</h4>
+              <h4>Inscribete en un evento</h4>
               <dl className={info__functionality}>
                 <dt>
                   <i className="bx bxs-tennis-ball"></i>{" "}
@@ -121,14 +131,13 @@ export const Homepage = () => {
                   Busca tu cancha por ubicación, tipo de suelo, medidas, etc.
                 </dd>
                 <dt>
-                  <i className="bx bxs-calendar"></i>{" "}
-                  <h5>2. Registra tu reserva</h5>
+                  <i className="bx bxs-calendar"></i> <h5>2. Inscribete</h5>
                 </dt>
-                <dd>Escoge fecha y horario en la que quieres rentarla.</dd>
+                <dd>Encuentra el evento que se adapte a ti.</dd>
                 <dt>
-                  <i className="bx bx-dollar"></i> <h5>3. Cotización y pago</h5>
+                  <i className="bx bx-dollar"></i> <h5>3. Disfruta</h5>
                 </dt>
-                <dd>Un pago rapido y seguro</dd>
+                <dd>Un juego justo y seguro.</dd>
               </dl>
             </div>
             <div className={card__functionality}>
@@ -144,16 +153,11 @@ export const Homepage = () => {
                 <dt>
                   <i className="bx bxs-user-check"></i> <h5>2. Verificación</h5>
                 </dt>
-                <dd>
-                  Nos pondremos en contacto contigo para verificar la
-                  información y activar tu cancha
-                </dd>
+                <dd>Verificaremos que los datos sean correctos.</dd>
                 <dt>
-                  <i className="bx bx-dollar"></i> <h5>3. Recibe y gana</h5>
+                  <i className="bx bx-dollar"></i> <h5>3. Busca gente</h5>
                 </dt>
-                <dd>
-                  Nos encargaremos de que mas personas conozcan tu cancha.
-                </dd>
+                <dd>Organiza tus grupos y que empieze el juego.</dd>
               </dl>
             </div>
           </div>
@@ -164,7 +168,7 @@ export const Homepage = () => {
           <div>
             <p className={paragraph}>
               Queremos ayudarte a encontrar la cancha perfecta en tu ciudad para
-              que puedas reservarla fácilmente.
+              que puedas jugar fácilmente.
             </p>
             <ul>
               <li>

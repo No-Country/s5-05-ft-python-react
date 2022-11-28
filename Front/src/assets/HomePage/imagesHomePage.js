@@ -9,7 +9,9 @@ import WorldMap from "./Images/WorldMap.png";
 //ICONS
 import MapIcon from "./Icons/mapIcon.png";
 import DrinkIcon from "./Icons/drinkIcon.png";
+import Logo from "./Icons/Logo.png"
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   // IMAGES
   HeaderBg: HeaderBg,
@@ -22,4 +24,5 @@ export default {
   //ICONS 
   MapIcon: MapIcon,
   DrinkIcon: DrinkIcon,
+  Logo: Logo
 };
