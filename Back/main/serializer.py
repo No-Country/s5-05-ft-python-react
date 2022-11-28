@@ -41,22 +41,14 @@ class UserSerializer(serializers.ModelSerializer):
                 'user_permissions'
     ]
 
-
-
 class JugadorSerializer(serializers.ModelSerializer):
 
     sexo = ChoiceField(choices = Jugador.SEXOS)
     rol = ChoiceField(choices=Jugador.ROLES)
-    dias = serializers.MultipleChoiceField(choices = Jugador.OP_DIAS)
-    turnos = serializers.MultipleChoiceField(choices = Jugador.OP_TURNOS)
-    cancha_specs = serializers.MultipleChoiceField(choices = Jugador.SPECS)
-    # superficie = ChoiceField(choices = Jugador.OP_SUPERFICIE)
-    # tipo_pared = serializers.MultipleChoiceField(choices = Jugador.OP_TIPO_PARED)
 
     class Meta:
         model = Jugador
-        fields = ["id", "nombre", "apellido", "sexo", "rol", "nivel", "telefono",
-                "dias", "turnos", "cancha_specs","editado","creado"]
+        fields = '__all__'
         read_only_fields = ('id',"usuario","editado","creado")
 
  

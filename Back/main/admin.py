@@ -7,3 +7,4 @@ class JugadorAdmin(admin.ModelAdmin):
 admin.site.register(User)
 admin.site.register(Jugador)
 admin.site.register(Complejo)
+

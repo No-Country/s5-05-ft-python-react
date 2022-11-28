@@ -35,7 +35,6 @@ def jugador_detail_view(request,pk=None):
     elif request.method == 'PUT':
         jugador = Jugador.objects.filter(id = pk).first()
         jugador_serializer = JugadorSerializer(instance=jugador, data=request.data)
-        print(type(jugador_serializer.initial_data['dias']))
         if jugador_serializer.is_valid():
             jugador_serializer.save()
             return Response(jugador_serializer.data)

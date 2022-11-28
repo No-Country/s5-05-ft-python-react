@@ -2,11 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
 from multiselectfield import MultiSelectField
+
+from django.contrib.postgres.fields import ArrayField
 from datetime import datetime
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password, is_jugador, is_complejo, **extra_fields):
+    def create_user(self, email, password, is_jugador=None, is_complejo=None, **extra_fields):
         if not email:
             raise ValueError('El usuario debe contener un email')   
         
@@ -77,24 +79,9 @@ class Complejo(models.Model):
     def __str__(self):
         return (f'Nombre: {self.nombre}')
 
-
 class Jugador(models.Model):
     
-    OP_DIAS = [
-        ('Lu', 'Lunes'),
-        ('Ma', 'Martes'),
-        ('Mi', 'Miercoles'),
-        ('Ju', 'Jueves'),
-        ('Vi', 'Viernes'),
-        ('Sa', 'Sabado'),
-        ('Do', 'Domingo'),
-    ]
-    
-    OP_TURNOS = [
-        ('M', 'Mañana'),
-        ('T', 'Tarde'),
-        ('N', 'Noche'),
-    ]
+
 
     MASCULINO='M'
     FEMENINO='F'
@@ -119,32 +106,25 @@ class Jugador(models.Model):
     rol = models.CharField(max_length=1, choices=ROLES, default=AMBOS)
     nivel = models.SmallIntegerField(choices=[(i,i) for i in range(1,8)], null = True, blank = True)
     telefono = models.CharField(max_length=10, help_text='Número sin 0 ni 15')
-    dias = MultiSelectField(choices = OP_DIAS, null = True, blank = True, max_length = 20)
-    turnos = MultiSelectField(choices=OP_TURNOS,max_length=5,null=True, blank=True)
+    
+    lunes = ArrayField(models.CharField(max_length=255, blank=True), default=list())
+    martes = ArrayField(models.CharField(max_length=255, blank=True), default=list())
+    miercoles = ArrayField(models.CharField(max_length=255, blank=True), default=list())
+    jueves = ArrayField(models.CharField(max_length=255, blank=True), default=list())
+    viernes = ArrayField(models.CharField(max_length=255, blank=True), default=list())
+    sabado = ArrayField(models.CharField(max_length=255, blank=True), default=list())
+    domingo = ArrayField(models.CharField(max_length=255, blank=True), default=list())
 
     SPECS = [
-        ('1', 'Techada'),
-        ('2', 'Aire Libre'),
-        ('3', 'Superficie Cemento'),
-        ('4', 'Superficie Sintetico'),
-        ('5', 'Pared Cemento'),
-        ('6', 'Pared Blindex')
+        ('T', 'Techada'),
+        ('AL', 'Aire Libre'),
+        ('SC', 'Superficie Cemento'),
+        ('SS', 'Superficie Sintetico'),
+        ('PC', 'Pared Cemento'),
+        ('PB', 'Pared Blindex')
     ]
 
-    # OP_SUPERFICIE = [
-    #     ('1', 'Cemento'),
-    #     ('2', 'Sintetico')
-    # ]
-
-    # OP_TIPO_PARED = [ 
-    #     ('1', 'Cemento'),
-    #     ('2', 'Blindex')
-    # ]
-
     cancha_specs = MultiSelectField(choices = SPECS, null = True, blank = True, max_length = 20)
-    # cobertura = models.Choices(choices = OP_COBERTURA)
-    # superficie = models.Choices(choices = OP_SUPERFICIE)
-    # tipo_pared = models.Choices(choices = OP_TIPO_PARED)
 
     editado = models.DateTimeField(auto_now=True)
     creado = models.DateTimeField(auto_now_add=True)
@@ -157,7 +137,8 @@ class Jugador(models.Model):
     def __str__(self):
         return (f'Nombre: {self.nombre}  Apellido:{self.apellido}')
 
-        
+
+
 
 
 
