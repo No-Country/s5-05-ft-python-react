@@ -7,7 +7,7 @@ from datetime import datetime
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password, is_jugador, is_complejo, **extra_fields):
+    def create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError('El usuario debe contener un email')   
         
@@ -56,7 +56,7 @@ class Complejo(models.Model):
     pais = models.CharField(max_length = 155, verbose_name = 'Pais')
     ciudad = models.CharField(max_length = 155, verbose_name = 'Ciudad')
     calle = models.CharField(max_length = 155)
-    altura = models.IntegerField()
+    altura = models.IntegerField(null = True, blank = True)
 
 
     class Meta:

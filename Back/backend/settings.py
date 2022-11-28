@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'multiselectfield',
     'django_extensions',
     'main.apps.MainConfig',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -83,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'padelDb', 
         'USER': 'postgres', 
-        'PASSWORD': 'postgre',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost', 
         'PORT': '5432',
     }

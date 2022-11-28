@@ -87,3 +87,4 @@ class JugadorSerializer(serializers.ModelSerializer):
     # def get_sexo(self, obj):
     #     return obj.get_sexo_display()
         
+    
