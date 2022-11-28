@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from multiselectfield import MultiSelectField
 
 from django.contrib.postgres.fields import ArrayField
@@ -8,7 +8,7 @@ from datetime import datetime
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password, is_jugador=None, is_complejo=None, **extra_fields):
+    def create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError('El usuario debe contener un email')   
         
@@ -34,7 +34,7 @@ class CustomUserManager(BaseUserManager):
 
         return user
 
-class User(AbstractUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -60,6 +60,8 @@ class Complejo(models.Model):
     altura = models.IntegerField(null=True, blank=True)
 
     cant_cancha = models.IntegerField(null=False, default=1)
+
+    objects = CustomUserManager()
 
     SPECS = [
         ('1', 'Techada'),
@@ -99,6 +101,8 @@ class Jugador(models.Model):
         (AMBOS, 'Ambos'),
     ]
     
+    objects = CustomUserManager()
+
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='Jugador')
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)

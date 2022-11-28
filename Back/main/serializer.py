@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User, Jugador
+from django.contrib.auth.hashers import make_password
 
 
 class ChoiceField(serializers.ChoiceField):
@@ -27,19 +28,21 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model= User
-        exclude = [
-                'password', 
-                'last_login', 
-                'is_superuser', 
-                #'username', 
-                'first_name', 
-                'last_name', 
-                'date_joined',  
-                'is_staff', 
-                'fecha_ingreso',
-                'groups',
-                'user_permissions'
-    ]
+        fields =    ['email',
+            'password',  
+            'is_jugador',
+            'is_complejo'
+            ]
+        extra_kwargs = {'passwords': {'write_only': True}}
+        
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            email=validated_data['email'],
+            password = validated_data['password']
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
 
 class JugadorSerializer(serializers.ModelSerializer):
 
