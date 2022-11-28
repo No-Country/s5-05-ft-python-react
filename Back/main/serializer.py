@@ -41,50 +41,16 @@ class UserSerializer(serializers.ModelSerializer):
                 'user_permissions'
     ]
 
-
-
 class JugadorSerializer(serializers.ModelSerializer):
 
-    # nombre = serializers.SerializerMethodField()
-    #apellido = serializers.SerializerMethodField()
-    #dias = serializers.SerializerMethodField()
-    #turnos = serializers.SerializerMethodField()
-    #sexo = serializers.SerializerMethodField()
-
     sexo = ChoiceField(choices = Jugador.SEXOS)
-    dias = serializers.MultipleChoiceField(choices = Jugador.OP_DIAS)
-    turnos = serializers.MultipleChoiceField(choices = Jugador.op_turnos)
+    rol = ChoiceField(choices=Jugador.ROLES)
 
     class Meta:
         model = Jugador
-        fields = ["id", "nombre", "apellido", "sexo", "telefono", "nivel", "dias", "turnos", "usuario"]
-        read_only_fields = ('id',)
+        fields = '__all__'
+        read_only_fields = ('id',"usuario","editado","creado")
 
-    # def create(self):
-    #     user = User.objects.create()
-    #     Jugador.objects.create(user=user)
-    #     return user
-
-    # def update(self, instance, validated_data):
-    #     instance.name = validated_data.get('nombre', instance.nombre)
-    #     instance.save()
-    #     return instance
-
-    # def get_nombre(self, obj):
-    #     return obj.nombre.capitalize()
-
-    # def get_apellido(self, obj):
-    #     return obj.apellido.capitalize()
-
-    # def get_dias(self, obj):
-    #     var = obj.get_dias_display().split(', ')
-    #     return var
-
-    # def get_turnos(self, obj):
-    #     var = obj.get_turnos_display().split(', ')
-    #     return var
-
-    # def get_sexo(self, obj):
-    #     return obj.get_sexo_display()
+ 
         
     
