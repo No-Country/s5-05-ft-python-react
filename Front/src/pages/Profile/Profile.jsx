@@ -7,8 +7,8 @@ import "./profile.css";
 import { ProfileUpdateComplex } from "./ProfileUpdate/ProfileUpdateComplex";
 import { ProfileUpdatePlayer } from "./ProfileUpdate/ProfileUpdatePlayer";
 export const Profile = () => {
-	// const [user, setUser] = useState("complex");
-	const [user, setUser] = useState("player");
+	const [user, setUser] = useState("complex");
+	// const [user, setUser] = useState("player");
 	const [updateData, setUpdateData] = useState(false);
 	const [disableButton, setDisableButton] = useState(false);
 

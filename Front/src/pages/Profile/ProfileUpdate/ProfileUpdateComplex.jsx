@@ -11,8 +11,11 @@ const complex = {
 	address: "Direccion XXXXX",
 	country: "Pais XXXXX",
 	city: "Ciudad XXXXX",
-	available: "Lista de Horarios",
 	contact: "1234567899",
+	courts: "4",
+	cover: "Aire Libre",
+	surface: "Cemento",
+	wall: "Cemento",
 };
 
 export const ProfileUpdateComplex = ({ updateData, setUpdateData }) => {
@@ -21,8 +24,11 @@ export const ProfileUpdateComplex = ({ updateData, setUpdateData }) => {
 	const [adressUpdate, setAdressUpdate] = useState(complex.address);
 	const [cityUpdate, setCityUpdate] = useState(complex.city);
 	const [countryUpdate, setCountryUpdate] = useState(complex.country);
-	const [availableUpdate, setAvailableUpdate] = useState(complex.available);
 	const [contactUpdate, setContactUpdate] = useState(complex.contact);
+	const [courtsUpdate, setCourtsUpdate] = useState(complex.courts);
+	const [coverUpdate, setCoverUpdate] = useState(complex.cover);
+	const [surfaceUpdate, setSurfaceUpdate] = useState(complex.surface);
+	const [wallUpdate, setWallUpdate] = useState(complex.wall);
 
 	//errors
 	const [errorName, setErrorName] = useState(false);
@@ -30,6 +36,7 @@ export const ProfileUpdateComplex = ({ updateData, setUpdateData }) => {
 	const [errorCity, setErrorCity] = useState(false);
 	const [errorCountry, setErrorCountry] = useState(false);
 	const [errorContact, setErrorContact] = useState(false);
+	const [errorCourt, setErrorCourts] = useState(false);
 
 	const handleName = (e) => {
 		validStringLength(e) ? setErrorName(false) : setErrorName(true);
@@ -47,12 +54,15 @@ export const ProfileUpdateComplex = ({ updateData, setUpdateData }) => {
 		validStringLength(e) ? setErrorCountry(false) : setErrorCountry(true);
 		setCountryUpdate(e);
 	};
-	const handleAvailable = (e) => {
-		setAvailableUpdate(e);
-	};
 	const handleContact = (e) => {
 		validStringNumber(e) ? setErrorContact(false) : setErrorContact(true);
 		setContactUpdate(e);
+	};
+	const handleCourts = (e) => {
+		!isNaN(e) && e.length > 0
+			? setErrorCourts(false)
+			: setErrorCourts(true);
+		setCourtsUpdate(e);
 	};
 
 	const handleCancelButton = () => {
@@ -61,11 +71,16 @@ export const ProfileUpdateComplex = ({ updateData, setUpdateData }) => {
 		setErrorCity(false);
 		setErrorCountry(false);
 		setErrorContact(false);
+		setErrorCourts(false);
 		setNameUpdate(complex.name);
 		setAdressUpdate(complex.address);
 		setCityUpdate(complex.city);
 		setCountryUpdate(complex.country);
 		setContactUpdate(complex.contact);
+		setCourtsUpdate(complex.courts);
+		setCoverUpdate(complex.cover);
+		setSurfaceUpdate(complex.surface);
+		setWallUpdate(complex.wall);
 		setUpdateData(false);
 	};
 
@@ -92,6 +107,84 @@ export const ProfileUpdateComplex = ({ updateData, setUpdateData }) => {
 					/>
 				)}
 			</div>
+
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_6" : ""
+					} `}>
+					{updateData ? "Canchas" : ""}
+				</label>
+				<input
+					className={`profile--update--input ${
+						errorCourt && "borderColor--input--error"
+					} `}
+					type='text'
+					value={courtsUpdate}
+					disabled={updateData ? false : true}
+					onChange={(e) => handleCourts(e.target.value)}
+				/>
+				{errorCourt && (
+					<div className='profile--update--error'>
+						Debe ser número
+					</div>
+				)}
+			</div>
+
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_6" : ""
+					} `}>
+					{updateData ? "Cubierta" : ""}
+				</label>
+				<select
+					className='profile--update--input'
+					disabled={updateData ? false : true}
+					value={coverUpdate}
+					onChange={(e) => setCoverUpdate(e.target.value)}>
+					<option value='Techada'>Techada</option>
+					<option value='Aire Libre'>Aire Libre</option>
+					<option value='ambas'>Ambas Opciones</option>
+				</select>
+			</div>
+
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_6" : ""
+					} `}>
+					{updateData ? "Superficie" : ""}
+				</label>
+				<select
+					className='profile--update--input'
+					disabled={updateData ? false : true}
+					value={surfaceUpdate}
+					onChange={(e) => setSurfaceUpdate(e.target.value)}>
+					<option value='Cemento'>Cemento</option>
+					<option value='Sintetico'>Sintetico</option>
+					<option value='ambas'>Ambas Opciones</option>
+				</select>
+			</div>
+
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_6" : ""
+					} `}>
+					{updateData ? "Paredes" : ""}
+				</label>
+				<select
+					className='profile--update--input'
+					disabled={updateData ? false : true}
+					value={wallUpdate}
+					onChange={(e) => setWallUpdate(e.target.value)}>
+					<option value='Cemento'>Cemento</option>
+					<option value='Blindex'>Blindex</option>
+					<option value='ambas'>Ambas Opciones</option>
+				</select>
+			</div>
+
 			<div className='container--profile--sections'>
 				<label
 					className={`profile--update--label  ${
@@ -181,23 +274,6 @@ export const ProfileUpdateComplex = ({ updateData, setUpdateData }) => {
 						Pais debe ser mayor a 3 caracteres
 					</div>
 				)}
-			</div>
-
-			<div className='container--profile--sections'>
-				<label
-					className={`profile--update--label ${
-						updateData ? "show_time_5" : ""
-					} `}>
-					{updateData ? "Horarios" : ""}
-				</label>
-				<input
-					className='profile--update--input'
-					type='text'
-					value={availableUpdate}
-					disabled={updateData ? false : true}
-					onChange={(e) => handleAvailable(e.target.value)}
-				/>
-				<div className='profile--update--error'>Error Horarios</div>
 			</div>
 
 			<div className='container--profile--sections'>

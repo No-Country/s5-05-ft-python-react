@@ -11,6 +11,7 @@ const user = {
 	name: "Nombre",
 	lastName: "Apellido",
 	position: "drive",
+	level: "7",
 	available: "Lista de Horarios",
 	contact: "1234567899",
 	genre: "h",
@@ -25,6 +26,7 @@ export const ProfileUpdatePlayer = ({
 	const [nameUpdate, setNameUpdate] = useState(user.name);
 	const [lastNameUpdate, setLastNameUpdate] = useState(user.lastName);
 	const [positionUpdate, setPositionUpdate] = useState(user.position);
+	const [levelUpdate, setLevelUpdate] = useState(user.level);
 	const [availableUpdate, setAvailableUpdate] = useState(user.available);
 	const [contactUpdate, setContactUpdate] = useState(user.contact);
 	const [genreUpdate, setGenreUpdate] = useState(user.genre);
@@ -161,6 +163,28 @@ export const ProfileUpdatePlayer = ({
 					<option value='reves'>Reves</option>
 					<option value='drive'>Drive</option>
 					<option value='allCourt'>Toda la Cancha</option>
+				</select>
+			</div>
+
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_3" : ""
+					}`}>
+					{updateData ? "Nivel" : ""}
+				</label>
+				<select
+					className='profile--update--input'
+					disabled={updateData ? false : true}
+					value={levelUpdate}
+					onChange={(e) => setLevelUpdate(e.target.value)}>
+					<option value='7'>7</option>
+					<option value='6'>6</option>
+					<option value='5'>5</option>
+					<option value='4'>4</option>
+					<option value='3'>3</option>
+					<option value='2'>2</option>
+					<option value='1'>1</option>
 				</select>
 			</div>
 
