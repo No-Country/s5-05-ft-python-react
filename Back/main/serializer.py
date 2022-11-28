@@ -51,8 +51,8 @@ class JugadorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Jugador
-        fields = '__all__'
-        read_only_fields = ('id',"usuario","editado","creado")
+        exclude = ["usuario"]
+        read_only_fields = ('id',"editado","creado")
 
  
         

@@ -50,7 +50,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Complejo(models.Model):
     
-
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     
     nombre = models.CharField(max_length=100)
@@ -64,15 +63,15 @@ class Complejo(models.Model):
     objects = CustomUserManager()
 
     SPECS = [
-        ('1', 'Techada'),
-        ('2', 'Aire Libre'),
-        ('3', 'Superficie Cemento'),
-        ('4', 'Superficie Sintetico'),
-        ('5', 'Pared Cemento'),
-        ('6', 'Pared Blindex')
+        ('T', 'Techada'),
+        ('AL', 'Aire Libre'),
+        ('SC', 'Superficie Cemento'),
+        ('SS', 'Superficie Sintetico'),
+        ('PC', 'Pared Cemento'),
+        ('PB', 'Pared Blindex')
     ]
 
-    cancha_specs = MultiSelectField(choices = SPECS, null = True, blank = True, max_length = 20)
+    cancha_specs = MultiSelectField(choices = SPECS, null = True, blank = True, max_length = 30)
 
     class Meta:
         verbose_name = 'Complejo'
@@ -83,8 +82,6 @@ class Complejo(models.Model):
 
 class Jugador(models.Model):
     
-
-
     MASCULINO='M'
     FEMENINO='F'
     SEXOS = [
@@ -128,7 +125,7 @@ class Jugador(models.Model):
         ('PB', 'Pared Blindex')
     ]
 
-    cancha_specs = MultiSelectField(choices = SPECS, null = True, blank = True, max_length = 20)
+    cancha_specs = MultiSelectField(choices = SPECS, null = True, blank = True, max_length = 30)
 
     editado = models.DateTimeField(auto_now=True)
     creado = models.DateTimeField(auto_now_add=True)
