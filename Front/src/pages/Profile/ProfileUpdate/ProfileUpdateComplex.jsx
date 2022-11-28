@@ -77,7 +77,7 @@ export const ProfileUpdateComplex = ({ updateData, setUpdateData }) => {
 		setCityUpdate(complex.city);
 		setCountryUpdate(complex.country);
 		setContactUpdate(complex.contact);
-		setCourtsUpdate(complex.contact);
+		setCourtsUpdate(complex.courts);
 		setCoverUpdate(complex.cover);
 		setSurfaceUpdate(complex.surface);
 		setWallUpdate(complex.wall);
