@@ -86,14 +86,17 @@ export const Homepage = () => {
           <HomeCard
             name="DONDE SEA"
             description="Con nuestro sencillo servicio puedes organizar encuentros desde la comodidad de tu casa. Se acabo lo de tener que ir a hablar con x persona para hacer una reserva."
+            icon="HomeIcon"
           />
           <HomeCard
             name="HORARIOS"
             description="Contamos con numerosas fechas disponibles, cada cancha tiene horarios disponibles. Podras elegir la que más se adapte a tu disponibilidad horaria."
+            icon="LevelIcon"
           />
           <HomeCard
             name="NIVEL"
             description="Incrementa tu reputacion como jugador. Haste respetar con los demas jugadores y genera un nombre en la cancha."
+            icon="CalendarIcon"
           />
         </div>
       </section>
