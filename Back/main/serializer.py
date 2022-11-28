@@ -31,7 +31,6 @@ class UserSerializer(serializers.ModelSerializer):
                 'password', 
                 'last_login', 
                 'is_superuser', 
-                #'username', 
                 'first_name', 
                 'last_name', 
                 'date_joined',  
@@ -48,8 +47,8 @@ class JugadorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Jugador
-        fields = '__all__'
-        read_only_fields = ('id',"usuario","editado","creado")
+        exclude = ["usuario"]
+        read_only_fields = ('id',"editado","creado")
 
  
         
