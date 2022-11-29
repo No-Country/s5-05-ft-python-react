@@ -7,10 +7,10 @@ from .models import User, Jugador, Complejo
 def update_save_jugador_perfil(sender, instance, created, **kwargs):
     user = instance
     if created and user.is_superuser == False and user.is_jugador: 
-        jugador = Jugador.objects.create_user(usuario = user)
+        jugador = Jugador.objects.create(usuario = user)
         jugador.save()
     elif created and user.is_superuser == False and user.is_complejo:
-        complejo = Complejo.objects.create_user(usuario = user)
+        complejo = Complejo.objects.create(usuario = user)
         complejo.save()
 
 

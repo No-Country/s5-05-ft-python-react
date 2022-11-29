@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from main.views import *
-
+from main.auth import *
 
 urlpatterns = [
     path('usuario/', user_api_view, name = 'usuario_api'),

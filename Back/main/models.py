@@ -8,7 +8,7 @@ from datetime import datetime
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password, **extra_fields):
+    def create_user(self, email, password = None, **extra_fields):
         if not email:
             raise ValueError('El usuario debe contener un email')   
         
@@ -35,6 +35,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
 class User(AbstractBaseUser, PermissionsMixin):
+    username = None
     email = models.EmailField(max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
