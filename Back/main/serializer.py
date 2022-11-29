@@ -26,27 +26,34 @@ class ChoiceField(serializers.ChoiceField):
 
 class UserTokenSerializer(serializers.ModelSerializer):
 
-    # email = serializers.EmailField(required=False, allow_blank=True)
-    # password = serializers.CharField(style={'input_type': 'password'})
-    # token = serializers.CharField(allow_blank=True, read_only=True)
+    email = serializers.EmailField(required=False, allow_blank=True)
+    password = serializers.CharField(style={'input_type': 'password'})
+    token = serializers.CharField(allow_blank=True, read_only=True)
     class Meta:
         model = User
         fields = ('email', 'password',) 
 
 
-    # def validate(self, data):
-    # # user = None
-    #     email = data.get('email')
-    #     password = data.get('password')
-    #     if not email:
-    #         raise serializers.ValidationError('Email is required for login')
-    #     if not password:
-    #         raise serializers.ValidationError('Password is required for login')
-    #     user = authenticate(email=email, password=password)
-    #     if not user:
-    #         raise serializers.ValidationError('This email is not valid/already exists')
-    #     data['user'] = user
-    #     return data
+    def validate(self, attrs):
+        username = attrs.get('email')
+        password = attrs.get('password')
+
+        if username and password:
+            user = authenticate(request=self.context.get('request'),
+                                username=username, password=password)
+
+            # The authenticate call simply returns None for is_active=False
+            # users. (Assuming the default ModelBackend authentication
+            # backend.)
+            if not user:
+                msg = ('Unable to log in with provided credentials.')
+                raise serializers.ValidationError(msg, code='authorization')
+        else:
+            msg = ('Must include "username" and "password".')
+            raise serializers.ValidationError(msg, code='authorization')
+
+        attrs['user'] = user
+        return attrs
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -57,7 +64,6 @@ class UserSerializer(serializers.ModelSerializer):
         
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
-        user.set_password(user.password)
         user.save()
         return user
 

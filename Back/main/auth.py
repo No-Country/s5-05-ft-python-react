@@ -7,6 +7,11 @@ from django.contrib.auth import authenticate
 
 class Login(ObtainAuthToken):
 
+
+    def get_serializer(self, *args, **kwargs):
+        kwargs['context'] = self.get_serializer_context()
+        return self.serializer_class(*args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         # email = request.data.get('email', '')
         # password = request.data.get('password', '')

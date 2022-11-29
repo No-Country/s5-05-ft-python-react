@@ -43,11 +43,3 @@ def jugador_detail_view(request,pk=None):
             return Response(jugador_serializer.data)
         return Response(jugador_serializer.errors)
 
-
-class Login(ObtainAuthToken):
-
-    def post(self, request, *args, **kwargs):
-        login_serializer = self.serializer_class(data = request.data, context = {'request':request})
-        if login_serializer.is_valid():
-            print('Validation confirmed')
-        return Response({'mensaje': 'Hi'}, status = status.HTTP_200_OK)
