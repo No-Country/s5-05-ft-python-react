@@ -7,8 +7,7 @@ export const Footer = () => {
     <footer className={footer}>
       <div>
         <div className={footer__part_1}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam,
-          dolor. Architecto iusto nobis explicabo optio?
+          ¡Que no queden canchas disponibles!
         </div>
         <div className={footer__part_2}>
           Web elaborada por S5-05-REACT/PYTHON <br />

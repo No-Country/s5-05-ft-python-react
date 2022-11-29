@@ -13,6 +13,8 @@
   font-family: "Roboto", "Segoe UI", sans-serif;
   text-transform: uppercase;
   color: var(--color);
+  text-decoration: none;
+  display: inline-block;
 }
 
 .btn__primary::after,
