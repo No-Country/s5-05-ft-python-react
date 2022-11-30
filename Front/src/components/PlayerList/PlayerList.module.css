@@ -30,6 +30,7 @@
     cursor: pointer;
     font-family: inherit;
     text-transform: uppercase;
+    user-select: none;
 }
 
 .search__input {
@@ -38,6 +39,7 @@
     border-radius: 5px;
     border: 1px solid var(--color--blue);
     color: var(--color--blue);
+    user-select: none;
 }
 
 .search__input:focus-visible {
@@ -71,6 +73,7 @@
     width: 90%;
     font-weight: bold;
     color: var(--color--blue);
+    user-select: none;
 }
 
 .row__data {
@@ -81,7 +84,7 @@
     background-color: var(--color--white);
     width: 90%;
     border-radius: 8px;
-    cursor: pointer;
+    user-select: none;
     /* box-shadow: 1px 1px 5px 0px rgba(87,87,87,0.75);
     -webkit-box-shadow: 1px 1px 5px 0px rgba(87,87,87,0.75);
     -moz-box-shadow: 1px 1px 5px 0px rgba(87,87,87,0.75); */
