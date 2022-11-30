@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { PlayerRegister } from "./components/PlayerRegister/PlayerRegister";
+import { PlayerTimesDisplay } from "./components/PlayerTimesDisplay/PlayerTimesDisplay";
 import { SelectTime2 } from "./components/selectTime/SelectTime";
 import { Complex } from "./pages/Complex/Complex";
 import { Homepage } from "./pages/HomePage/HomePage";
