@@ -6,7 +6,7 @@
     "time": "Horario 4",
     "phone": "123456789",
     "gender": "M",
-    "id": 1
+    "id": "1"
   },
   {
     "name": "Juan",
@@ -15,7 +15,7 @@
     "time": "Horario 1",
     "phone": "123456789",
     "gender": "M",
-    "id": 2
+    "id": "2"
   },
   {
     "name": "Maria",
@@ -24,7 +24,7 @@
     "time": "Horario 1",
     "phone": "123456789",
     "gender": "F",
-    "id": 3
+    "id": "3"
   },
   {
     "name": "Francisco",
@@ -33,7 +33,7 @@
     "time": "Horario 3",
     "phone": "123456789",
     "gender": "M",
-    "id": 4
+    "id": "4"
   },
   {
     "name": "Lionel",
@@ -42,7 +42,7 @@
     "time": "Horario 4",
     "phone": "123456789",
     "gender": "M",
-    "id": 5
+    "id": "5"
   },
   {
     "name": "Lionel",
@@ -51,6 +51,6 @@
     "time": "Horario 3",
     "phone": "123456789",
     "gender": "M",
-    "id": 6
+    "id": "6"
   }
 ]
