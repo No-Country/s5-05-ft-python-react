@@ -6,9 +6,65 @@ import SuccesIcon from "../../assets/profile/succes_icon.png";
 import "./profile.css";
 import { ProfileUpdateComplex } from "./ProfileUpdate/ProfileUpdateComplex";
 import { ProfileUpdatePlayer } from "./ProfileUpdate/ProfileUpdatePlayer";
+
+const userPlayer = {
+	name: "Nombre",
+	lastName: "Apellido",
+	position: "drive",
+	level: "7",
+	available: [
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false],
+	],
+	contact: "1234567899",
+	genre: "h",
+};
+
+const userComplex = {
+	name: "Nombre de la cancha",
+	address: "Direccion XXXXX",
+	country: "Pais XXXXX",
+	city: "Ciudad XXXXX",
+	contact: "1234567899",
+	courts: "4",
+	cover: "Aire Libre",
+	surface: "Cemento",
+	wall: "Cemento",
+};
+
 export const Profile = () => {
-	const [user, setUser] = useState("complex");
-	// const [user, setUser] = useState("player");
+	// const [user, setUser] = useState("complex");
+	const [user, setUser] = useState("player");
 	const [updateData, setUpdateData] = useState(false);
 	const [disableButton, setDisableButton] = useState(false);
 
@@ -55,12 +111,14 @@ export const Profile = () => {
 				</button>
 				{user === "player" ? (
 					<ProfileUpdatePlayer
+						userPlayer={userPlayer}
 						updateData={updateData}
 						setUpdateData={setUpdateData}
 						setDisableButton={setDisableButton}
 					/>
 				) : (
 					<ProfileUpdateComplex
+						userComplex={userComplex}
 						updateData={updateData}
 						setUpdateData={setUpdateData}
 					/>

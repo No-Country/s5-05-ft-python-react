@@ -2,47 +2,43 @@ import { useEffect, useState } from "react";
 import FemalePlayer from "../../../assets/profile/female_player.png";
 import MalePlayer from "../../../assets/profile/male_player.png";
 import PhotoIcon from "../../../assets/profile/photo_icon.png";
+import { PlayerTimeSelector } from "../../../components/PlayerTimeSelector/PlayerTimeSelector";
 import {
 	validStringLength,
 	validStringLetters,
 	validStringNumber,
 } from "../../../helper/validations";
-const user = {
-	name: "Nombre",
-	lastName: "Apellido",
-	position: "drive",
-	level: "7",
-	available: "Lista de Horarios",
-	contact: "1234567899",
-	genre: "h",
-};
 
 export const ProfileUpdatePlayer = ({
+	userPlayer,
 	updateData,
 	setUpdateData,
 	setDisableButton,
 }) => {
 	//updaters
-	const [nameUpdate, setNameUpdate] = useState(user.name);
-	const [lastNameUpdate, setLastNameUpdate] = useState(user.lastName);
-	const [positionUpdate, setPositionUpdate] = useState(user.position);
-	const [levelUpdate, setLevelUpdate] = useState(user.level);
-	const [availableUpdate, setAvailableUpdate] = useState(user.available);
-	const [contactUpdate, setContactUpdate] = useState(user.contact);
-	const [genreUpdate, setGenreUpdate] = useState(user.genre);
+	const [nameUpdate, setNameUpdate] = useState(userPlayer.name);
+	const [lastNameUpdate, setLastNameUpdate] = useState(userPlayer.lastName);
+	const [positionUpdate, setPositionUpdate] = useState(userPlayer.position);
+	const [levelUpdate, setLevelUpdate] = useState(userPlayer.level);
+	const [availableUpdate, setAvailableUpdate] = useState(
+		userPlayer.available
+	);
+	const [contactUpdate, setContactUpdate] = useState(userPlayer.contact);
+	const [genreUpdate, setGenreUpdate] = useState(userPlayer.genre);
 
 	// errors
 	const [errorName, setErrorName] = useState(false);
 	const [errorLastName, setErrorLastName] = useState(false);
 	const [errorContact, setErrorContact] = useState(false);
+	const [errorTimes, setErrorTimes] = useState(false);
 
 	const [buttonCancel, setButtonCancel] = useState(false);
 
 	useEffect(() => {
-		errorName || errorLastName || errorContact
+		errorName || errorLastName || errorContact || errorTimes
 			? setDisableButton(true)
 			: setDisableButton(false);
-	}, [errorName, errorLastName, errorContact, setDisableButton]);
+	}, [errorName, errorLastName, errorContact, errorTimes, setDisableButton]);
 
 	//function handlers
 	const handleName = (e) => {
@@ -68,12 +64,14 @@ export const ProfileUpdatePlayer = ({
 		setErrorName(false);
 		setErrorLastName(false);
 		setErrorContact(false);
-		setNameUpdate(user.name);
-		setLastNameUpdate(user.lastName);
-		setPositionUpdate(user.position);
-		setAvailableUpdate(user.available);
-		setContactUpdate(user.contact);
-		setGenreUpdate(user.genre);
+		setErrorTimes(false);
+		setNameUpdate(userPlayer.name);
+		setLastNameUpdate(userPlayer.lastName);
+		setPositionUpdate(userPlayer.position);
+		setAvailableUpdate(userPlayer.available);
+		setContactUpdate(userPlayer.contact);
+		setGenreUpdate(userPlayer.genre);
+		setLevelUpdate(userPlayer.level);
 		setUpdateData(false);
 		setButtonCancel(true);
 	};
@@ -195,13 +193,26 @@ export const ProfileUpdatePlayer = ({
 					}`}>
 					{updateData ? "Horarios" : ""}
 				</label>
-				<input
-					className='profile--update--input'
-					type='text'
-					value={availableUpdate}
-					disabled={updateData ? false : true}
-					onChange={(e) => setAvailableUpdate(e.target.value)}
-				/>
+				{!updateData ? (
+					<input
+						className='profile--update--input'
+						type='text'
+						value={"Horarios"}
+						disabled={updateData ? false : true}
+						onChange={(e) => setAvailableUpdate(e.target.value)}
+					/>
+				) : (
+					<PlayerTimeSelector
+						availableUpdate={availableUpdate}
+						setAvailableUpdate={setAvailableUpdate}
+						setErrorTimes={setErrorTimes}
+					/>
+				)}
+				{errorTimes && (
+					<div className='profile--update--error'>
+						Debe seleccionar al menos un horario
+					</div>
+				)}
 			</div>
 
 			<div className='container--profile--sections'>

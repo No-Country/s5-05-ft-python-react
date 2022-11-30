@@ -6,29 +6,21 @@ import {
 	validStringNumber,
 } from "../../../helper/validations";
 
-const complex = {
-	name: "Nombre de la cancha",
-	address: "Direccion XXXXX",
-	country: "Pais XXXXX",
-	city: "Ciudad XXXXX",
-	contact: "1234567899",
-	courts: "4",
-	cover: "Aire Libre",
-	surface: "Cemento",
-	wall: "Cemento",
-};
-
-export const ProfileUpdateComplex = ({ updateData, setUpdateData }) => {
+export const ProfileUpdateComplex = ({
+	userComplex,
+	updateData,
+	setUpdateData,
+}) => {
 	//updaters
-	const [nameUpdate, setNameUpdate] = useState(complex.name);
-	const [adressUpdate, setAdressUpdate] = useState(complex.address);
-	const [cityUpdate, setCityUpdate] = useState(complex.city);
-	const [countryUpdate, setCountryUpdate] = useState(complex.country);
-	const [contactUpdate, setContactUpdate] = useState(complex.contact);
-	const [courtsUpdate, setCourtsUpdate] = useState(complex.courts);
-	const [coverUpdate, setCoverUpdate] = useState(complex.cover);
-	const [surfaceUpdate, setSurfaceUpdate] = useState(complex.surface);
-	const [wallUpdate, setWallUpdate] = useState(complex.wall);
+	const [nameUpdate, setNameUpdate] = useState(userComplex.name);
+	const [adressUpdate, setAdressUpdate] = useState(userComplex.address);
+	const [cityUpdate, setCityUpdate] = useState(userComplex.city);
+	const [countryUpdate, setCountryUpdate] = useState(userComplex.country);
+	const [contactUpdate, setContactUpdate] = useState(userComplex.contact);
+	const [courtsUpdate, setCourtsUpdate] = useState(userComplex.courts);
+	const [coverUpdate, setCoverUpdate] = useState(userComplex.cover);
+	const [surfaceUpdate, setSurfaceUpdate] = useState(userComplex.surface);
+	const [wallUpdate, setWallUpdate] = useState(userComplex.wall);
 
 	//errors
 	const [errorName, setErrorName] = useState(false);
@@ -72,15 +64,15 @@ export const ProfileUpdateComplex = ({ updateData, setUpdateData }) => {
 		setErrorCountry(false);
 		setErrorContact(false);
 		setErrorCourts(false);
-		setNameUpdate(complex.name);
-		setAdressUpdate(complex.address);
-		setCityUpdate(complex.city);
-		setCountryUpdate(complex.country);
-		setContactUpdate(complex.contact);
-		setCourtsUpdate(complex.courts);
-		setCoverUpdate(complex.cover);
-		setSurfaceUpdate(complex.surface);
-		setWallUpdate(complex.wall);
+		setNameUpdate(userComplex.name);
+		setAdressUpdate(userComplex.address);
+		setCityUpdate(userComplex.city);
+		setCountryUpdate(userComplex.country);
+		setContactUpdate(userComplex.contact);
+		setCourtsUpdate(userComplex.courts);
+		setCoverUpdate(userComplex.cover);
+		setSurfaceUpdate(userComplex.surface);
+		setWallUpdate(userComplex.wall);
 		setUpdateData(false);
 	};
 
