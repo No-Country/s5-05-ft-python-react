@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-page);
+  font-family: var(--ff--lato);
+  min-height: 100vh;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.form {
+  background-image: url("../../assets/pattern.svg");
+  background-position: center;
+  padding-top: 100px;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 35px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.159);
+  position: relative;
+}
+
+.title {
+  position: absolute;
+  text-align: center;
+  color: white;
+  width: 100%;
+  top: 2.2rem;
+  font-weight: 400;
+}
+
+.inputs_container {
+  background-color: var(--background-inputs);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 40px 0 35px 35px;
+  position: relative;
+  top: 4px;
+}
+.input_content {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: white;
+}
+.form input {
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  margin-top: 8px;
+}
+.form input:focus {
+  box-shadow: 0 0 5px inset rgba(0, 0, 0, 0.091);
+}
+
+.form input::placeholder {
+  font-size: 14px;
+}
+
+.label {
+  font-size: 12px;
+}
+.button {
+  border: none;
+  padding: 10px 20px;
+  background-color: black;
+  color: rgb(215, 213, 213);
+  border-radius: 8px 0 8px 8px;
+  margin-top: 8px;
+}
+.redirection {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  font-size: 14px;
+}
+.redirection a {
+  color: black;
+  margin-left: 8px;
+}
+
+.error {
+  height: 20px;
+  font-size: 13px;
+  color: rgb(185, 56, 56);
+  text-align: center;
+}

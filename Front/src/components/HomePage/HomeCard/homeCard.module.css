@@ -1,10 +1,11 @@
 .card__container {
   max-width: 280px;
+  aspect-ratio: 1;
   width: 80%;
   background-color: var(--color--blue);
   padding: 25px 15px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
   gap: 10px;

@@ -9,7 +9,12 @@ import WorldMap from "./Images/WorldMap.png";
 //ICONS
 import MapIcon from "./Icons/mapIcon.png";
 import DrinkIcon from "./Icons/drinkIcon.png";
+import Logo from "./Icons/Logo.png";
+import HomeIcon from "./Icons/homeicon.png";
+import LevelIcon from "./Icons/levelicon.png";
+import CalendarIcon from "./Icons/calendaricon.png";
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   // IMAGES
   HeaderBg: HeaderBg,
@@ -19,7 +24,11 @@ export default {
   MotivateImage: MotivateImage,
   WorldMap: WorldMap,
 
-  //ICONS 
+  //ICONS
   MapIcon: MapIcon,
   DrinkIcon: DrinkIcon,
+  Logo: Logo,
+  HomeIcon: HomeIcon,
+  LevelIcon: LevelIcon,
+  CalendarIcon: CalendarIcon,
 };
