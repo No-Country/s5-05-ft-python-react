@@ -1,54 +1,69 @@
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  min-width: 350px;
-  overflow: auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 350px;
-  height: 100%;
-  width: 100%;
-  padding: 1rem;
-  font-family: var(--ff--lato);
+	width: 280px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: column;
+	font-family: var(--ff--lato);
+	margin: 0 auto;
+}
+
+.container_tableTimes {
+	width: 318px;
+	height: 450px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: flex-start;
+	font-family: var(--ff--lato);
+	-ms-overflow-style: none; /* for Internet Explorer, Edge */
+	scrollbar-width: none; /* for Firefox */
+	overflow-y: scroll;
+}
+
+.container_tableTimes_text {
+	width: 80px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	padding-top: 5px;
+}
+
+.tableTimes_text {
+	font-size: 12px;
+	text-align: center;
+	padding: 5px 0px;
+	margin: 5.6px 0px;
+	border-bottom: 1px solid black;
 }
 
 .container td {
-  font-size: 16px;
-  height: 60px;
-  line-height: initial;
-  color: rgb(255, 255, 255);
-  text-shadow: 1px 1px 1px black;
+	line-height: initial;
+	height: 50px;
+	font-size: 12px;
 }
 
 .days_container {
-  display: flex;
-  width: 95%;
-  justify-content: space-evenly;
-  text-align: center;
-}
-.day_text {
-  width: 100%;
-  border: 0.7rem solid transparent;
+	display: flex;
+	width: 200px;
+	align-self: flex-end;
+	justify-content: space-between;
+	text-align: center;
+	margin-right: 7px;
+	font-size: 16px;
+	font-family: var(--ff--lato);
+	padding: 15px 0px 5px 0px;
 }
 
 .button {
-  padding: 10px 20px;
-  border: none;
-  background-color: cornflowerblue;
-  color: rgb(255, 255, 255);
-}
-.button:active {
-  opacity: 0.9;
+	padding: 10px 20px;
+	border: none;
+	background-color: cornflowerblue;
+	color: rgb(255, 255, 255);
+	margin: 20px 0px;
 }
 
-@media screen and (max-width: 645px) {
-  .container td {
-    font-size: 12px;
-    height: 50px;
-  }
-  .container {
-    padding: 0.5rem;
-  }
+.button:active {
+	opacity: 0.9;
 }
