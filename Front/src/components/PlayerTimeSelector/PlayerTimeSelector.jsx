@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TableDragSelect from "react-table-drag-select";
 import "react-table-drag-select/style.css";
-import { findDay, findHour, timesText } from "../../helper/timePlayers";
-
+import { timesText } from "../../helper/timePlayers";
 import "./playerTimeSelector.css";
 import styles from "./playerTimeSelector.module.css";
 
@@ -13,7 +12,6 @@ const {
 	days_container,
 	day_text,
 	container,
-	// button,
 } = styles;
 
 const daysWeek = ["L", "M", "M", "J", "V", "S", "D"];
@@ -23,7 +21,6 @@ export const PlayerTimeSelector = ({
 	setAvailableUpdate,
 	setErrorTimes,
 }) => {
-	// const [elections, setElections] = useState({});
 	const [cells, setCells] = useState(availableUpdate);
 
 	const validation = () => {
@@ -33,28 +30,6 @@ export const PlayerTimeSelector = ({
 	};
 
 	useEffect(() => {
-		const days = {
-			lun: [],
-			mar: [],
-			mie: [],
-			jue: [],
-			vie: [],
-			sab: [],
-			dom: [],
-		};
-
-		cells.forEach((hour, indexHour) => {
-			if (hour.includes(true)) {
-				const hora = findHour(indexHour);
-				hour.forEach((day, indexDay) => {
-					const dia = findDay(indexDay);
-					if (day) {
-						days[dia] = [...days[dia], hora];
-					}
-				});
-			}
-		});
-		// setElections(days);
 		validation();
 	}, [cells]);
 
@@ -89,9 +64,6 @@ export const PlayerTimeSelector = ({
 					))}
 				</TableDragSelect>
 			</div>
-			{/* <button className={button} type='button' onClick={validation}>
-				Aceptar
-			</button> */}
 		</div>
 	);
 };
