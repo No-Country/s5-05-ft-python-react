@@ -14,7 +14,6 @@ class ChoiceField(serializers.ChoiceField):
             return obj
 
     def to_internal_value(self, data):
-        # To support inserts with the value
         if data == '' and self.allow_blank:
             return ''
 
@@ -28,10 +27,10 @@ class UserTokenSerializer(serializers.ModelSerializer):
 
     email = serializers.EmailField(required=False, allow_blank=True)
     password = serializers.CharField(style={'input_type': 'password'})
-    token = serializers.CharField(allow_blank=True, read_only=True)
+    #token = serializers.CharField(allow_blank=True, read_only=True)
     class Meta:
         model = User
-        fields = ('email', 'password',) 
+        fields = ('email', 'password')  
 
 
     def validate(self, attrs):
