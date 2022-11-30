@@ -95,6 +95,16 @@
 
 .profilePlayer--info--available--text {
 	font-weight: 700;
+	align-self: flex-start;
+}
+
+.container--profilePlayer--info--available--text {
+	width: 100%;
+	min-height: 150px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
 }
 
 .container--profilePlayer--info--contact {
