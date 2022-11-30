@@ -64,12 +64,12 @@ class Complejo(models.Model):
     objects = CustomUserManager()
 
     SPECS = [
-        ('T', 'Techada'),
-        ('AL', 'Aire Libre'),
-        ('SC', 'Superficie Cemento'),
-        ('SS', 'Superficie Sintetico'),
-        ('PC', 'Pared Cemento'),
-        ('PB', 'Pared Blindex')
+        ("T", 'Techada'),
+        ("AL", 'Aire Libre'),
+        ("SC", 'Superficie Cemento'),
+        ("SS", 'Superficie Sintetico'),
+        ("PC", 'Pared Cemento'),
+        ("PB", 'Pared Blindex')
     ]
 
     cancha_specs = MultiSelectField(choices = SPECS, null = True, blank = True, max_length = 30)
@@ -109,24 +109,26 @@ class Jugador(models.Model):
     nivel = models.SmallIntegerField(choices=[(i,i) for i in range(1,8)], null = True, blank = True)
     telefono = models.CharField(max_length=10, help_text='Número sin 0 ni 15')
     
-    lunes = ArrayField(models.CharField(max_length=255, blank=True), default=list())
-    martes = ArrayField(models.CharField(max_length=255, blank=True), default=list())
-    miercoles = ArrayField(models.CharField(max_length=255, blank=True), default=list())
-    jueves = ArrayField(models.CharField(max_length=255, blank=True), default=list())
-    viernes = ArrayField(models.CharField(max_length=255, blank=True), default=list())
-    sabado = ArrayField(models.CharField(max_length=255, blank=True), default=list())
-    domingo = ArrayField(models.CharField(max_length=255, blank=True), default=list())
+    lunes = ArrayField(models.CharField(max_length=255, blank=True), default=list)
+    martes = ArrayField(models.CharField(max_length=255, blank=True), default=list)
+    miercoles = ArrayField(models.CharField(max_length=255, blank=True), default=list)
+    jueves = ArrayField(models.CharField(max_length=255, blank=True), default=list)
+    viernes = ArrayField(models.CharField(max_length=255, blank=True), default=list)
+    sabado = ArrayField(models.CharField(max_length=255, blank=True), default=list)
+    domingo = ArrayField(models.CharField(max_length=255, blank=True), default=list)
 
     SPECS = [
-        ('T', 'Techada'),
-        ('AL', 'Aire Libre'),
-        ('SC', 'Superficie Cemento'),
-        ('SS', 'Superficie Sintetico'),
-        ('PC', 'Pared Cemento'),
-        ('PB', 'Pared Blindex')
+        ("T", 'Techada'),
+        ("AL", 'Aire Libre'),
+        ("SC", 'Superficie Cemento'),
+        ("SS", 'Superficie Sintetico'),
+        ("PC", 'Pared Cemento'),
+        ("PB", 'Pared Blindex')
     ]
 
     cancha_specs = MultiSelectField(choices = SPECS, null = True, blank = True, max_length = 30)
+
+    grilla = models.JSONField(default=list)
 
     editado = models.DateTimeField(auto_now=True)
     creado = models.DateTimeField(auto_now_add=True)
