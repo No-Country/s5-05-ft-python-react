@@ -109,13 +109,13 @@ class Jugador(models.Model):
     nivel = models.SmallIntegerField(choices=[(i,i) for i in range(1,8)], null = True, blank = True)
     telefono = models.CharField(max_length=10, help_text='Número sin 0 ni 15')
     
-    lunes = ArrayField(models.CharField(max_length=255, blank=True), default=list)
-    martes = ArrayField(models.CharField(max_length=255, blank=True), default=list)
-    miercoles = ArrayField(models.CharField(max_length=255, blank=True), default=list)
-    jueves = ArrayField(models.CharField(max_length=255, blank=True), default=list)
-    viernes = ArrayField(models.CharField(max_length=255, blank=True), default=list)
-    sabado = ArrayField(models.CharField(max_length=255, blank=True), default=list)
-    domingo = ArrayField(models.CharField(max_length=255, blank=True), default=list)
+    lunes = ArrayField(models.CharField(max_length=255, blank=True),blank=True, default=list)
+    martes = ArrayField(models.CharField(max_length=255, blank=True),blank=True, default=list)
+    miercoles = ArrayField(models.CharField(max_length=255, blank=True),blank=True, default=list)
+    jueves = ArrayField(models.CharField(max_length=255, blank=True),blank=True, default=list)
+    viernes = ArrayField(models.CharField(max_length=255, blank=True),blank=True, default=list)
+    sabado = ArrayField(models.CharField(max_length=255, blank=True),blank=True, default=list)
+    domingo = ArrayField(models.CharField(max_length=255, blank=True),blank=True, default=list)
 
     SPECS = [
         ("T", 'Techada'),
@@ -128,7 +128,7 @@ class Jugador(models.Model):
 
     cancha_specs = MultiSelectField(choices = SPECS, null = True, blank = True, max_length = 30)
 
-    grilla = models.JSONField(default=list)
+    grilla = models.JSONField(default=[[False]*7]*32,blank=True,null=True)
 
     editado = models.DateTimeField(auto_now=True)
     creado = models.DateTimeField(auto_now_add=True)
