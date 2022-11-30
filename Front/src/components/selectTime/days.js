@@ -1,1 +1,1 @@
-export const days = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"];
+export const days = ["L", "M", "M", "J", "V", "S", "D"];
