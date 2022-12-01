@@ -15,17 +15,23 @@ Eficiente y accesible para cualquier persona.
 
 La página web The Paddle Ball ofrece:
 
- * Como jugadores podes elegir por nivel, posición, horario, género, etc. 
-
- * Como cancha podes elegir por dirección, superficie, paredes y más 
-
- *
+ * Como jugadores:
  
- *
- 
- *
+               -podes elegir por nivel, posición, horario, género, etc. 
+               
+               -poder cancelar la reserva de donde jugar que no se repitan los partidos con los mismos jugadores.
+               
+               -poder elegir la cancha a donde jugar (cancha techada, cancha abierta, etc).
 
 
+ * Como cancha: 
+              
+              -podes elegir por dirección, superficie, paredes.
+              
+              -valoración de la cancha.
+               
+              -poder armar partidos en la semana o en el mismo día	que tenga fácil acceso para todos los usuarios.
+               
 ## ROLES GRUPO S5-05-Python-React
 
 | Developer          | Rol       | LinkedIn                                      | GitHub                               |
@@ -45,7 +51,7 @@ La página web The Paddle Ball ofrece:
 <p align="left">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/800px-HTML5_logo_and_wordmark.svg.png"  width=10% height=10%>
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg"  width=10% height=10%>
-<img src="https://www.postgresql.org/media/img/about/press/elephant.png" width=8% height=8%>
+
 </p> 
 <p align="left">
 <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png"  width=10% height=10%>
@@ -57,7 +63,7 @@ La página web The Paddle Ball ofrece:
 <p align="left">
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width=8% height=8%> 
 <img src="https://raw.githubusercontent.com/github/explore/7456fdff59816d37ef383a6c8f32a26ff7332db2/topics/django/django.png"  width=10% height=10%>
-
+<img src="https://www.postgresql.org/media/img/about/press/elephant.png" width=8% height=8%>
 </p>
 
 --------------------------------------------
@@ -77,15 +83,22 @@ Efficient and accessible to anyone.
 
 The Paddle Ball website offers:
 
- * As players you can choose by level, position, schedule, gender, etc. 
+ * As players:
+                
+                -You can choose by level, position, schedule, gender, etc.
+                
+                - Being able to cancel the reservation of where to play so that matches with the same players are not repeated.
+                
+                - Being able to choose the court where to play (covered court, open court, etc).
 
- * As a court you can choose by direction, surface, walls and more. 
 
- *
- 
- *
- 
- *
+  * As court:
+                
+                -You can choose by direction, surface, walls.
+               
+                -Evaluation of the court.
+                
+                -Be able to set up matches during the week or on the same day that has easy access for all users.
 
 
 ## GROUP ROLES S5-05-Python-React
@@ -107,7 +120,7 @@ The Paddle Ball website offers:
 <p align="left">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/800px-HTML5_logo_and_wordmark.svg.png"  width=10% height=10%>
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg"  width=10% height=10%>
-<img src="https://www.postgresql.org/media/img/about/press/elephant.png" width=8% height=8%>
+
 </p> 
 <p align="left">
 <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png"  width=10% height=10%>
@@ -119,5 +132,5 @@ The Paddle Ball website offers:
 <p align="left">
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width=8% height=8%> 
 <img src="https://raw.githubusercontent.com/github/explore/7456fdff59816d37ef383a6c8f32a26ff7332db2/topics/django/django.png"  width=10% height=10%>
-
+<img src="https://www.postgresql.org/media/img/about/press/elephant.png" width=8% height=8%>
 </p>
