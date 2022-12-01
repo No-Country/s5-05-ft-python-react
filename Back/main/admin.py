@@ -1,7 +1,10 @@
 from django.contrib import admin
-from .models import *
+from .models import User, Jugador, Complejo
 
-admin.site.register(Dias)
-admin.site.register(Horas)
-admin.site.register(Disponibilidad)
-admin.site.register(Perfil)
+class JugadorAdmin(admin.ModelAdmin):
+    readonly_fields = ('creado','editado')
+
+admin.site.register(User)
+admin.site.register(Jugador)
+admin.site.register(Complejo)
+
