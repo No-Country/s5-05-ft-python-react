@@ -4,15 +4,10 @@ const required = "Campo requerido";
 
 export const validation = () =>
   Yup.object().shape({
-    club_name: Yup.string()
-      .required("Indicar un nombre")
-      .min(3, "Mínimo 2 letras"),
     total_field: Yup.number()
       .required("Escriba su número")
       .positive()
       .integer(),
-    email: Yup.string().email("Correo inválido").required(),
-    password: Yup.string().required(required),
     street: Yup.string().required("Indicar calle"),
     phone: Yup.number("Solo número")
       .required("Escriba su número")
