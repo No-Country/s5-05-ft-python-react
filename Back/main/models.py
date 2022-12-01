@@ -42,6 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_jugador = models.BooleanField(default=False)
     is_complejo = models.BooleanField(default=False)
+    perfil_completo = models.BooleanField(default=False)
     fecha_ingreso = models.DateTimeField(default=datetime.now, blank=True)
 
     objects = CustomUserManager()

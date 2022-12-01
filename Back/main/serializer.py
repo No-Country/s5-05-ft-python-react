@@ -54,7 +54,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model= User
-        fields =    ['email','password', 'is_jugador','is_complejo']
+        fields =    ['id','email','password', 'is_jugador','is_complejo']
         extra_kwargs = {'passwords': {'write_only': True}}
         
     def create(self, validated_data):
@@ -69,7 +69,7 @@ class JugadorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Jugador
-        exclude = ["usuario","grilla"]
+        exclude = ["grilla"]
         read_only_fields = ('id',"editado","creado")
 
 class ComplejoSerializer(serializers.ModelSerializer):

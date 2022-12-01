@@ -20,6 +20,15 @@ def user_api_view(request):
                 return Response(user_serializer.data)
             return Response(user_serializer.errors)
 
+@api_view(['GET', 'POST'])
+def user_detail_view(request,pk=None):
+    user = User.objects.filter(id = pk).first()
+    if user:          
+        if request.method == 'GET':
+            user_serializer = UserSerializer(user)
+            print(user_serializer.data)
+            return Response(user_serializer.data)
+
 @api_view(['GET'])
 def jugador_api_view(request):
         if request.method == 'GET':    
@@ -30,7 +39,7 @@ def jugador_api_view(request):
 @api_view(['GET','PUT'])
 def jugador_detail_view(request,pk=None):
     # query
-    jugador = Jugador.objects.filter(id = pk).first()
+    jugador = Jugador.objects.filter(usuario_id = pk).first()
 
     # validation
     if jugador:
@@ -38,7 +47,7 @@ def jugador_detail_view(request,pk=None):
         # retrieve            
         if request.method == 'GET':
             jugador_serializer = JugadorSerializer(jugador)
-            return Response(jugador_serializer.data)
+            return Response(jugador_serializer.data, )
 
         # update    
         elif request.method == 'PUT':
@@ -59,7 +68,7 @@ def complejo_api_view(request):
 @api_view(['GET','PUT'])
 def complejo_detail_view(request,pk=None):
     # query
-    complejo = Complejo.objects.filter(id = pk).first()
+    complejo = Complejo.objects.filter(usuario = pk).first()
     
     # validation
     if complejo:

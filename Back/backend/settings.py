@@ -96,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'padelDb', 
         'USER': 'postgres', 
-        'PASSWORD': 'postgre',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost', 
         'PORT': '5432',
     }
