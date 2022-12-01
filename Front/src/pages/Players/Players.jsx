@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { PlayerList } from "../../components/PlayerList/PlayerList";
 
+import data from '../../components/PlayerList/data.json';
+
 import classes from "./Players.module.css";
 
 const {
@@ -12,28 +14,30 @@ const {
   field,
   match,
   player__pos,
+  btn__delete,
   btn,
 } = classes;
 
 export const Players = () => {
   const [playersMatch, setPlayersMatch] = useState([]);
 
+  const [playersTotal, setPlayersTotal] = useState(data);
+
   const handleDragEnd = (result) => {
     if (
       playersMatch.length <= 3 &&
-      !playersMatch.find((player) => player.playerId === result.source.index) && result.destination
+      !playersMatch.find((player) => parseInt(player.id) === result.source.index) && result.destination
     ) {
+      const player = playersTotal.find((player) => parseInt(player.id) === result.source.index);
       setPlayersMatch([
         ...playersMatch,
-        {
-          playerId: result.source.index,
-        },
+        player,
       ]);
     }
   };
 
   const handleDeletePlayer = (id) => {
-    const players = playersMatch.filter(player=>player.playerId !== id)
+    const players = playersMatch.filter(player=>player.id !== id)
     setPlayersMatch(players);
   }
 
@@ -63,9 +67,12 @@ export const Players = () => {
                 >
                   {playersMatch.length
                     ? playersMatch.map((player) => (
-                        <div key={player.playerId} className={player__pos}>
-                          {player.playerId}
-                          <button onClick={()=>handleDeletePlayer(player.playerId)}>X</button>
+                        <div key={player.id} className={player__pos}>
+                          <p>{player.name}</p>
+                          <p>Nivel: {player.level}</p>
+                          <p>Posición: {player.position}</p>
+                          <p>Género: {player.gender}</p>
+                          <button onClick={()=>handleDeletePlayer(player.id)} className={btn__delete}>X</button>
                         </div>
                       ))
                     : "Arrastra jugadores para organizar partido"}
