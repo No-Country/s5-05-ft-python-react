@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django import forms
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from multiselectfield import MultiSelectField
 
@@ -48,6 +49,24 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+class ChoiceArrayField(ArrayField):
+    """
+    A field that allows us to store an array of choices.
+     
+    Uses Django 1.9's postgres ArrayField
+    and a MultipleChoiceField for its formfield.
+    """
+ 
+    def formfield(self, **kwargs):
+        defaults = {
+            'form_class': forms.MultipleChoiceField,
+            'choices': self.base_field.choices,
+        }
+        defaults.update(kwargs)
+        # Skip our parent's formfield implementation completely as we don't
+        # care for it.
+        # pylint:disable=bad-super-call
+        return super(ArrayField, self).formfield(**defaults)
 
 class Complejo(models.Model):
     
@@ -63,16 +82,16 @@ class Complejo(models.Model):
 
     objects = CustomUserManager()
 
-    SPECS = [
-        ("T", 'Techada'),
-        ("AL", 'Aire Libre'),
-        ("SC", 'Superficie Cemento'),
-        ("SS", 'Superficie Sintetico'),
-        ("PC", 'Pared Cemento'),
-        ("PB", 'Pared Blindex')
-    ]
+    # SPECS = [
+    #     ("T", 'Techada'),
+    #     ("AL", 'Aire Libre'),
+    #     ("SC", 'Superficie Cemento'),
+    #     ("SS", 'Superficie Sintetico'),
+    #     ("PC", 'Pared Cemento'),
+    #     ("PB", 'Pared Blindex')
+    # ]
 
-    cancha_specs = MultiSelectField(choices = SPECS, null = True, blank = True, max_length = 30)
+    # cancha_specs = MultiSelectField(choices = SPECS, null = True, blank = True, max_length = 30)
 
     class Meta:
         verbose_name = 'Complejo'
@@ -80,6 +99,8 @@ class Complejo(models.Model):
 
     def __str__(self):
         return (f'Nombre: {self.nombre}')
+
+
 
 class Jugador(models.Model):
     
@@ -117,6 +138,7 @@ class Jugador(models.Model):
     sabado = ArrayField(models.CharField(max_length=255, blank=True),blank=True, default=list)
     domingo = ArrayField(models.CharField(max_length=255, blank=True),blank=True, default=list)
 
+    
     SPECS = [
         ("T", 'Techada'),
         ("AL", 'Aire Libre'),
@@ -126,8 +148,8 @@ class Jugador(models.Model):
         ("PB", 'Pared Blindex')
     ]
 
-    cancha_specs = MultiSelectField(choices = SPECS, null = True, blank = True, max_length = 30)
-
+    cancha_specs = ChoiceArrayField(models.CharField(choices = SPECS, null = True, blank = True, max_length = 30), default=["T"])
+    
     grilla = models.JSONField(default=[[False]*7]*32,blank=True,null=True)
 
     editado = models.DateTimeField(auto_now=True)

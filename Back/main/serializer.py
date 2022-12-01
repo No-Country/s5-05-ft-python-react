@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Jugador
+from .models import User, Jugador, Complejo
 from django.contrib.auth import authenticate
 
 
@@ -73,8 +73,15 @@ class JugadorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Jugador
-        exclude = ["usuario"]
+        exclude = ["usuario","grilla"]
         read_only_fields = ('id',"editado","creado")
+
+class ComplejoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Complejo
+        exclude = ["usuario"]
+
 
  
     
