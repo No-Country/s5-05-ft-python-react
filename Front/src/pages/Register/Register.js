@@ -16,7 +16,7 @@ const {
   title,
 } = styles;
 
-export const PreRegister = () => {
+export const Register = () => {
   return (
     <section className={container}>
       <Formik

@@ -2,8 +2,8 @@ import React from "react";
 import { Field, Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 
-import style from "./clubRegister.module.css";
-import { countries } from "../../../helper/contants";
+import style from "./clubForm.module.css";
+import { countries } from "../../helper/contants";
 import { validation } from "./schema";
 
 const {
@@ -19,16 +19,12 @@ const {
   field_background,
   error,
 } = style;
-export const ClubRegister = () => {
+export const ClubForm = () => {
   return (
     <div className={container}>
-      <h2>Completar Registro</h2>
+      <h2>Completar</h2>
       <Formik
-        className=""
         initialValues={{
-          club_name: "",
-          email: "",
-          password: "",
           street: "",
           phone: "",
           total_field: "",
@@ -45,29 +41,10 @@ export const ClubRegister = () => {
           console.log(value)
         }
       >
-        {({ values, errors }) => (
+        {({ values, errors, touched }) => (
           <div className={form_container}>
             <Form className={form}>
               <div className={field_background}>
-                <Field type="text" name="club_name" placeholder="Nombre" />
-                <div className={error}>
-                  <p> {errors.club_name && errors.club_name}</p>
-                </div>
-
-                <Field type="email" name="email" placeholder="Correo" />
-                <div className={error}>
-                  <p>{errors.email && errors.email}</p>
-                </div>
-
-                <Field
-                  type="password"
-                  name="password"
-                  placeholder="Contraseña"
-                />
-                <div className={error}>
-                  <p>{errors.password && errors.password}</p>
-                </div>
-
                 <div className={select_container}>
                   <Field
                     id="country"
@@ -85,18 +62,20 @@ export const ClubRegister = () => {
                     ))}
                   </Field>
                   <div className={error}>
-                    <p>{errors.country && errors.country}</p>
+                    <p>
+                      {errors.country && touched.country ? errors.country : ""}
+                    </p>
                   </div>
                 </div>
 
                 <Field type="text" name="city" placeholder="Ciudad" />
                 <div className={error}>
-                  <p>{errors.city && errors.city}</p>
+                  <p>{errors.city && touched.city ? errors.city : ""}</p>
                 </div>
 
                 <Field type="text" name="street" placeholder="Calle y Número" />
                 <div className={error}>
-                  <p>{errors.street && errors.street}</p>
+                  <p>{errors.street && touched.street ? errors.street : ""}</p>
                 </div>
 
                 <Field
@@ -106,7 +85,7 @@ export const ClubRegister = () => {
                   value={values.phone.replace(/\D/g, "")}
                 />
                 <div className={error}>
-                  <p>{errors.phone && errors.phone}</p>
+                  <p>{errors.phone && touched.phone ? errors.phone : ""}</p>
                 </div>
 
                 <Field
@@ -115,7 +94,11 @@ export const ClubRegister = () => {
                   placeholder="Total de canchas"
                 />
                 <div className={error}>
-                  <p>{errors.total_field && errors.total_field}</p>
+                  <p>
+                    {errors.total_field && touched.total_field
+                      ? errors.total_field
+                      : ""}
+                  </p>
                 </div>
 
                 <div role="group">
@@ -130,7 +113,7 @@ export const ClubRegister = () => {
                   </label>
                 </div>
                 <div className={error}>
-                  <p>{errors.sky && errors.sky}</p>
+                  <p>{errors.sky && touched.sky ? errors.sky : ""}</p>
                 </div>
 
                 <div role="group">
@@ -145,7 +128,9 @@ export const ClubRegister = () => {
                   </label>
                 </div>
                 <div className={error}>
-                  <p>{errors.surface && errors.surface}</p>
+                  <p>
+                    {errors.surface && touched.surface ? errors.surface : ""}
+                  </p>
                 </div>
 
                 <div role="group">
@@ -160,23 +145,18 @@ export const ClubRegister = () => {
                   </label>
                 </div>
                 <div className={error}>
-                  <p>{errors.wall && errors.wall}</p>
+                  <p>{errors.wall && touched.wall ? errors.wall : ""}</p>
                 </div>
 
                 <button type="submit" className={btn_submit}>
-                  Registrarse
+                  Completar
                 </button>
               </div>
             </Form>
             <div className={background_form}>
               <div className={background_content}>
-                <h3>¡Registra tu complejo!</h3>
+                <h3>Completa tu Registro!</h3>
                 <p>Que no queden turnos libres!</p>
-
-                <article className={redirect}>
-                  <p>¿Ya tenés cuenta?</p>
-                  <Link to={"/login"}>Ingresá</Link>
-                </article>
               </div>
             </div>
           </div>
