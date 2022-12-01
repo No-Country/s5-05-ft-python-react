@@ -15,17 +15,23 @@ Eficiente y accesible para cualquier persona.
 
 La página web The Paddle Ball ofrece:
 
- * Como jugadores podes elegir por nivel, posición, horario, género, etc. 
-
- * Como cancha podes elegir por dirección, superficie, paredes y más 
-
- *
+ * Como jugadores:
  
- *
- 
- *
+               -podes elegir por nivel, posición, horario, género, etc. 
+               
+               -poder cancelar la reserva de donde jugar que no se repitan los partidos con los mismos jugadores.
+               
+               -poder elegir la cancha a donde jugar (cancha techada, cancha abierta, etc).
 
 
+ * Como cancha: 
+              
+              -podes elegir por dirección, superficie, paredes.
+              
+              -valoración de la cancha.
+               
+              -poder armar partidos en la semana o en el mismo día	que tenga fácil acceso para todos los usuarios.
+               
 ## ROLES GRUPO S5-05-Python-React
 
 | Developer          | Rol       | LinkedIn                                      | GitHub                               |
@@ -77,15 +83,22 @@ Efficient and accessible to anyone.
 
 The Paddle Ball website offers:
 
- * As players you can choose by level, position, schedule, gender, etc. 
+ * As players:
+                
+                -You can choose by level, position, schedule, gender, etc.
+                
+                - Being able to cancel the reservation of where to play so that matches with the same players are not repeated.
+                
+                - Being able to choose the court where to play (covered court, open court, etc).
 
- * As a court you can choose by direction, surface, walls and more. 
 
- *
- 
- *
- 
- *
+  * As court:
+                
+                -You can choose by direction, surface, walls.
+               
+                -Evaluation of the court.
+                
+                -Be able to set up matches during the week or on the same day that has easy access for all users.
 
 
 ## GROUP ROLES S5-05-Python-React
