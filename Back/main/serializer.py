@@ -30,7 +30,7 @@ class UserTokenSerializer(serializers.ModelSerializer):
     #token = serializers.CharField(allow_blank=True, read_only=True)
     class Meta:
         model = User
-        fields = ('email', 'password')  
+        fields = ('email', 'password', 'perfil_completo')  
 
 
     def validate(self, attrs):
