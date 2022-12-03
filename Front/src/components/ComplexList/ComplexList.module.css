@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--color--light--blue);
+    font-family: var(--ff--lato);
+}
+
+.card__container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 42px;
+    padding: 20px;
+}

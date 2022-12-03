@@ -1,0 +1,130 @@
+.container--section--profileComplex {
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	background-image: url("../../assets/profile/bg_profile_2.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+.container--profileComplex {
+	width: 600px;
+	padding: 20px 0px;
+	font-family: var(--ff--lato);
+	background-color: rgba(255, 255, 255, 0.637);
+	display: flex;
+	flex-direction: column;
+	font-size: var(--fs--medium);
+	font-weight: 700;
+}
+.profileComplex--info--data {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+.container--profileComplex--avatar--name {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.profileComplex--name {
+	text-align: center;
+	margin-top: 15px;
+	padding: 10px 20px;
+	font-weight: 900;
+	font-size: 40px;
+	color: var(--color--light--blue);
+	background-color: var(--color--navy);
+	border-radius: 25px;
+}
+.profileComplex--info--icon {
+	width: 40px;
+	margin: 15px;
+}
+.container--profileComplex--info--adress {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.profileComplex--info--adress--text {
+	color: var(--color--navy);
+	font-size: var(--fs--big);
+}
+.container--profileComplex--info--contact {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.profileComplex--info--contact--text {
+	color: var(--color--navy);
+	font-size: var(--fs--big);
+}
+.profileComplex--info--contact--number {
+	padding: 10px 15px;
+	border: 1px solid var(--color--navy);
+	border-radius: 25px;
+	cursor: pointer;
+	transition: all 0.05s linear;
+	margin-left: 15px;
+	font-size: var(--fs--small);
+}
+.profileComplex--info--contact--number:hover {
+	transition: all 0.05s linear;
+	border-bottom: 3px solid var(--color--navy);
+	border-left: 2px solid var(--color--navy);
+}
+.container--profileComplex--info--courts {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.profileComplex--info--courts--text {
+	color: var(--color--navy);
+	font-size: var(--fs--big);
+}
+.profileComplex--info--courts--name {
+	width: 35px;
+	height: 35px;
+	line-height: 28px;
+	border-radius: 50%;
+	margin-left: 15px;
+	border: 3px solid var(--color--white);
+	text-align: center;
+}
+.container--profileComplex--info--surface {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.profileComplex--info--surface--text {
+	color: var(--color--navy);
+	font-size: var(--fs--big);
+}
+.container--profileComplex--info--walls {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.profileComplex--info--walls--text {
+	color: var(--color--navy);
+	font-size: var(--fs--big);
+}
+.container--profileComplex--info--cover {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.profileComplex--info--cover--text {
+	color: var(--color--navy);
+	font-size: var(--fs--big);
+}
+
+@media only screen and (max-width: 600px) {
+	.profileComplex--name {
+		font-size: 25px;
+	}
+}

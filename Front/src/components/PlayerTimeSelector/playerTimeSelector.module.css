@@ -1,0 +1,69 @@
+.container {
+	width: 280px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: column;
+	font-family: var(--ff--lato);
+	margin: 0 auto;
+}
+
+.container_tableTimes {
+	width: 318px;
+	height: 450px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: flex-start;
+	font-family: var(--ff--lato);
+	-ms-overflow-style: none; /* for Internet Explorer, Edge */
+	scrollbar-width: none; /* for Firefox */
+	overflow-y: scroll;
+}
+
+.container_tableTimes_text {
+	width: 80px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	padding-top: 5px;
+}
+
+.tableTimes_text {
+	font-size: 12px;
+	text-align: center;
+	padding: 5px 0px;
+	margin: 5.6px 0px;
+	border-bottom: 1px solid black;
+}
+
+.container td {
+	line-height: initial;
+	height: 50px;
+	font-size: 12px;
+}
+
+.days_container {
+	display: flex;
+	width: 200px;
+	align-self: flex-end;
+	justify-content: space-between;
+	text-align: center;
+	margin-right: 7px;
+	font-size: 16px;
+	font-family: var(--ff--lato);
+	padding: 15px 0px 5px 0px;
+}
+
+.button {
+	padding: 10px 20px;
+	border: none;
+	background-color: cornflowerblue;
+	color: rgb(255, 255, 255);
+	margin: 20px 0px;
+}
+
+.button:active {
+	opacity: 0.9;
+}

@@ -1,0 +1,29 @@
+.container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	border-radius: 5px;
+	font-family: var(--ff--lato);
+}
+
+.labelDay {
+	width: 150px;
+	text-align: center;
+	padding: 5px;
+	text-transform: uppercase;
+	color: var(--color--blue);
+	margin: 0 auto;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.308);
+}
+
+.containerDays {
+	width: 100%;
+	margin: 2px 0px;
+}
+
+.containerTimes {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}

@@ -1,0 +1,236 @@
+@keyframes appear {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes shake {
+	0% {
+		transform: translate(1px, 1px) rotate(0deg);
+	}
+	10% {
+		transform: translate(-1px, -2px) rotate(-1deg);
+	}
+	20% {
+		transform: translate(-3px, 0px) rotate(1deg);
+	}
+	30% {
+		transform: translate(3px, 2px) rotate(0deg);
+	}
+	40% {
+		transform: translate(1px, -1px) rotate(1deg);
+	}
+	50% {
+		transform: translate(-1px, 2px) rotate(-1deg);
+	}
+	60% {
+		transform: translate(-3px, 1px) rotate(0deg);
+	}
+	70% {
+		transform: translate(3px, 1px) rotate(-1deg);
+	}
+	80% {
+		transform: translate(-1px, -1px) rotate(1deg);
+	}
+	90% {
+		transform: translate(1px, 2px) rotate(0deg);
+	}
+	100% {
+		transform: translate(1px, -2px) rotate(-1deg);
+	}
+}
+
+.profile--update--toast {
+	background-color: var(--color--navy);
+	color: var(--color--green);
+	text-transform: capitalize;
+	font-weight: 700;
+	text-align: center;
+}
+.profile--update--toast--icon {
+	width: 35px;
+}
+.profile--update--toast--error {
+	background-color: var(--color--green);
+	color: var(--color--navy);
+	text-transform: capitalize;
+	font-weight: 700;
+	text-align: center;
+}
+
+.container--section--profile {
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	background-image: url("../../assets/profile/bg_profile_1.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	font-family: var(--ff--lato);
+}
+.container--profile {
+	width: 600px;
+	padding: 10px 20px;
+	background-color: rgba(255, 255, 255, 0.801);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.profile--button--updateData {
+	width: 250px;
+	padding: 15px;
+	border: none;
+	background-color: var(--color--green);
+	color: var(--color--navy);
+	transition: all 0.2s;
+	font-weight: 700;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.profile--button--saveData {
+	width: 250px;
+	padding: 15px;
+	border: none;
+	background-color: var(--color--navy);
+	color: var(--color--green);
+	transition: all 0.2s;
+	font-weight: 700;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.profile--button--saveData--disabled {
+	background-color: grey;
+	color: white;
+}
+
+.container--profile--update {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	font-family: var(--ff--lato);
+	padding: 30px 0px;
+}
+
+.button--profile--cancel {
+	width: 250px;
+	padding: 15px;
+	border: none;
+	font-weight: 700;
+	text-transform: uppercase;
+	align-self: center;
+	background-color: rgba(255, 0, 0, 0.493);
+	color: var(--color--white);
+	cursor: pointer;
+}
+
+.container--profile--avatar {
+	position: relative;
+	width: max-content;
+	align-self: center;
+	padding: 20px 0px;
+}
+
+.profileComplex--avatar {
+	width: 300px;
+	border-radius: 5px;
+}
+
+.profile--update--cameraIcon {
+	width: 15px;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	z-index: 2;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.profile--updateComplex--cameraIcon {
+	width: 15px;
+	position: absolute;
+	bottom: 30px;
+	right: 10px;
+	z-index: 2;
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: white;
+}
+
+.container--profile--sections {
+	width: 100%;
+	min-height: 80px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	margin-bottom: 15px;
+	gap: 5px;
+}
+
+.profile--update--label {
+	height: 20px;
+	color: var(--color--navy);
+	font-weight: 500;
+	letter-spacing: 0.5px;
+	font-size: var(--fs--medium);
+}
+
+.profile--update--input {
+	width: 240px;
+	height: 40px;
+	padding-left: 15px;
+	background-color: transparent;
+	border: none;
+	border-bottom: 2px solid var(--color--light--blue);
+	border-left: 2px solid var(--color--light--blue);
+	border-right: 1px solid rgba(128, 128, 128, 0.082);
+	border-top: 1px solid rgba(128, 128, 128, 0.082);
+	border-radius: 5px;
+	text-transform: capitalize;
+	color: var(--color--navy);
+	font-weight: 500;
+	font-size: var(--fs--small);
+	outline: none;
+}
+
+.profile--update--error {
+	padding-left: 15px;
+	font-size: var(--fs--small);
+	color: red;
+}
+
+.borderColor--input--error {
+	border-color: red;
+	animation: shake 0.4s linear;
+}
+
+.show_time_1 {
+	animation: appear 1s linear;
+}
+.show_time_2 {
+	animation-delay: 0.5s;
+	animation: appear 1s linear;
+}
+.show_time_3 {
+	animation-delay: 1s;
+	animation: appear 1s linear;
+}
+.show_time_4 {
+	animation-delay: 1.5s;
+	animation: appear 1s linear;
+}
+
+.show_time_5 {
+	animation-delay: 2s;
+	animation: appear 1s linear;
+}
+.show_time_6 {
+	animation-delay: 2.5s;
+	animation: appear 1s linear;
+}

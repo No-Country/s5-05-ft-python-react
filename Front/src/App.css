@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
+
+:root {
+  /* VARS LIST COLORS */
+  --color--navy: #2365bb;
+  --color--blue: #3282c3;
+  --color--light--blue: #b3c6e1;
+  --color--white: #dbe1ef;
+  --color--green: #bbd9a8;
+
+  /* FORMS */
+  --background-inputs: rgba(250, 250, 250, 0.996);
+  --background-page: rgb(240, 241, 245);
+
+  /* VAR FONT FAMILY */
+  --ff--lato: "Lato", sans-serif;
+
+  /* VAR FONT SIZE */
+  --fs--xbig: 22px;
+  --fs--big: 20px;
+  --fs--medium: 18px;
+  --fs--normal: 16px;
+  --fs--small: 14px;
+  --fs--xsmall: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  :root {
+    --fs--xbig: 20px;
+    --fs--big: 18px;
+    --fs--medium: 16px;
+    --fs--normal: 14px;
+  }
+}
