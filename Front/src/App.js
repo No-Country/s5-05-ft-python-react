@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { json, Route, Routes } from "react-router-dom";
 import "./App.css";
 
 import { PlayerTimesDisplay } from "./components/PlayerTimesDisplay/PlayerTimesDisplay";
@@ -15,22 +15,23 @@ import { ProfilePlayer } from "./pages/ProfilePlayer/ProfilePlayer";
 import { Register } from "./pages/Register/Register";
 
 export const App = () => {
+	const user = {
+		email: "nico7@gmail.com",
+		password: "12345",
+		is_jugador: true,
+		is_complejo: false,
+		perfil_completo: false,
+	};
 	// post
 	fetch("http://127.0.0.1:8000/api/usuario/", {
-		method: "get",
-		body: JSON.stringify({
-			email: "nico6@gmail.com",
-			password: "12345",
-			is_jugador: true,
-			is_complejo: false,
-			perfil_completo: false
-		}),
+		method: "POST",
+		body: JSON.stringify(user),
 		mode: "cors", // no-cors, *cors, same-origin
 		cache: "no-cache",
 		credentials: "same-origin", // include, *same-origin, omit
 		headers: {
-			"Content-Type": "application/json"
-		}
+			"Content-Type": "application/json",
+		},
 	});
 
 	// get

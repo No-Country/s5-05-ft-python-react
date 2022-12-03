@@ -60,7 +60,7 @@ MIDDLEWARE = [
 ]
 
 # CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:3000'
+#     'http://localhost:3000/'
 # ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -96,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'padelDb', 
         'USER': 'postgres', 
-        'PASSWORD': 'postgres',
+        'PASSWORD': '159159',
         'HOST': 'localhost', 
         'PORT': '5432',
     }
