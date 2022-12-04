@@ -65,7 +65,7 @@ export const ProfileComplex = () => {
 						</div>
 					</div>
 
-					<div className='container--profileComplex--info--surface'>
+					{/* <div className='container--profileComplex--info--surface'>
 						<img
 							className='profileComplex--info--icon'
 							src={SurfaceIcon}
@@ -80,9 +80,9 @@ export const ProfileComplex = () => {
 								Sintetico
 							</div>
 						</div>
-					</div>
+					</div> */}
 
-					<div className='container--profileComplex--info--walls'>
+					{/* <div className='container--profileComplex--info--walls'>
 						<img
 							className='profileComplex--info--icon'
 							src={WallIcon}
@@ -97,9 +97,9 @@ export const ProfileComplex = () => {
 								Blindex
 							</div>
 						</div>
-					</div>
+					</div> */}
 
-					<div className='container--profileComplex--info--cover'>
+					{/* <div className='container--profileComplex--info--cover'>
 						<img
 							className='profileComplex--info--icon'
 							src={RoofIcon}
@@ -113,7 +113,7 @@ export const ProfileComplex = () => {
 								Aire Libre
 							</div>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>
