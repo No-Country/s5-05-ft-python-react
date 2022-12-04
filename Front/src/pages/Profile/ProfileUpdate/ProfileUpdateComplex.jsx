@@ -123,7 +123,7 @@ export const ProfileUpdateComplex = ({
 				)}
 			</div>
 
-			<div className='container--profile--sections'>
+			{/* <div className='container--profile--sections'>
 				<label
 					className={`profile--update--label ${
 						updateData ? "show_time_6" : ""
@@ -175,7 +175,7 @@ export const ProfileUpdateComplex = ({
 					<option value='Blindex'>Blindex</option>
 					<option value='ambas'>Ambas Opciones</option>
 				</select>
-			</div>
+			</div> */}
 
 			<div className='container--profile--sections'>
 				<label
