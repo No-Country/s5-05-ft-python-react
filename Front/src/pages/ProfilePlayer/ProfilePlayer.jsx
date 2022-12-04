@@ -4,6 +4,9 @@ import GenreIcon from "../../assets/profile/genre_icon.png";
 import LevelIcon from "../../assets/profile/level_icon.png";
 import MalePlayer from "../../assets/profile/male_player.png";
 import PositionIcon from "../../assets/profile/position_icon.png";
+import RoofIcon from "../../assets/profile/roof_icon.png";
+import SurfaceIcon from "../../assets/profile/surface_icon.png";
+import WallIcon from "../../assets/profile/wall_icon.png";
 import WtsIcon from "../../assets/profile/wts_icon.png";
 import { PlayerTimesDisplay } from "../../components/PlayerTimesDisplay/PlayerTimesDisplay";
 import { openInNewTab } from "../../helper/openInNewTab";
@@ -42,6 +45,7 @@ export const ProfilePlayer = () => {
 							7
 						</div>
 					</div>
+
 					<div className='container--profilePlayer--info--position'>
 						<img
 							className='profilePlayer--info--icon'
@@ -52,6 +56,38 @@ export const ProfilePlayer = () => {
 							Drive
 						</div>
 					</div>
+
+					<div className='container--profilePlayer--info--level'>
+						<img
+							className='profilePlayer--info--icon'
+							src={SurfaceIcon}
+							alt='surface court'
+						/>
+						<div className='profilePlayer--info--level--text'>
+							Sintetico
+						</div>
+					</div>
+					<div className='container--profilePlayer--info--level'>
+						<img
+							className='profilePlayer--info--icon'
+							src={WallIcon}
+							alt='surface court'
+						/>
+						<div className='profilePlayer--info--level--text'>
+							Blindex
+						</div>
+					</div>
+					<div className='container--profilePlayer--info--level'>
+						<img
+							className='profilePlayer--info--icon'
+							src={RoofIcon}
+							alt='surface court'
+						/>
+						<div className='profilePlayer--info--level--text'>
+							Techada
+						</div>
+					</div>
+
 					<div className='container--profilePlayer--info--available'>
 						<img
 							className='profilePlayer--info--icon'
@@ -356,6 +392,7 @@ export const ProfilePlayer = () => {
 							/>
 						</div>
 					</div>
+
 					<div className='container--profilePlayer--info--contact'>
 						<img
 							className='profilePlayer--info--icon'
