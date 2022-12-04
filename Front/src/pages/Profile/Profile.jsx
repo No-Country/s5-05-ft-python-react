@@ -11,6 +11,9 @@ const userPlayer = {
 	name: "Nombre",
 	lastName: "Apellido",
 	position: "drive",
+	surface: "Sintetico",
+	wall: "Blinex",
+	cover: "Techada",
 	level: "7",
 	available: [
 		[false, false, false, false, false, false, false],
