@@ -4,6 +4,7 @@ import { Field, Form, Formik } from "formik";
 import styles from "./playerForm.module.css";
 import { schemePlayer } from "./schema";
 import { Modal_selectTime } from "./Modal_selectTime";
+import { instance } from "../../axios/axiosConfig";
 const {
   content,
   form,
@@ -13,16 +14,16 @@ const {
   label,
   errorText,
   radio_container,
+  check,
 } = styles;
 
 export const FormPlayer = () => {
   const [availability, setAvailability] = useState({
-    election: false,
+    election: [],
     cells: false,
   });
 
   const changeAvailavility = (data) => {
-    console.log(data);
     setAvailability(data);
   };
   return (
@@ -33,16 +34,55 @@ export const FormPlayer = () => {
         sexo: "",
         nivel: "",
         rol: "",
+        surface: "",
+        sky: "",
+        wall: "",
+        telefono: "",
       }}
       validationSchema={schemePlayer}
       onSubmit={(values) => {
-        if (availability.election) {
+        if (availability.cells) {
+          const {
+            apellido,
+            nivel,
+            nombre,
+            rol,
+            sexo,
+            sky,
+            surface,
+            wall,
+            telefono,
+          } = values;
+
+          const days = Object.entries(availability.election);
+
           //hacer el post
-          console.log({ values, election: availability.election });
+          console.log(availability.cells);
+
+          /* instance
+            .put("", {
+              numero:telefono,
+              nivel,
+              apellido,
+              rol,
+              nombre,
+              sexo,
+              grilla: availability.cells,
+              cancha_specs: [...sky, surface].concat(wall),
+              [days[0][0]]: days[0][1],
+              [days[1][0]]: days[1][1],
+              [days[2][0]]: days[2][1],
+              [days[3][0]]: days[3][1],
+              [days[4][0]]: days[4][1],
+              [days[5][0]]: days[5][1],
+              [days[6][0]]: days[6][1],
+            })
+            .then((resp) => console.log(resp))
+            .catch((err) => console.error(err)); */
         }
       }}
     >
-      {({ errors, touched }) => {
+      {({ errors, touched, values }) => {
         return (
           <Form className={form}>
             <h2 className={title}>Formulario Jugador</h2>
@@ -77,7 +117,21 @@ export const FormPlayer = () => {
                   {errors.apellido && touched.apellido ? errors.apellido : ""}
                 </p>
               </div>
-
+              <div className={input_container}>
+                <label className={label} htmlFor="telefono">
+                  Número
+                </label>
+                <Field
+                  type="text"
+                  name="telefono"
+                  id="telefono"
+                  value={values.telefono.replace(/\D/g, "")}
+                  placeholder="123456"
+                />
+              </div>
+              <div className={errorText}>
+                <p>{errors.numero && touched.numero ? errors.numero : ""}</p>
+              </div>
               <div className={input_container}>
                 <label className={label}>Sexo</label>
                 <div
@@ -98,7 +152,6 @@ export const FormPlayer = () => {
               <div className={errorText}>
                 <p>{errors.sexo && touched.sexo ? errors.sexo : ""}</p>
               </div>
-
               <div className={input_container}>
                 <label className={label}>Categoría</label>
                 <div
@@ -156,14 +209,58 @@ export const FormPlayer = () => {
                   <p>{errors.rol && touched.rol ? errors.rol : ""}</p>
                 </div>
               </div>
+              <div role="group" className={check}>
+                <h3>Cobertura</h3>
+                <label>
+                  <Field type="checkbox" name="sky" value="T" />
+                  Techada
+                </label>
+                <label>
+                  <Field type="checkbox" name="sky" value="AL" />
+                  Aire Libre
+                </label>
+              </div>
+              <div className={errorText}>
+                <p>{errors.sky && touched.sky ? errors.sky : ""}</p>
+              </div>
+              <div role="group" className={check}>
+                <h3>Superficie</h3>
+                <label>
+                  <Field type="checkbox" name="surface" value="SP" />
+                  Cemento
+                </label>
+                <label>
+                  <Field type="checkbox" name="surface" value="SS" />
+                  Sintético
+                </label>
+              </div>
+              <div className={errorText}>
+                <p>{errors.surface && touched.surface ? errors.surface : ""}</p>
+              </div>
+              <div role="group" className={check}>
+                <h3>Tipo de Pared</h3>
+                <label>
+                  <Field type="checkbox" name="wall" value="PC" />
+                  Cemento
+                </label>
+                <label>
+                  <Field type="checkbox" name="wall" value="PB" />
+                  Blindex
+                </label>
+              </div>
+              <div className={errorText}>
+                <p>{errors.wall && touched.wall ? errors.wall : ""}</p>
+              </div>
               <Modal_selectTime
                 changeAvailavility={changeAvailavility}
                 initialState={availability.cells}
               />
               <div className={errorText}>
-                <p>{!availability.election && "Elegir días disponibles"}</p>
+                <p>
+                  {availability.election.length < 1 &&
+                    "Elegir días disponibles"}
+                </p>
               </div>
-
               <button type="submit" className={button}>
                 Completar
               </button>

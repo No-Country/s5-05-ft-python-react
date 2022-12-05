@@ -1,6 +1,7 @@
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
+import { instance } from "../../axios/axiosConfig";
 import styles from "./login.module.css";
 import { scheme } from "./scheme";
 
@@ -29,7 +30,17 @@ export const Login = () => {
 
         <Formik
           initialValues={{ password: "", email: "" }}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={(values) => {
+            const { email, password } = values;
+
+            /* instance
+              .post("", {
+                email,
+                password,
+              })
+              .then((resp) => console.log(resp))
+              .catch((err) => console.error(err)); */
+          }}
           validationSchema={scheme}
         >
           {({ errors }) => (
