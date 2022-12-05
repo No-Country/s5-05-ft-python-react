@@ -1,9 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import classes from './PlayerList.module.css'
 import { RowData } from './Row/RowData';
 
-import data from './data.json';
 import { FilterForm } from './FilterForm/FilterForm';
 import { Droppable } from 'react-beautiful-dnd';
 
@@ -15,7 +14,12 @@ export const PlayerList = () => {
 
   const [search, setSearch] = useState("");
 
-  const [playersList, setPlayersList] = useState(data);
+  const [playersList, setPlayersList] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/jugador').then(res=>res.json()).then(data=>setPlayersList(data))
+  }, [])
+  
 
   return (
     <Droppable droppableId="players" isDropDisabled={true}>
@@ -38,12 +42,12 @@ export const PlayerList = () => {
                 <div>Nombre</div>
                 <div>Nivel</div>
                 <div>Posición</div>
-                <div>Horario</div>
+                <div>Preferencias</div>
                 <div>Teléfono</div>
                 <div>Género</div>
               </div>
               {
-                playersList.length ? playersList.map(player => <RowData key={player.id} player={player}/>) : <div className={row}><p>No hay jugadores</p></div>
+                playersList.length ? playersList.map(player => <RowData key={player.usuario} player={player}/>) : <div className={row}><p>No hay jugadores</p></div>
               }
             </div>
           </div>
