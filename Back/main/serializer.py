@@ -30,7 +30,7 @@ class UserTokenSerializer(serializers.ModelSerializer):
     #token = serializers.CharField(allow_blank=True, read_only=True)
     class Meta:
         model = User
-        fields = ('email', 'password')  
+        fields = ('email', 'password', 'perfil_completo')  
 
 
     def validate(self, attrs):
@@ -69,14 +69,14 @@ class JugadorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Jugador
-        exclude = ["grilla"]
-        read_only_fields = ('id',"editado","creado")
+        exclude = ["grilla", "id"]
+        read_only_fields = ("editado","creado")
 
 class ComplejoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Complejo
-        exclude = ["usuario"]
+        exclude = ["id"]
 
 
  
