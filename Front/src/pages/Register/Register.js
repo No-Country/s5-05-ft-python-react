@@ -34,7 +34,7 @@ export const Register = () => {
 
           if (type === "player") is_jugador = true;
           else is_complejo = true;
-
+          /* 
           instance
             .post("", {
               email,
@@ -43,7 +43,7 @@ export const Register = () => {
               is_jugador,
             })
             .then((resp) => console.log(resp))
-            .catch((err) => console.error(err));
+            .catch((err) => console.error(err)); */
         }}
         validationSchema={scheme}
       >

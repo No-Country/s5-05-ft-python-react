@@ -41,7 +41,7 @@ export const ClubForm = () => {
         onSubmit={(value) => {
           const { calle, cant_cancha, ciudad, nombre, numero, pais } = value;
           //hacer el post
-          instance
+          /*  instance
             .put("", {
               calle,
               numero,
@@ -51,7 +51,7 @@ export const ClubForm = () => {
               ciudad,
             })
             .then((resp) => console.log(resp))
-            .catch((err) => console.error(err));
+            .catch((err) => console.error(err)); */
         }}
       >
         {({ values, errors, touched }) => (
