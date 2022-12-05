@@ -41,7 +41,7 @@ export const FormPlayer = () => {
       }}
       validationSchema={schemePlayer}
       onSubmit={(values) => {
-        if (availability.election) {
+        if (availability.cells) {
           const {
             apellido,
             nivel,
@@ -57,6 +57,7 @@ export const FormPlayer = () => {
           const days = Object.entries(availability.election);
 
           //hacer el post
+          console.log(availability.cells);
 
           /* instance
             .put("", {
@@ -66,6 +67,7 @@ export const FormPlayer = () => {
               rol,
               nombre,
               sexo,
+              grilla: availability.cells,
               cancha_specs: [...sky, surface].concat(wall),
               [days[0][0]]: days[0][1],
               [days[1][0]]: days[1][1],
@@ -254,7 +256,10 @@ export const FormPlayer = () => {
                 initialState={availability.cells}
               />
               <div className={errorText}>
-                <p>{!availability.election && "Elegir días disponibles"}</p>
+                <p>
+                  {availability.election.length < 1 &&
+                    "Elegir días disponibles"}
+                </p>
               </div>
               <button type="submit" className={button}>
                 Completar
