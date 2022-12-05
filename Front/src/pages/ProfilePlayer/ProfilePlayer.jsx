@@ -1,5 +1,7 @@
-// import FemalePlayer from "../../assets/profile/female_player.png";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import AvailableIcon from "../../assets/profile/available_icon.png";
+import FemalePlayer from "../../assets/profile/female_player.png";
 import GenreIcon from "../../assets/profile/genre_icon.png";
 import LevelIcon from "../../assets/profile/level_icon.png";
 import MalePlayer from "../../assets/profile/male_player.png";
@@ -8,27 +10,43 @@ import RoofIcon from "../../assets/profile/roof_icon.png";
 import SurfaceIcon from "../../assets/profile/surface_icon.png";
 import WallIcon from "../../assets/profile/wall_icon.png";
 import WtsIcon from "../../assets/profile/wts_icon.png";
+import { Loading } from "../../components/Loading/Loading";
 import { PlayerTimesDisplay } from "../../components/PlayerTimesDisplay/PlayerTimesDisplay";
 import { openInNewTab } from "../../helper/openInNewTab";
 import "./profilePlayer.css";
 
 export const ProfilePlayer = () => {
-	return (
+	const { idPlayer } = useParams();
+	const [userPlayer, setUserPlayer] = useState({});
+	const [loading, setLoading] = useState();
+
+	useEffect(() => {
+		fetch(`http://127.0.0.1:8000/api/jugador/${idPlayer}`)
+			.then((response) => response.json())
+			.then((data) => {
+				setUserPlayer(data);
+			})
+			.catch()
+			.finally(setLoading(false));
+	}, [idPlayer]);
+
+	return loading ? (
+		<Loading />
+	) : (
 		<div className='container--section--profilePlayer'>
 			<div className='container--profilePlayer'>
 				<div className='container--profilePlayer--avatar--name'>
 					<img
 						className='profilePlayer--avatar'
-						src={MalePlayer}
+						src={
+							userPlayer.sexo === "Masculino"
+								? MalePlayer
+								: FemalePlayer
+						}
 						alt='avatar icon'
 					/>
-					{/* <img
-					className='profilePlayer--avatar'
-					src={FemalePlayer}
-					alt='avatar icon'
-				/> */}
 					<div className='container--profilePlayer--name'>
-						apellido nombre
+						{userPlayer.apellido} {userPlayer.nombre}
 					</div>
 				</div>
 				<div className='container--profilePlayer--info'>
@@ -42,7 +60,7 @@ export const ProfilePlayer = () => {
 							Nivel
 						</div>
 						<div className='profilePlayer--info--level--number'>
-							7
+							{userPlayer.nivel}
 						</div>
 					</div>
 
@@ -53,7 +71,7 @@ export const ProfilePlayer = () => {
 							alt='player level'
 						/>
 						<div className='profilePlayer--position--value'>
-							Drive
+							{userPlayer.rol}
 						</div>
 					</div>
 
@@ -405,7 +423,7 @@ export const ProfilePlayer = () => {
 								openInNewTab(`https://wa.me/123456789`)
 							}
 							className='profilePlayer--info--contact--number'>
-							126 - 46456463
+							{userPlayer.telefono}
 						</div>
 					</div>
 					<div className='container--profilePlayer--info--genre'>
@@ -415,7 +433,7 @@ export const ProfilePlayer = () => {
 							alt='player genre'
 						/>
 						<div className='profilePlayer--info--genre--text'>
-							Hombre
+							{userPlayer.sexo}
 						</div>
 					</div>
 				</div>
