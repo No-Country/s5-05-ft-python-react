@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  background-color: rgba(37, 35, 35, 0.824);
+  z-index: 1;
+  top: 0;
+  left: 0;
+  color: white;
+}
+
+.close {
+  padding: 0.5rem;
+  background-color: rgb(180, 41, 41);
+  border: none;
+  color: white;
+  border-radius: 8px;
+  position: relative;
+  left: 145px;
+}
+
+.button_days {
+  border: none;
+  padding: 10px 20px;
+  background-color: grey;
+  color: white;
+  border-radius: 4px;
+}
