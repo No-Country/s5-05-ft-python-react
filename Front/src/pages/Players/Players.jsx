@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { ToastContainer, toast } from 'react-toastify';
+
 import { PlayerList } from "../../components/PlayerList/PlayerList";
 
 import data from '../../components/PlayerList/data.json';
 
+import 'react-toastify/dist/ReactToastify.css';
 import classes from "./Players.module.css";
 
 const {
@@ -33,6 +36,13 @@ export const Players = () => {
         ...playersMatch,
         player,
       ]);
+      toast.success('Jugador agregado');
+    } else if (playersMatch.length > 3) {
+      toast.warning('Máximo 4 jugadores')
+    } else if (!result.destination) {
+      return
+    } else {
+      toast.error('Jugador repetido')
     }
   };
 
@@ -85,6 +95,7 @@ export const Players = () => {
           )}
         </Droppable>
       </div>
+      <ToastContainer autoClose={1500}/>
     </DragDropContext>
   );
 };
