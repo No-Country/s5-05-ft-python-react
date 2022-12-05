@@ -54,15 +54,14 @@ const userPlayer = {
 };
 
 const userComplex = {
-	name: "Nombre de la cancha",
-	address: "Direccion XXXXX",
-	country: "Pais XXXXX",
-	city: "Ciudad XXXXX",
-	contact: "1234567899",
-	courts: "4",
-	cover: "Aire Libre",
-	surface: "Cemento",
-	wall: "Cemento",
+	nombre: "Nombre de la cancha",
+	altura: "191",
+	calle: "Calle XXXXX",
+	ciudad: "Pais XXXXX",
+	pais: "Ciudad XXXXX",
+	contacto: "1234567899",
+	cant_cancha: "4",
+	usuario: 2,
 };
 
 export const Profile = () => {
