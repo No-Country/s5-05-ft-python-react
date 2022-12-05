@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import style from "./clubForm.module.css";
 import { countries } from "../../helper/contants";
 import { validation } from "./schema";
+import axios from "axios";
+import { instance } from "../../axios/axiosConfig";
 
 const {
   container,
@@ -25,83 +27,92 @@ export const ClubForm = () => {
       <h2>Completar</h2>
       <Formik
         initialValues={{
-          street: "",
-          phone: "",
-          total_field: "",
-          surface: [],
+          calle: "",
+          numero: "",
+          cant_cancha: "",
+          /*  surface: [],
           sky: [],
-          wall: [],
-          country: "",
-          city: "",
-          street: "",
+          wall: [], */
+          pais: "",
+          nombre: "",
+          ciudad: "",
         }}
         validationSchema={validation}
-        onSubmit={(value) =>
+        onSubmit={(value) => {
+          const { calle, cant_cancha, ciudad, nombre, numero, pais } = value;
           //hacer el post
-          console.log(value)
-        }
+          instance
+            .put("", {
+              calle,
+              numero,
+              cant_cancha,
+              pais,
+              nombre,
+              ciudad,
+            })
+            .then((resp) => console.log(resp))
+            .catch((err) => console.error(err));
+        }}
       >
         {({ values, errors, touched }) => (
           <div className={form_container}>
             <Form className={form}>
               <div className={field_background}>
+                <Field type="text" name="nombre" placeholder="Nombre" />
+                <div className={error}>
+                  <p>{errors.nombre && touched.nombre ? errors.nombre : ""}</p>
+                </div>
+
                 <div className={select_container}>
-                  <Field
-                    id="country"
-                    as="select"
-                    name="country"
-                    className={select}
-                  >
+                  <Field id="pais" as="select" name="pais" className={select}>
                     <option value="" disabled>
                       Seleccionar País
                     </option>
-                    {countries.map((country) => (
-                      <option key={country} value={country}>
-                        {country}
+                    {countries.map((pais) => (
+                      <option key={pais} value={pais}>
+                        {pais}
                       </option>
                     ))}
                   </Field>
                   <div className={error}>
-                    <p>
-                      {errors.country && touched.country ? errors.country : ""}
-                    </p>
+                    <p>{errors.pais && touched.pais ? errors.pais : ""}</p>
                   </div>
                 </div>
 
-                <Field type="text" name="city" placeholder="Ciudad" />
+                <Field type="text" name="ciudad" placeholder="Ciudad" />
                 <div className={error}>
-                  <p>{errors.city && touched.city ? errors.city : ""}</p>
+                  <p>{errors.ciudad && touched.ciudad ? errors.ciudad : ""}</p>
                 </div>
 
-                <Field type="text" name="street" placeholder="Calle y Número" />
+                <Field type="text" name="calle" placeholder="Calle y Número" />
                 <div className={error}>
-                  <p>{errors.street && touched.street ? errors.street : ""}</p>
+                  <p>{errors.calle && touched.calle ? errors.calle : ""}</p>
                 </div>
 
                 <Field
-                  type="phone"
-                  name="phone"
+                  type="numero"
+                  name="numero"
                   placeholder="WhatsApp"
-                  value={values.phone.replace(/\D/g, "")}
+                  value={values.numero.replace(/\D/g, "")}
                 />
                 <div className={error}>
-                  <p>{errors.phone && touched.phone ? errors.phone : ""}</p>
+                  <p>{errors.numero && touched.numero ? errors.numero : ""}</p>
                 </div>
 
                 <Field
                   type="number"
-                  name="total_field"
-                  placeholder="Total de canchas"
+                  name="cant_cancha"
+                  placeholder="Número de canchas"
                 />
                 <div className={error}>
                   <p>
-                    {errors.total_field && touched.total_field
-                      ? errors.total_field
+                    {errors.cant_cancha && touched.cant_cancha
+                      ? errors.cant_cancha
                       : ""}
                   </p>
                 </div>
 
-                <div role="group">
+                {/* <div role="group">
                   <h3>Cobertura</h3>
                   <label>
                     <Field type="checkbox" name="sky" value="Techada" />
@@ -146,7 +157,7 @@ export const ClubForm = () => {
                 </div>
                 <div className={error}>
                   <p>{errors.wall && touched.wall ? errors.wall : ""}</p>
-                </div>
+                </div> */}
 
                 <button type="submit" className={btn_submit}>
                   Completar
