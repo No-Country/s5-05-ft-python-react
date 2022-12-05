@@ -92,6 +92,7 @@
 
     .field {
         padding: 0 5rem;
+        font-size: 14px;
     }
 }
 
@@ -103,7 +104,11 @@
 
     .field {
         padding: 0 3.5rem;
-        font-size: 14px;
+        font-size: 12px;
+    }
+
+    .btn__delete {
+        padding: 3px;
     }
 }
 
@@ -114,7 +119,11 @@
     }
 
     .field {
-        padding: 0 2.5rem;
-        font-size: 12px;
+        padding: 0 2rem;
+        font-size: 10px;
+    }
+
+    .btn__delete {
+        padding: 2px;
     }
 }

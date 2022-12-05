@@ -4,10 +4,9 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import { PlayerList } from "../../components/PlayerList/PlayerList";
 
-import data from '../../components/PlayerList/data.json';
-
 import 'react-toastify/dist/ReactToastify.css';
 import classes from "./Players.module.css";
+import { useEffect } from "react";
 
 const {
   main,
@@ -24,14 +23,14 @@ const {
 export const Players = () => {
   const [playersMatch, setPlayersMatch] = useState([]);
 
-  const [playersTotal, setPlayersTotal] = useState(data);
+  const [playersTotal, setPlayersTotal] = useState([]);
 
   const handleDragEnd = (result) => {
     if (
       playersMatch.length <= 3 &&
-      !playersMatch.find((player) => parseInt(player.id) === result.source.index) && result.destination
+      !playersMatch.find((player) => parseInt(player.usuario) === result.source.index) && result.destination
     ) {
-      const player = playersTotal.find((player) => parseInt(player.id) === result.source.index);
+      const player = playersTotal.find((player) => parseInt(player.usuario) === result.source.index);
       setPlayersMatch([
         ...playersMatch,
         player,
@@ -47,13 +46,18 @@ export const Players = () => {
   };
 
   const handleDeletePlayer = (id) => {
-    const players = playersMatch.filter(player=>player.id !== id)
+    const players = playersMatch.filter(player=>player.usuario !== id)
     setPlayersMatch(players);
   }
 
   const handleDeletePlayers = () => {
     setPlayersMatch([]);
   }
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/jugador').then(res=>res.json()).then(data=>setPlayersTotal(data))
+  }, [])
+  
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
@@ -77,12 +81,12 @@ export const Players = () => {
                 >
                   {playersMatch.length
                     ? playersMatch.map((player) => (
-                        <div key={player.id} className={player__pos}>
-                          <p>{player.name}</p>
-                          <p>Nivel: {player.level}</p>
-                          <p>Posición: {player.position}</p>
-                          <p>Género: {player.gender}</p>
-                          <button onClick={()=>handleDeletePlayer(player.id)} className={btn__delete}>X</button>
+                        <div key={player.usuario} className={player__pos}>
+                          <p>{player.nombre} {player.apellido}</p>
+                          <p>Nivel: {player.nivel}</p>
+                          <p>Posición: {player.rol}</p>
+                          <p>Género: {player.sexo}</p>
+                          <button onClick={()=>handleDeletePlayer(player.usuario)} className={btn__delete}>X</button>
                         </div>
                       ))
                     : "Arrastra jugadores para organizar partido"}

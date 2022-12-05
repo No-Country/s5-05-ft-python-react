@@ -6,17 +6,37 @@ import classes from '../PlayerList.module.css'
 const {row__data} = classes
 
 export const RowData = ({ player }) => {
+
+  const getSpecs = (charCode) => {
+    switch (charCode) {
+      case "T":
+        return "Techada";
+      case "AL":
+          return "Aire Libre"
+      case "SC":
+          return "Superficie Cemento"
+      case "SS":
+        return "Superficie Sintética"
+      case "PC":
+        return "Pared Cemento"
+      case "PB":
+        return "Pared Blindex"
+      default:
+        break;
+    }
+  }
+
   return (
-    <Draggable draggableId={player.id} index={parseInt(player.id)} key={player.id} children={player}>
+    <Draggable draggableId={`${player.usuario}`} index={parseInt(player.usuario)} key={player.usuario}>
       {
         (draggableProvided) => (
           <div className={row__data} {...draggableProvided.draggableProps} ref={draggableProvided.innerRef} {...draggableProvided.dragHandleProps}>
-              <div>{player.name}</div>
-              <div>{player.level}</div>
-              <div>{player.position}</div>
-              <div>{player.time}</div>
-              <div>{player.phone}</div>
-              <div>{player.gender}</div>
+              <div>{player.nombre} {player.apellido}</div>
+              <div>{player.nivel}</div>
+              <div>{player.rol}</div>
+              <div>{player.cancha_specs.map(cancha=>getSpecs(cancha))}</div>
+              <div>{player.telefono}</div>
+              <div>{player.sexo}</div>
           </div>
         )
       }
