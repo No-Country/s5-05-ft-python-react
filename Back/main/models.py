@@ -69,6 +69,7 @@ class Complejo(models.Model):
     ciudad = models.CharField(max_length = 155, verbose_name = 'Ciudad')
     calle = models.CharField(max_length = 155)
     altura = models.IntegerField(null=True, blank=True)
+    telefono = models.CharField(max_length=10, help_text='Número sin 0 ni 15', null = True, blank = True)
 
     cant_cancha = models.IntegerField(null=False, default=1)
 

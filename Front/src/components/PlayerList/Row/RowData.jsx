@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Draggable } from 'react-beautiful-dnd'
 
 import classes from '../PlayerList.module.css'
 
-const {row__data} = classes
+const {row__data, profile__link} = classes
 
 export const RowData = ({ player }) => {
 
@@ -31,7 +32,7 @@ export const RowData = ({ player }) => {
       {
         (draggableProvided) => (
           <div className={row__data} {...draggableProvided.draggableProps} ref={draggableProvided.innerRef} {...draggableProvided.dragHandleProps}>
-              <div>{player.nombre} {player.apellido}</div>
+              <Link to={`/profile/player/${player.usuario}`} className={profile__link}>{player.nombre} {player.apellido}</Link>
               <div>{player.nivel}</div>
               <div>{player.rol}</div>
               <div>{player.cancha_specs.map(cancha=>getSpecs(cancha))}</div>
