@@ -17,6 +17,10 @@ tzdata = "==2022.6"
 django-multiselectfield = "*"
 django-extensions = "*"
 django-cors-headers = "*"
+dj-database-url = "*"
+psycopg2-binary = "*"
+whitenoise = {extras = ["brotli"], version = "*"}
+gunicorn = "*"
 
 [dev-packages]
 
