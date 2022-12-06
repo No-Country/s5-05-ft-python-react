@@ -36,6 +36,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: var(--ff--lato);
+    color: var(--color--white);
 }
 
 .field {

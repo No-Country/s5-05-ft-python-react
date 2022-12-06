@@ -90,10 +90,19 @@
     -moz-box-shadow: 1px 1px 5px 0px rgba(87,87,87,0.75); */
 }
 
-.row__data > div, .row > div {
+.row__data > div, .row > div, .row__data > .profile__link {
     padding: 5px 8px;
     width: 150px;
     text-align: center;
+}
+
+.profile__link {
+    text-decoration: none;
+    color: var(--color--blue);
+}
+
+.profile__link:active {
+    color: var(--color--light--blue);
 }
 
 @media screen and (max-width: 768px) {
