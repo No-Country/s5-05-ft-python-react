@@ -14,9 +14,6 @@ import { ProfilePlayer } from "./pages/ProfilePlayer/ProfilePlayer";
 import { Register } from "./pages/Register/Register";
 
 export const App = () => {
-	instance.get("jugador").then((rta) => console.log(rta.data));
-	instance.get("complejo").then((rta) => console.log(rta.data));
-
 	return (
 		<Routes>
 			<Route path='/' element={<Homepage />} />
