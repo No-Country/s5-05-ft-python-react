@@ -13,6 +13,13 @@
     width: 100%;
 }
 
+.data__container__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 200px;
+}
+
 .data__options__container {
     width: 200px;
 }
@@ -93,6 +100,10 @@
 @media screen and (max-width: 460px) {
     .data__container {
         flex-direction: column;
+    }
+
+    .data__container__info {
+        height: 150px;
     }
 
     .data__options__container {
