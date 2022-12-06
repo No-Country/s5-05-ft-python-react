@@ -13,7 +13,10 @@ import { ProfileComplex } from "./pages/ProfileComplex/ProfileComplex";
 import { ProfilePlayer } from "./pages/ProfilePlayer/ProfilePlayer";
 import { Register } from "./pages/Register/Register";
 
+import { Navbar } from "./components/HomePage/Navbar/Navbar";
+
 export const App = () => {
+<<<<<<< HEAD
 	return (
 		<Routes>
 			<Route path='/' element={<Homepage />} />
@@ -34,4 +37,23 @@ export const App = () => {
 			<Route path='/form/player' element={<PlayerForm />} />
 		</Routes>
 	);
+=======
+  return (
+  <>
+  <Navbar />
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+      <Route path="/complex" element={<Complex />} />
+      <Route path="/players" element={<Players />} />
+      <Route path="/profile/complex/:idComplex" element={<ProfileComplex />} />
+      <Route path="/profile/player/:idPlayer" element={<ProfilePlayer />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/form/complex" element={<ComplexForm />} />
+      <Route path="/form/player" element={<PlayerForm />} />
+    </Routes>
+  </>
+  );
+>>>>>>> front-dev
 };
