@@ -17,55 +17,10 @@ export const UserProvider = ({ children }) => {
 	const [token, setToken] = useState();
 
 	//para manejar las vistas del usuario
-	const [userType, setUserType] = useState("player");
+	const [userType, setUserType] = useState("complex");
 
 	// actualizar cuando completa form de jugador / complejo
-	const [userPlayer, setUserPLayer] = useState({
-		nombre: "Nombre",
-		apellido: "Apellido",
-		posicion: "Drive",
-		surface: "Sintetico",
-		wall: "Blinex",
-		cover: "Techada",
-		nivel: "7",
-		grilla: [
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-			[false, false, false, false, false, false, false],
-		],
-		telefono: "12345679",
-		sexo: "Masculino",
-		usuario: 10,
-	});
+	const [userPlayer, setUserPLayer] = useState(null);
 	const [userComplex, setUserComplex] = useState(null);
 
 	useEffect(() => {
