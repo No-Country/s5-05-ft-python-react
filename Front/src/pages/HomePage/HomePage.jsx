@@ -1,6 +1,5 @@
 import classes from "./home.module.css";
 import images from "../../assets/HomePage/imagesHomePage";
-import { Navbar } from "../../components/HomePage/Navbar/Navbar";
 import { Footer } from "../../components/HomePage/Footer/Footer";
 import { HomeButton } from "../../components/HomePage/HomeButton/HomeButton";
 import { HomeCard } from "../../components/HomePage/HomeCard/HomeCard";
@@ -35,7 +34,6 @@ export const Homepage = () => {
 
   return (
     <>
-      <Navbar />
       <header className={header}>
         <div className={`${header__container} ${container}`}>
           <div className={header__img__container}>
@@ -112,9 +110,9 @@ export const Homepage = () => {
           </div>
         </div>
       </section>
-      <section className={featured__courts}>
+      {/* <section className={featured__courts}>
         <Subtitle name={"Canchas destacadas"} />
-      </section>
+      </section> */}
       <section className="functionality">
         <div className={container}>
           <Subtitle name={"¿Como funciona?"} />
