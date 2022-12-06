@@ -35,7 +35,7 @@
 	text-align: center;
 	margin-top: 15px;
 	padding: 10px 20px;
-	font-weight: 900;
+	font-weight: 500;
 	font-size: 40px;
 	color: var(--color--light--blue);
 	background-color: var(--color--navy);
@@ -49,15 +49,21 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	padding: 20px 0px;
 }
 .profileComplex--info--adress--text {
 	color: var(--color--navy);
 	font-size: var(--fs--big);
 }
+.profileComplex--info--adress--name {
+	text-transform: capitalize;
+}
+
 .container--profileComplex--info--contact {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	padding: 20px 0px;
 }
 .profileComplex--info--contact--text {
 	color: var(--color--navy);
@@ -81,6 +87,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	padding: 20px 0px;
 }
 .profileComplex--info--courts--text {
 	color: var(--color--navy);

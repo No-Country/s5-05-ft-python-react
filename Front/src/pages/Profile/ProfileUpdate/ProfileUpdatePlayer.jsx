@@ -1,30 +1,31 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
 import FemalePlayer from "../../../assets/profile/female_player.png";
 import MalePlayer from "../../../assets/profile/male_player.png";
 import PhotoIcon from "../../../assets/profile/photo_icon.png";
 import { PlayerTimeSelector } from "../../../components/PlayerTimeSelector/PlayerTimeSelector";
+import { UserContext } from "../../../context/userContext";
 import {
 	validStringLength,
 	validStringLetters,
 	validStringNumber,
 } from "../../../helper/validations";
 
-export const ProfileUpdatePlayer = ({
-	userPlayer,
-	updateData,
-	setUpdateData,
-	setDisableButton,
-}) => {
+export const ProfileUpdatePlayer = () => {
+	const { userPlayer, PUT_userPlayer } = useContext(UserContext);
+
 	//updaters
-	const [nameUpdate, setNameUpdate] = useState(userPlayer.name);
-	const [lastNameUpdate, setLastNameUpdate] = useState(userPlayer.lastName);
-	const [positionUpdate, setPositionUpdate] = useState(userPlayer.position);
-	const [levelUpdate, setLevelUpdate] = useState(userPlayer.level);
-	const [availableUpdate, setAvailableUpdate] = useState(
-		userPlayer.available
-	);
-	const [contactUpdate, setContactUpdate] = useState(userPlayer.contact);
-	const [genreUpdate, setGenreUpdate] = useState(userPlayer.genre);
+	const [nameUpdate, setNameUpdate] = useState(userPlayer.nombre);
+	const [lastNameUpdate, setLastNameUpdate] = useState(userPlayer.apellido);
+	const [positionUpdate, setPositionUpdate] = useState(userPlayer.posicion);
+	const [coverUpdate, setCoverUpdate] = useState(userPlayer.cover);
+	const [surfaceUpdate, setSurfaceUpdate] = useState(userPlayer.surface);
+	const [wallUpdate, setWallUpdate] = useState(userPlayer.wall);
+	const [levelUpdate, setLevelUpdate] = useState(userPlayer.nivel);
+	const [availableUpdate, setAvailableUpdate] = useState(userPlayer.grilla);
+	const [contactUpdate, setContactUpdate] = useState(userPlayer.telefono);
+	const [genreUpdate, setGenreUpdate] = useState(userPlayer.sexo);
+	const [userNumber, setUserNumber] = useState(userPlayer.usuario);
 
 	// errors
 	const [errorName, setErrorName] = useState(false);
@@ -33,6 +34,8 @@ export const ProfileUpdatePlayer = ({
 	const [errorTimes, setErrorTimes] = useState(false);
 
 	const [buttonCancel, setButtonCancel] = useState(false);
+	const [disableButton, setDisableButton] = useState(false);
+	const [updateData, setUpdateData] = useState(false);
 
 	useEffect(() => {
 		errorName || errorLastName || errorContact || errorTimes
@@ -60,24 +63,56 @@ export const ProfileUpdatePlayer = ({
 		setContactUpdate(e);
 	};
 
+	const handleUpdateData = () => {
+		if (updateData) {
+			let newUser = {
+				nombre: nameUpdate,
+				apellido: lastNameUpdate,
+				rol: positionUpdate,
+				nivel: levelUpdate,
+				grilla: availableUpdate,
+				telefono: contactUpdate,
+				sexo: genreUpdate,
+				usuario: userNumber,
+			};
+			PUT_userPlayer(newUser);
+		}
+
+		setUpdateData(!updateData);
+	};
+
 	const handleCancelButton = () => {
 		setErrorName(false);
 		setErrorLastName(false);
 		setErrorContact(false);
 		setErrorTimes(false);
-		setNameUpdate(userPlayer.name);
-		setLastNameUpdate(userPlayer.lastName);
-		setPositionUpdate(userPlayer.position);
-		setAvailableUpdate(userPlayer.available);
-		setContactUpdate(userPlayer.contact);
-		setGenreUpdate(userPlayer.genre);
-		setLevelUpdate(userPlayer.level);
+		setNameUpdate(userPlayer.nombre);
+		setLastNameUpdate(userPlayer.apellido);
+		setPositionUpdate(userPlayer.posicion);
+		setSurfaceUpdate(userPlayer.surface);
+		setWallUpdate(userPlayer.wall);
+		setCoverUpdate(userPlayer.cover);
+		setAvailableUpdate(userPlayer.grilla);
+		setContactUpdate(userPlayer.telefono);
+		setGenreUpdate(userPlayer.sexo);
+		setLevelUpdate(userPlayer.nivel);
 		setUpdateData(false);
 		setButtonCancel(true);
 	};
 
 	return (
 		<div className='container--profile--update'>
+			<button
+				disabled={disableButton}
+				className={`${
+					updateData
+						? "profile--button--updateData"
+						: "profile--button--saveData"
+				}
+						${disableButton ? "profile--button--saveData--disabled" : ""}`}
+				onClick={handleUpdateData}>
+				{updateData ? "Guardar Cambios" : "Actualizar Perfil"}
+			</button>
 			{updateData && (
 				<button
 					className='button--profile--cancel'
@@ -158,9 +193,60 @@ export const ProfileUpdatePlayer = ({
 					disabled={updateData ? false : true}
 					value={positionUpdate}
 					onChange={(e) => setPositionUpdate(e.target.value)}>
-					<option value='reves'>Reves</option>
-					<option value='drive'>Drive</option>
-					<option value='allCourt'>Toda la Cancha</option>
+					<option value='Reves'>Reves</option>
+					<option value='Drive'>Drive</option>
+					<option value='Ambos'>Toda la Cancha</option>
+				</select>
+			</div>
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_3" : ""
+					}`}>
+					{updateData ? "Superficie" : ""}
+				</label>
+				<select
+					className='profile--update--input'
+					disabled={updateData ? false : true}
+					value={surfaceUpdate}
+					onChange={(e) => setSurfaceUpdate(e.target.value)}>
+					<option value='reves'>Sintetico</option>
+					<option value='drive'>Cemento</option>
+					<option value='allCourt'>Ambas</option>
+				</select>
+			</div>
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_3" : ""
+					}`}>
+					{updateData ? "Paredes" : ""}
+				</label>
+				<select
+					className='profile--update--input'
+					disabled={updateData ? false : true}
+					value={wallUpdate}
+					onChange={(e) => setWallUpdate(e.target.value)}>
+					<option value='reves'>Blindex</option>
+					<option value='drive'>Cemento</option>
+					<option value='allCourt'>Ambas</option>
+				</select>
+			</div>
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_3" : ""
+					}`}>
+					{updateData ? "Cubierta" : ""}
+				</label>
+				<select
+					className='profile--update--input'
+					disabled={updateData ? false : true}
+					value={coverUpdate}
+					onChange={(e) => setCoverUpdate(e.target.value)}>
+					<option value='Reves'>Techada</option>
+					<option value='Drive'>Aire Libre</option>
+					<option value='Ambos'>Ambos</option>
 				</select>
 			</div>
 
@@ -250,10 +336,11 @@ export const ProfileUpdatePlayer = ({
 					disabled={updateData ? false : true}
 					value={genreUpdate}
 					onChange={(e) => setGenreUpdate(e.target.value)}>
-					<option value='m'>Mujer</option>
-					<option value='h'>Hombre</option>
+					<option value='Masculino'>Masculino</option>
+					<option value='Femenino'>Femenino</option>
 				</select>
 			</div>
+			<ToastContainer />
 		</div>
 	);
 };

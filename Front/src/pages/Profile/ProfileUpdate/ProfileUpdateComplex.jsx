@@ -1,42 +1,87 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
 import AvatarCourt from "../../../assets/profile/img_complex.jpg";
 import PhotoIcon from "../../../assets/profile/photo_icon.png";
+import { UserContext } from "../../../context/userContext";
 import {
+	validNumberString,
 	validStringLength,
 	validStringNumber,
 } from "../../../helper/validations";
 
-export const ProfileUpdateComplex = ({
-	userComplex,
-	updateData,
-	setUpdateData,
-}) => {
+export const ProfileUpdateComplex = () => {
+	const { userComplex, PUT_userComplex } = useContext(UserContext);
+
+	const [disableButton, setDisableButton] = useState(false);
+	const [updateData, setUpdateData] = useState(false);
+
 	//updaters
-	const [nameUpdate, setNameUpdate] = useState(userComplex.name);
-	const [adressUpdate, setAdressUpdate] = useState(userComplex.address);
-	const [cityUpdate, setCityUpdate] = useState(userComplex.city);
-	const [countryUpdate, setCountryUpdate] = useState(userComplex.country);
-	const [contactUpdate, setContactUpdate] = useState(userComplex.contact);
-	const [courtsUpdate, setCourtsUpdate] = useState(userComplex.courts);
-	const [coverUpdate, setCoverUpdate] = useState(userComplex.cover);
-	const [surfaceUpdate, setSurfaceUpdate] = useState(userComplex.surface);
-	const [wallUpdate, setWallUpdate] = useState(userComplex.wall);
+	const [nameUpdate, setNameUpdate] = useState(userComplex.nombre);
+	const [adressUpdate, setAdressUpdate] = useState(userComplex.altura);
+	const [streetUpdate, setStreetUpdate] = useState(userComplex.calle);
+	const [cityUpdate, setCityUpdate] = useState(userComplex.ciudad);
+	const [countryUpdate, setCountryUpdate] = useState(userComplex.pais);
+	const [contactUpdate, setContactUpdate] = useState(userComplex.telefono);
+	const [courtsUpdate, setCourtsUpdate] = useState(userComplex.cant_cancha);
+	const [userNumber, setUserNumber] = useState(userComplex.usuario);
 
 	//errors
 	const [errorName, setErrorName] = useState(false);
+	const [errorStreet, setErrorStreet] = useState(false);
 	const [errorAdress, setErrorAdress] = useState(false);
 	const [errorCity, setErrorCity] = useState(false);
 	const [errorCountry, setErrorCountry] = useState(false);
 	const [errorContact, setErrorContact] = useState(false);
 	const [errorCourt, setErrorCourts] = useState(false);
 
+	useEffect(() => {
+		errorName ||
+		errorStreet ||
+		errorAdress ||
+		errorCity ||
+		errorCountry ||
+		errorContact ||
+		errorCourt
+			? setDisableButton(true)
+			: setDisableButton(false);
+	}, [
+		errorName,
+		errorStreet,
+		errorAdress,
+		errorCity,
+		errorCountry,
+		errorContact,
+		errorCourt,
+	]);
+
+	const handleUpdateData = () => {
+		if (updateData) {
+			let newUser = {
+				nombre: nameUpdate,
+				altura: adressUpdate,
+				calle: streetUpdate,
+				ciudad: cityUpdate,
+				pais: countryUpdate,
+				telefono: contactUpdate,
+				cant_cancha: courtsUpdate,
+				usuario: userNumber,
+			};
+			PUT_userComplex(newUser);
+		}
+		setUpdateData(!updateData);
+	};
+
 	const handleName = (e) => {
 		validStringLength(e) ? setErrorName(false) : setErrorName(true);
 		setNameUpdate(e);
 	};
 	const handleAdress = (e) => {
-		validStringLength(e) ? setErrorAdress(false) : setErrorAdress(true);
+		validNumberString(e) ? setErrorAdress(false) : setErrorAdress(true);
 		setAdressUpdate(e);
+	};
+	const handleStreet = (e) => {
+		validStringLength(e) ? setErrorStreet(false) : setErrorStreet(true);
+		setStreetUpdate(e);
 	};
 	const handleCity = (e) => {
 		validStringLength(e) ? setErrorCity(false) : setErrorCity(true);
@@ -60,24 +105,37 @@ export const ProfileUpdateComplex = ({
 	const handleCancelButton = () => {
 		setErrorName(false);
 		setErrorAdress(false);
+		setErrorStreet(false);
 		setErrorCity(false);
 		setErrorCountry(false);
 		setErrorContact(false);
 		setErrorCourts(false);
-		setNameUpdate(userComplex.name);
-		setAdressUpdate(userComplex.address);
-		setCityUpdate(userComplex.city);
-		setCountryUpdate(userComplex.country);
-		setContactUpdate(userComplex.contact);
-		setCourtsUpdate(userComplex.courts);
-		setCoverUpdate(userComplex.cover);
-		setSurfaceUpdate(userComplex.surface);
-		setWallUpdate(userComplex.wall);
+		setNameUpdate(userComplex.nombre);
+		setStreetUpdate(userComplex.altura);
+		setAdressUpdate(userComplex.calle);
+		setCityUpdate(userComplex.ciudad);
+		setCountryUpdate(userComplex.pais);
+		setContactUpdate(userComplex.telefono);
+		setCourtsUpdate(userComplex.cant_cancha);
+		// setCoverUpdate(userComplex.cover);
+		// setSurfaceUpdate(userComplex.surface);
+		// setWallUpdate(userComplex.wall);
 		setUpdateData(false);
 	};
 
 	return (
 		<div className='container--profile--update'>
+			<button
+				disabled={disableButton}
+				className={`${
+					updateData
+						? "profile--button--updateData"
+						: "profile--button--saveData"
+				}
+						${disableButton ? "profile--button--saveData--disabled" : ""}`}
+				onClick={handleUpdateData}>
+				{updateData ? "Guardar Cambios" : "Actualizar Perfil"}
+			</button>
 			{updateData && (
 				<button
 					className='button--profile--cancel'
@@ -123,7 +181,7 @@ export const ProfileUpdateComplex = ({
 				)}
 			</div>
 
-			<div className='container--profile--sections'>
+			{/* <div className='container--profile--sections'>
 				<label
 					className={`profile--update--label ${
 						updateData ? "show_time_6" : ""
@@ -175,7 +233,7 @@ export const ProfileUpdateComplex = ({
 					<option value='Blindex'>Blindex</option>
 					<option value='ambas'>Ambas Opciones</option>
 				</select>
-			</div>
+			</div> */}
 
 			<div className='container--profile--sections'>
 				<label
@@ -199,6 +257,29 @@ export const ProfileUpdateComplex = ({
 					</div>
 				)}
 			</div>
+
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_6" : ""
+					} `}>
+					{updateData ? "Contacto" : ""}
+				</label>
+				<input
+					className={`profile--update--input ${
+						errorContact && "borderColor--input--error"
+					} `}
+					type='text'
+					value={contactUpdate}
+					disabled={updateData ? false : true}
+					onChange={(e) => handleContact(e.target.value)}
+				/>
+				{errorContact && (
+					<div className='profile--update--error'>
+						Debe ser número válido y mayor a 8 caracteres
+					</div>
+				)}
+			</div>
 			<div className='container--profile--sections'>
 				<label
 					className={`profile--update--label ${
@@ -216,6 +297,28 @@ export const ProfileUpdateComplex = ({
 					onChange={(e) => handleAdress(e.target.value)}
 				/>
 				{errorAdress && (
+					<div className='profile--update--error'>
+						Deben ser números
+					</div>
+				)}
+			</div>
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_2" : ""
+					}`}>
+					{updateData ? "Calle" : ""}
+				</label>
+				<input
+					className={`profile--update--input ${
+						errorStreet && "borderColor--input--error"
+					} `}
+					type='text'
+					value={streetUpdate}
+					disabled={updateData ? false : true}
+					onChange={(e) => handleStreet(e.target.value)}
+				/>
+				{errorStreet && (
 					<div className='profile--update--error'>
 						Dirección debe ser mayor a 3 caracteres
 					</div>
@@ -267,29 +370,7 @@ export const ProfileUpdateComplex = ({
 					</div>
 				)}
 			</div>
-
-			<div className='container--profile--sections'>
-				<label
-					className={`profile--update--label ${
-						updateData ? "show_time_6" : ""
-					} `}>
-					{updateData ? "Contacto" : ""}
-				</label>
-				<input
-					className={`profile--update--input ${
-						errorContact && "borderColor--input--error"
-					} `}
-					type='text'
-					value={contactUpdate}
-					disabled={updateData ? false : true}
-					onChange={(e) => handleContact(e.target.value)}
-				/>
-				{errorContact && (
-					<div className='profile--update--error'>
-						Debe ser número válido y mayor a 8 caracteres
-					</div>
-				)}
-			</div>
+			<ToastContainer />
 		</div>
 	);
 };
