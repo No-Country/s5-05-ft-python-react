@@ -3,8 +3,7 @@ import classes from "./ModalCard.module.css";
 const {
   card,
   data__container,
-  data__options__container,
-  data__options,
+  data__container__info,
   data__map,
   data__map__container,
   img,
@@ -12,123 +11,18 @@ const {
   btn__container,
 } = classes;
 
-export const ModalCard = ({ imgUrl, setOpenModal, sub = false }) => {
-
-  const handleAcceptCancelSub = () => {
-    //TODO: fetch post data
-  };
+export const ModalCard = ({ imgUrl, setOpenModal, complex }) => {
 
   return (
     <div className={card}>
       <div>
         <div>
-          <h2>Complejo</h2>
+          <h2>{complex.nombre}</h2>
           <div className={data__container}>
-            <div className={data__options__container}>
-              <p>Información: </p>
-              <p>Horarios: </p>
-              <div>
-                <p>Cobertura: </p>
-                <div className={data__options}>
-                  <p>
-                    Techada{" "}
-                    <svg
-                      width="20px"
-                      height="20px"
-                      viewBox="0 0 69.447 69.447"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g
-                        id="tennis_ball"
-                        data-name="tennis ball"
-                        transform="translate(-1271.769 -1574.648)"
-                      >
-                        <path
-                          id="Path_85"
-                          data-name="Path 85"
-                          d="M1341.208,1609.372a34.719,34.719,0,1,1-34.72-34.724A34.724,34.724,0,0,1,1341.208,1609.372Z"
-                          fill="#b9d613"
-                        />
-                        <path
-                          id="Path_86"
-                          data-name="Path 86"
-                          d="M1311.144,1574.993a35.139,35.139,0,0,0-4.61-.344,41.069,41.069,0,0,1-34.369,29.735,34.3,34.3,0,0,0-.381,4.635l.183-.026a45.921,45.921,0,0,0,39.149-33.881Zm29.721,34.692a45.487,45.487,0,0,0-33.488,34.054l-.071.313a34.54,34.54,0,0,0,4.818-.455,41.218,41.218,0,0,1,28.686-29.194,36.059,36.059,0,0,0,.388-4.8Z"
-                          fill="#f7f7f7"
-                        />
-                      </g>
-                    </svg>
-                  </p>
-                  <p>Aire Libre</p>
-                </div>
-              </div>
-              <div>
-                <p>Superficie: </p>
-                <div className={data__options}>
-                  <p>
-                    Cemento{" "}
-                    <svg
-                      width="20px"
-                      height="20px"
-                      viewBox="0 0 69.447 69.447"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g
-                        id="tennis_ball"
-                        data-name="tennis ball"
-                        transform="translate(-1271.769 -1574.648)"
-                      >
-                        <path
-                          id="Path_85"
-                          data-name="Path 85"
-                          d="M1341.208,1609.372a34.719,34.719,0,1,1-34.72-34.724A34.724,34.724,0,0,1,1341.208,1609.372Z"
-                          fill="#b9d613"
-                        />
-                        <path
-                          id="Path_86"
-                          data-name="Path 86"
-                          d="M1311.144,1574.993a35.139,35.139,0,0,0-4.61-.344,41.069,41.069,0,0,1-34.369,29.735,34.3,34.3,0,0,0-.381,4.635l.183-.026a45.921,45.921,0,0,0,39.149-33.881Zm29.721,34.692a45.487,45.487,0,0,0-33.488,34.054l-.071.313a34.54,34.54,0,0,0,4.818-.455,41.218,41.218,0,0,1,28.686-29.194,36.059,36.059,0,0,0,.388-4.8Z"
-                          fill="#f7f7f7"
-                        />
-                      </g>
-                    </svg>
-                  </p>
-                  <p>Sintético</p>
-                </div>
-              </div>
-              <div>
-                <p>Tipo de Pared: </p>
-                <div className={data__options}>
-                  <p>Cemento</p>
-                  <p>
-                    Blindex{" "}
-                    <svg
-                      width="20px"
-                      height="20px"
-                      viewBox="0 0 69.447 69.447"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g
-                        id="tennis_ball"
-                        data-name="tennis ball"
-                        transform="translate(-1271.769 -1574.648)"
-                      >
-                        <path
-                          id="Path_85"
-                          data-name="Path 85"
-                          d="M1341.208,1609.372a34.719,34.719,0,1,1-34.72-34.724A34.724,34.724,0,0,1,1341.208,1609.372Z"
-                          fill="#b9d613"
-                        />
-                        <path
-                          id="Path_86"
-                          data-name="Path 86"
-                          d="M1311.144,1574.993a35.139,35.139,0,0,0-4.61-.344,41.069,41.069,0,0,1-34.369,29.735,34.3,34.3,0,0,0-.381,4.635l.183-.026a45.921,45.921,0,0,0,39.149-33.881Zm29.721,34.692a45.487,45.487,0,0,0-33.488,34.054l-.071.313a34.54,34.54,0,0,0,4.818-.455,41.218,41.218,0,0,1,28.686-29.194,36.059,36.059,0,0,0,.388-4.8Z"
-                          fill="#f7f7f7"
-                        />
-                      </g>
-                    </svg>
-                  </p>
-                </div>
-              </div>
+            <div className={data__container__info}>
+              <p>Ciudad: {complex.ciudad}</p>
+              <p>Dirección: {complex.calle} {complex.altura}</p>
+              <p>Teléfono: {complex.telefono}</p>
             </div>
             <div className={data__map__container}>
               <iframe
@@ -146,10 +40,7 @@ export const ModalCard = ({ imgUrl, setOpenModal, sub = false }) => {
       </div>
       <div className={btn__container}>
         <button onClick={() => setOpenModal(false)} className={btn}>
-          Cancelar
-        </button>
-        <button onClick={handleAcceptCancelSub} className={btn}>
-          {sub ? "Anular inscripción" : "Enviar inscripción"}
+          Cerrar
         </button>
       </div>
     </div>
