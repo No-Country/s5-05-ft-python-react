@@ -69,7 +69,7 @@ class JugadorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Jugador
-        exclude = ["grilla", "id"]
+        exclude = ["id"]
         read_only_fields = ("editado","creado")
 
 class ComplejoSerializer(serializers.ModelSerializer):
