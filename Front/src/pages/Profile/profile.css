@@ -90,6 +90,8 @@
 	font-weight: 700;
 	text-transform: uppercase;
 	cursor: pointer;
+	align-self: center;
+	margin: 20px 0px;
 }
 
 .profile--button--saveData {
@@ -102,6 +104,8 @@
 	font-weight: 700;
 	text-transform: uppercase;
 	cursor: pointer;
+	align-self: center;
+	margin: 20px 0px;
 }
 
 .profile--button--saveData--disabled {
