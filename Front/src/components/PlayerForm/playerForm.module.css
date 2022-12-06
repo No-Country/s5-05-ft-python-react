@@ -14,6 +14,23 @@
   color: white;
   font-weight: 400;
 }
+
+.check {
+  display: flex;
+  flex-direction: column;
+}
+
+.form h3 {
+  text-align: center;
+  font-size: small;
+}
+.check label {
+  margin: 5px;
+}
+.check input {
+  margin-right: 4px;
+}
+
 .content {
   display: flex;
   flex-direction: column;

@@ -17,7 +17,7 @@ export const Modal_selectTime = ({ changeAvailavility, initialState }) => {
     } else {
       changeAvailavility({
         cells: false,
-        election: false,
+        election: [],
       });
     }
     settoggleModal(false);

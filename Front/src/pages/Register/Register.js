@@ -1,6 +1,7 @@
 import { Field, Form, Formik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
+import { instance } from "../../axios/axiosConfig";
 
 import styles from "./preRegister.module.css";
 import { scheme } from "./schemaPreRegister";
@@ -26,7 +27,24 @@ export const Register = () => {
           password2: "",
           type: "",
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+          const { email, password, type } = values;
+          let is_jugador = false;
+          let is_complejo = false;
+
+          if (type === "player") is_jugador = true;
+          else is_complejo = true;
+          /* 
+          instance
+            .post("", {
+              email,
+              password,
+              is_complejo,
+              is_jugador,
+            })
+            .then((resp) => console.log(resp))
+            .catch((err) => console.error(err)); */
+        }}
         validationSchema={scheme}
       >
         {({ errors, touched }) => (
