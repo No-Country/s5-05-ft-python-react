@@ -1,30 +1,29 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
 import AvatarCourt from "../../../assets/profile/img_complex.jpg";
 import PhotoIcon from "../../../assets/profile/photo_icon.png";
+import { UserContext } from "../../../context/userContext";
 import {
 	validNumberString,
 	validStringLength,
 	validStringNumber,
 } from "../../../helper/validations";
 
-export const ProfileUpdateComplex = ({
-	userComplex,
-	updateData,
-	setUpdateData,
-}) => {
+export const ProfileUpdateComplex = () => {
+	const { userComplex, PUT_userComplex } = useContext(UserContext);
+
+	const [disableButton, setDisableButton] = useState(false);
+	const [updateData, setUpdateData] = useState(false);
+
 	//updaters
 	const [nameUpdate, setNameUpdate] = useState(userComplex.nombre);
 	const [adressUpdate, setAdressUpdate] = useState(userComplex.altura);
 	const [streetUpdate, setStreetUpdate] = useState(userComplex.calle);
 	const [cityUpdate, setCityUpdate] = useState(userComplex.ciudad);
 	const [countryUpdate, setCountryUpdate] = useState(userComplex.pais);
-	const [contactUpdate, setContactUpdate] = useState(userComplex.contacto);
+	const [contactUpdate, setContactUpdate] = useState(userComplex.telefono);
 	const [courtsUpdate, setCourtsUpdate] = useState(userComplex.cant_cancha);
 	const [userNumber, setUserNumber] = useState(userComplex.usuario);
-
-	// const [coverUpdate, setCoverUpdate] = useState(userComplex.cover);
-	// const [surfaceUpdate, setSurfaceUpdate] = useState(userComplex.surface);
-	// const [wallUpdate, setWallUpdate] = useState(userComplex.wall);
 
 	//errors
 	const [errorName, setErrorName] = useState(false);
@@ -34,6 +33,43 @@ export const ProfileUpdateComplex = ({
 	const [errorCountry, setErrorCountry] = useState(false);
 	const [errorContact, setErrorContact] = useState(false);
 	const [errorCourt, setErrorCourts] = useState(false);
+
+	useEffect(() => {
+		errorName ||
+		errorStreet ||
+		errorAdress ||
+		errorCity ||
+		errorCountry ||
+		errorContact ||
+		errorCourt
+			? setDisableButton(true)
+			: setDisableButton(false);
+	}, [
+		errorName,
+		errorStreet,
+		errorAdress,
+		errorCity,
+		errorCountry,
+		errorContact,
+		errorCourt,
+	]);
+
+	const handleUpdateData = () => {
+		if (updateData) {
+			let newUser = {
+				nombre: nameUpdate,
+				altura: adressUpdate,
+				calle: streetUpdate,
+				ciudad: cityUpdate,
+				pais: countryUpdate,
+				telefono: contactUpdate,
+				cant_cancha: courtsUpdate,
+				usuario: userNumber,
+			};
+			PUT_userComplex(newUser);
+		}
+		setUpdateData(!updateData);
+	};
 
 	const handleName = (e) => {
 		validStringLength(e) ? setErrorName(false) : setErrorName(true);
@@ -79,7 +115,7 @@ export const ProfileUpdateComplex = ({
 		setAdressUpdate(userComplex.calle);
 		setCityUpdate(userComplex.ciudad);
 		setCountryUpdate(userComplex.pais);
-		setContactUpdate(userComplex.contacto);
+		setContactUpdate(userComplex.telefono);
 		setCourtsUpdate(userComplex.cant_cancha);
 		// setCoverUpdate(userComplex.cover);
 		// setSurfaceUpdate(userComplex.surface);
@@ -89,6 +125,17 @@ export const ProfileUpdateComplex = ({
 
 	return (
 		<div className='container--profile--update'>
+			<button
+				disabled={disableButton}
+				className={`${
+					updateData
+						? "profile--button--updateData"
+						: "profile--button--saveData"
+				}
+						${disableButton ? "profile--button--saveData--disabled" : ""}`}
+				onClick={handleUpdateData}>
+				{updateData ? "Guardar Cambios" : "Actualizar Perfil"}
+			</button>
 			{updateData && (
 				<button
 					className='button--profile--cancel'
@@ -323,6 +370,7 @@ export const ProfileUpdateComplex = ({
 					</div>
 				)}
 			</div>
+			<ToastContainer />
 		</div>
 	);
 };
