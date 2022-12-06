@@ -14,8 +14,12 @@ import { ProfilePlayer } from "./pages/ProfilePlayer/ProfilePlayer";
 import { ComplexForm } from "./pages/ComplexForm/ComplexForm";
 import { PlayerForm } from "./pages/PlayerForm/PlayerForm";
 
+import { Navbar } from "./components/HomePage/Navbar/Navbar";
+
 export const App = () => {
   return (
+  <>
+  <Navbar />
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/complex" element={<Complex />} />
@@ -28,5 +32,6 @@ export const App = () => {
       <Route path="/form/complex" element={<ComplexForm />} />
       <Route path="/form/player" element={<PlayerForm />} />
     </Routes>
+  </>
   );
 };
