@@ -1,89 +1,139 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import SuccesIcon from "../assets/profile/succes_icon.png";
+import { instance } from "../axios/axiosConfig";
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-	const [user, setUser] = useState({});
+	// actualizar cuando completa form de login , para poder llamar a PUT
+	const [userCredentials, setUserCredentials] = useState({
+		username: "nico12@gmail.com",
+		password: "123456789",
+		id: "",
+	});
+
+	// actualizar cuando completa form de login
 	const [token, setToken] = useState();
-	const [userPlayer, setUserPLayer] = useState(null);
+
+	//para manejar las vistas del usuario
+	const [userType, setUserType] = useState("player");
+
+	// actualizar cuando completa form de jugador / complejo
+	const [userPlayer, setUserPLayer] = useState({
+		nombre: "Nombre",
+		apellido: "Apellido",
+		posicion: "Drive",
+		surface: "Sintetico",
+		wall: "Blinex",
+		cover: "Techada",
+		nivel: "7",
+		grilla: [
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+			[false, false, false, false, false, false, false],
+		],
+		telefono: "12345679",
+		sexo: "Masculino",
+		usuario: 10,
+	});
 	const [userComplex, setUserComplex] = useState(null);
 
-	const updateToken = () => {};
+	useEffect(() => {
+		userPlayer !== null && setUserType("player");
+		userComplex !== null && setUserType("complex");
+	}, [userPlayer, userComplex]);
 
-	const updateUserPlayer = async (player) => {
-		let updated;
-		await fetch("URL/api/jugador/id/", {
-			method: "PUT",
-			body: JSON.stringify(player),
-			mode: "cors",
-			cache: "no-cache",
-			credentials: "same-origin",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((response) => response.json())
-			.then((response) => {
-				console.log(response);
-				setUserPLayer(player);
-				updated = true;
-			})
-			.catch((error) => {
-				console.log(error);
-				updated = false;
-			});
-		return updated;
+	const updateUser = (userValue) => {
+		setUserCredentials(userValue);
 	};
 
-	const updateUserComplex = async (complex) => {
-		let updated;
-		await fetch("URL/api/complejo/id/", {
-			method: "PUT",
-			body: JSON.stringify(complex),
-			mode: "cors",
-			cache: "no-cache",
-			credentials: "same-origin",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((response) => response.json())
-			.then((response) => {
-				console.log(response);
-				setUserComplex(complex);
-				updated = true;
-			})
-			.catch((error) => {
-				console.log(error);
-				updated = false;
-			});
+	const updateUserPlayer = (userPlayerValue) => {
+		setUserPLayer(userPlayerValue);
+	};
 
-		return updated;
+	const updateUserComplex = (userComplexValue) => {
+		setUserComplex(userComplexValue);
+	};
+
+	const updateToken = (tokenValue) => {
+		setToken(tokenValue);
+	};
+
+	const PUT_userPlayer = (player) => {
+		console.log(player);
+		instance
+			.put(`jugador/${player.usuario}/`, player, {
+				auth: {
+					username: userCredentials.username,
+					password: userCredentials.password,
+				},
+			})
+			.then((resp) => {
+				setUserPLayer(resp.data);
+				notify(true);
+			})
+			.catch((err) => {
+				notify(false);
+			});
+	};
+
+	const PUT_userComplex = (complex) => {
+		instance
+			.put(`complejo/${complex.usuario}/`, complex, {
+				auth: {
+					username: userCredentials.username,
+					password: userCredentials.password,
+				},
+			})
+			.then((resp) => {
+				setUserComplex(resp.data);
+				notify(true);
+			})
+			.catch((err) => {
+				notify(false);
+			});
 	};
 
 	const logout = () => {
-		fetch(`URL/api/api/logout/?token=${token}`, () => {});
+		instance
+			.get(`logout/?token=${token}`)
+			.then((response) => console.log(response));
 	};
 
-	const getUserPlayer = async (id) => {
-		let userSearch;
-		await fetch("URL/api/jugador/id/")
-			.then((response) => response.json())
-			.then((response) => {
-				console.log(response);
-				userSearch = response;
-			})
-			.catch((error) => {
-				console.log(error);
-				userSearch = null;
-			});
-
-		return userSearch;
-	};
-	const getUserComplex = async (idComplex) => {
-		let userSearch;
-		await fetch(`URL/api/complejo/${idComplex}/`)
-			.then((response) => response.json())
+	const getUserPlayer = (id) => {
+		let userSearch = {};
+		instance
+			.put(`jugador/${id}/`)
 			.then((response) => {
 				console.log(response);
 				userSearch = response;
@@ -96,5 +146,46 @@ export const UserProvider = ({ children }) => {
 		return userSearch;
 	};
 
-	return <UserContext.Provider value={{}}>{children}</UserContext.Provider>;
+	const notify = (resolve) =>
+		resolve
+			? toast("Cambios guardados", {
+					position: toast.POSITION.BOTTOM_CENTER,
+					className: "profile--update--toast",
+					draggablePercent: 60,
+					autoClose: 1000,
+					icon: () => (
+						<img
+							className='profile--update--toast--icon'
+							src={SuccesIcon}
+							alt='icon'
+						/>
+					),
+			  })
+			: toast.error("Ocurrio un error", {
+					position: toast.POSITION.BOTTOM_CENTER,
+					className: "profile--update--toast--error",
+					draggablePercent: 60,
+					autoClose: 1000,
+			  });
+
+	return (
+		<UserContext.Provider
+			value={{
+				userCredentials,
+				token,
+				userType,
+				userPlayer,
+				userComplex,
+				updateUser,
+				updateUserPlayer,
+				updateUserComplex,
+				updateToken,
+				PUT_userPlayer,
+				PUT_userComplex,
+				logout,
+				getUserPlayer,
+			}}>
+			{children}
+		</UserContext.Provider>
+	);
 };
