@@ -5,35 +5,8 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
 	const [user, setUser] = useState({});
 	const [token, setToken] = useState();
-	const [userPlayer, setUserPLayer] = useState({});
-	const [userComplex, setUserComplex] = useState({});
-
-	const login = (user) => {
-		// login with email + password
-		fetch("URL/api/login/", {
-			method: "POST",
-			body: JSON.stringify(user),
-			mode: "cors",
-			cache: "no-cache",
-			credentials: "same-origin",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-	};
-
-	const createUser = (user) => {
-		fetch("URL/api/usuario/", {
-			method: "POST",
-			body: JSON.stringify(user),
-			mode: "cors",
-			cache: "no-cache",
-			credentials: "same-origin",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-	};
+	const [userPlayer, setUserPLayer] = useState(null);
+	const [userComplex, setUserComplex] = useState(null);
 
 	const updateToken = () => {};
 
@@ -88,7 +61,7 @@ export const UserProvider = ({ children }) => {
 		return updated;
 	};
 
-	const logout = (token) => {
+	const logout = () => {
 		fetch(`URL/api/api/logout/?token=${token}`, () => {});
 	};
 
