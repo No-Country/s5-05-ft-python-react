@@ -19,6 +19,9 @@ export const ProfileUpdatePlayer = ({
 	const [nameUpdate, setNameUpdate] = useState(userPlayer.name);
 	const [lastNameUpdate, setLastNameUpdate] = useState(userPlayer.lastName);
 	const [positionUpdate, setPositionUpdate] = useState(userPlayer.position);
+	const [coverUpdate, setCoverUpdate] = useState(userPlayer.cover);
+	const [surfaceUpdate, setSurfaceUpdate] = useState(userPlayer.surface);
+	const [wallUpdate, setWallUpdate] = useState(userPlayer.wall);
 	const [levelUpdate, setLevelUpdate] = useState(userPlayer.level);
 	const [availableUpdate, setAvailableUpdate] = useState(
 		userPlayer.available
@@ -68,6 +71,9 @@ export const ProfileUpdatePlayer = ({
 		setNameUpdate(userPlayer.name);
 		setLastNameUpdate(userPlayer.lastName);
 		setPositionUpdate(userPlayer.position);
+		setSurfaceUpdate(userPlayer.surface);
+		setWallUpdate(userPlayer.wall);
+		setCoverUpdate(userPlayer.cover);
 		setAvailableUpdate(userPlayer.available);
 		setContactUpdate(userPlayer.contact);
 		setGenreUpdate(userPlayer.genre);
@@ -161,6 +167,57 @@ export const ProfileUpdatePlayer = ({
 					<option value='reves'>Reves</option>
 					<option value='drive'>Drive</option>
 					<option value='allCourt'>Toda la Cancha</option>
+				</select>
+			</div>
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_3" : ""
+					}`}>
+					{updateData ? "Superficie" : ""}
+				</label>
+				<select
+					className='profile--update--input'
+					disabled={updateData ? false : true}
+					value={surfaceUpdate}
+					onChange={(e) => setSurfaceUpdate(e.target.value)}>
+					<option value='reves'>Sintetico</option>
+					<option value='drive'>Cemento</option>
+					<option value='allCourt'>Ambas</option>
+				</select>
+			</div>
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_3" : ""
+					}`}>
+					{updateData ? "Paredes" : ""}
+				</label>
+				<select
+					className='profile--update--input'
+					disabled={updateData ? false : true}
+					value={wallUpdate}
+					onChange={(e) => setWallUpdate(e.target.value)}>
+					<option value='reves'>Blindex</option>
+					<option value='drive'>Cemento</option>
+					<option value='allCourt'>Ambas</option>
+				</select>
+			</div>
+			<div className='container--profile--sections'>
+				<label
+					className={`profile--update--label ${
+						updateData ? "show_time_3" : ""
+					}`}>
+					{updateData ? "Cubierta" : ""}
+				</label>
+				<select
+					className='profile--update--input'
+					disabled={updateData ? false : true}
+					value={coverUpdate}
+					onChange={(e) => setCoverUpdate(e.target.value)}>
+					<option value='reves'>Techada</option>
+					<option value='drive'>Aire Libre</option>
+					<option value='allCourt'>Ambas</option>
 				</select>
 			</div>
 

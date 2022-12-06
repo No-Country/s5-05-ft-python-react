@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import CourtsIcon from "../../assets/profile/courts_icon.png";
 import CourtImage from "../../assets/profile/img_complex.jpg";
 import LocationIcon from "../../assets/profile/location_icon.png";
@@ -6,11 +8,30 @@ import RoofIcon from "../../assets/profile/roof_icon.png";
 import SurfaceIcon from "../../assets/profile/surface_icon.png";
 import WallIcon from "../../assets/profile/wall_icon.png";
 import WtsIcon from "../../assets/profile/wts_icon.png";
+import { Loading } from "../../components/Loading/Loading";
 
 import "./profileComplex.css";
 
 export const ProfileComplex = () => {
-	return (
+	const { idComplex } = useParams();
+	const [userComplex, setUserComplex] = useState({});
+	const [loading, setLoading] = useState();
+
+	useEffect(() => {
+		fetch(`http://127.0.0.1:8000/api/complejo/${idComplex}`)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				setUserComplex(data);
+			})
+			.catch()
+			.finally(setLoading(false));
+		console.log(idComplex);
+	}, [idComplex]);
+
+	return loading ? (
+		<Loading />
+	) : (
 		<div className='container--section--profileComplex'>
 			<div className='container--profileComplex'>
 				<div className='container--profileComplex--avatar--name'>
@@ -19,7 +40,9 @@ export const ProfileComplex = () => {
 						src={CourtImage}
 						alt='avatar icon'
 					/>
-					<h2 className='profileComplex--name'>Nombre Canchas</h2>
+					<h2 className='profileComplex--name'>
+						{userComplex.nombre}
+					</h2>
 				</div>
 				<div className='container--profileComplex--info'>
 					<div className='container--profileComplex--info--adress'>
@@ -33,7 +56,8 @@ export const ProfileComplex = () => {
 								Dirección
 							</div>
 							<div className='profileComplex--info--adress--name'>
-								Calle XXXXX , ciudad , pais.
+								{userComplex.calle} {userComplex.altura} -{" "}
+								{userComplex.ciudad} , {userComplex.pais}.
 							</div>
 						</div>
 					</div>
@@ -47,7 +71,7 @@ export const ProfileComplex = () => {
 							Contacto
 						</div>
 						<div className='profileComplex--info--contact--number'>
-							12364897879
+							159159159159
 						</div>
 					</div>
 
@@ -61,11 +85,11 @@ export const ProfileComplex = () => {
 							Canchas
 						</div>
 						<div className='profileComplex--info--courts--name'>
-							3
+							{userComplex.cant_cancha}
 						</div>
 					</div>
 
-					<div className='container--profileComplex--info--surface'>
+					{/* <div className='container--profileComplex--info--surface'>
 						<img
 							className='profileComplex--info--icon'
 							src={SurfaceIcon}
@@ -80,9 +104,9 @@ export const ProfileComplex = () => {
 								Sintetico
 							</div>
 						</div>
-					</div>
+					</div> */}
 
-					<div className='container--profileComplex--info--walls'>
+					{/* <div className='container--profileComplex--info--walls'>
 						<img
 							className='profileComplex--info--icon'
 							src={WallIcon}
@@ -97,9 +121,9 @@ export const ProfileComplex = () => {
 								Blindex
 							</div>
 						</div>
-					</div>
+					</div> */}
 
-					<div className='container--profileComplex--info--cover'>
+					{/* <div className='container--profileComplex--info--cover'>
 						<img
 							className='profileComplex--info--icon'
 							src={RoofIcon}
@@ -113,7 +137,7 @@ export const ProfileComplex = () => {
 								Aire Libre
 							</div>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>

@@ -158,3 +158,21 @@
 .profilePlayer--info--genre--text {
 	font-weight: 700;
 }
+
+.container--profilePlayer--info--surface {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.profilePlayer--info--data {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.profilePlayer--info--surface--text {
+	color: var(--color--navy);
+	font-size: var(--fs--big);
+}
