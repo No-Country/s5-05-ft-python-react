@@ -32,7 +32,6 @@ export const PlayerTimesDisplay = ({ availableTimes }) => {
 				});
 			}
 		});
-
 		setTimeout(() => {
 			setLoading(false);
 		}, 3000);
