@@ -24,8 +24,9 @@ export const ProfilePlayer = () => {
 
 	useEffect(() => {
 		instance
-			.get(`jugador/${idPlayer}`)
+			.get(`jugador/${idPlayer}/`)
 			.then(({ data }) => {
+				console.log(data);
 				!data.message && setUserPlayer(data);
 			})
 			.finally(
