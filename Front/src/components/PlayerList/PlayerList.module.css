@@ -76,6 +76,13 @@
     user-select: none;
 }
 
+.row__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 .row__data {
     display: flex;
     justify-content: space-between;
