@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import { toast } from "react-toastify";
 import SuccesIcon from "../assets/profile/succes_icon.png";
 import { instance } from "../axios/axiosConfig";
@@ -20,16 +20,10 @@ export const UserProvider = ({ children }) => {
 	const [token, setToken] = useState();
 
 	//para manejar las vistas del usuario
-	const [userType, setUserType] = useState("complex");
 
 	// actualizar cuando completa form de jugador / complejo
 	const [userPlayer, setUserPLayer] = useState(null);
 	const [userComplex, setUserComplex] = useState(null);
-
-	useEffect(() => {
-		userPlayer !== null && setUserType("player");
-		userComplex !== null && setUserType("complex");
-	}, [userPlayer, userComplex]);
 
 	const updateUser = (userValue) => {
 		setUserCredentials(userValue);
@@ -140,7 +134,6 @@ export const UserProvider = ({ children }) => {
 			value={{
 				userCredentials,
 				token,
-				userType,
 				userPlayer,
 				userComplex,
 				updateUser,
