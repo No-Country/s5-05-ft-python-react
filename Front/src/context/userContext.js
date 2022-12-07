@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import SuccesIcon from "../assets/profile/succes_icon.png";
 import { instance } from "../axios/axiosConfig";
@@ -6,145 +7,140 @@ import { instance } from "../axios/axiosConfig";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  // actualizar cuando completa form de login , para poder llamar a PUT
-  const [userCredentials, setUserCredentials] = useState({
-    username: "",
-    password: "",
-    id: "",
-    is_jugador: false,
-    is_complejo: false,
-    perfil_completo: false,
-  });
+	const navigate = useNavigate();
+	// actualizar cuando completa form de login , para poder llamar a PUT
+	const [userCredentials, setUserCredentials] = useState({
+		username: "",
+		password: "",
+		id: "",
+		is_jugador: false,
+		is_complejo: false,
+		perfil_completo: false,
+	});
 
-  // actualizar cuando completa form de login
-  const [token, setToken] = useState();
+	// actualizar cuando completa form de login
+	const [token, setToken] = useState();
 
-  //para manejar las vistas del usuario
-  const [userType, setUserType] = useState("complex");
+	useEffect(() => {
+		if (userCredentials.id !== "") {
+			userCredentials.is_jugador && userCredentials.perfil_completo
+				? getUserPlayer(userCredentials.id)
+				: getUserComplex(userCredentials.id);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [userCredentials.id]);
 
-  // actualizar cuando completa form de jugador / complejo
-  const [userPlayer, setUserPLayer] = useState(null);
-  const [userComplex, setUserComplex] = useState(null);
+	// actualizar cuando completa form de jugador / complejo
+	const [userPlayer, setUserPLayer] = useState(null);
+	const [userComplex, setUserComplex] = useState(null);
 
-  useEffect(() => {
-    userPlayer !== null && setUserType("player");
-    userComplex !== null && setUserType("complex");
-  }, [userPlayer, userComplex]);
+	const updateUser = (userValue) => {
+		setUserCredentials(userValue);
+	};
 
-  const updateUser = (userValue) => {
-    setUserCredentials(userValue);
-  };
+	const updateToken = (tokenValue) => {
+		setToken(tokenValue);
+	};
 
-  const updateUserPlayer = (userPlayerValue) => {
-    setUserPLayer(userPlayerValue);
-  };
+	const PUT_userPlayer = (player) => {
+		instance
+			.put(`jugador/${player.usuario}/`, player, {
+				auth: {
+					username: userCredentials.username,
+					password: userCredentials.password,
+				},
+			})
+			.then(({ data }) => {
+				setUserPLayer(data);
+				notify(true);
+			})
+			.catch(() => {
+				notify(false);
+			});
+	};
 
-  const updateUserComplex = (userComplexValue) => {
-    setUserComplex(userComplexValue);
-  };
+	const PUT_userComplex = (complex) => {
+		instance
+			.put(`complejo/${complex.usuario}/`, complex, {
+				auth: {
+					username: userCredentials.username,
+					password: userCredentials.password,
+				},
+			})
+			.then(({ data }) => {
+				setUserComplex(data);
+				notify(true);
+			})
+			.catch(() => {
+				notify(false);
+			});
+	};
 
-  const updateToken = (tokenValue) => {
-    setToken(tokenValue);
-  };
+	const logout = () => {
+		instance.get(`logout/?token=${token}`);
 
-  const PUT_userPlayer = (player) => {
-    console.log(player);
-    instance
-      .put(`jugador/${player.usuario}/`, player, {
-        auth: {
-          username: userCredentials.username,
-          password: userCredentials.password,
-        },
-      })
-      .then((resp) => {
-        setUserPLayer(resp.data);
-        notify(true);
-      })
-      .catch((err) => {
-        notify(false);
-      });
-  };
+		setUserCredentials({
+			username: "",
+			password: "",
+			id: "",
+			is_jugador: false,
+			is_complejo: false,
+			perfil_completo: false,
+		});
+		setUserPLayer(null);
+		setUserComplex(null);
+		navigate("login");
+	};
 
-  const PUT_userComplex = (complex) => {
-    instance
-      .put(`complejo/${complex.usuario}/`, complex, {
-        auth: {
-          username: userCredentials.username,
-          password: userCredentials.password,
-        },
-      })
-      .then((resp) => {
-        setUserComplex(resp.data);
-        notify(true);
-      })
-      .catch((err) => {
-        notify(false);
-      });
-  };
+	const getUserPlayer = (id) => {
+		instance.get(`jugador/${id}/`).then(({ data }) => {
+			setUserPLayer(data);
+		});
+	};
 
-  const logout = () => {
-    instance
-      .get(`logout/?token=${token}`)
-      .then((response) => console.log(response));
-  };
+	const getUserComplex = (id) => {
+		instance.get(`jugador/${id}/`).then(({ data }) => {
+			setUserComplex(data);
+		});
+	};
 
-  const getUserPlayer = (id) => {
-    let userSearch = {};
-    instance
-      .put(`jugador/${id}/`)
-      .then((response) => {
-        console.log(response);
-        userSearch = response;
-      })
-      .catch((error) => {
-        console.log(error);
-        userSearch = null;
-      });
+	const notify = (resolve) =>
+		resolve
+			? toast("Cambios guardados", {
+					position: toast.POSITION.BOTTOM_CENTER,
+					className: "profile--update--toast",
+					draggablePercent: 60,
+					autoClose: 1000,
+					icon: () => (
+						<img
+							className='profile--update--toast--icon'
+							src={SuccesIcon}
+							alt='icon'
+						/>
+					),
+			  })
+			: toast.error("Ocurrio un error", {
+					position: toast.POSITION.BOTTOM_CENTER,
+					className: "profile--update--toast--error",
+					draggablePercent: 60,
+					autoClose: 1000,
+			  });
 
-    return userSearch;
-  };
-
-  const notify = (resolve) =>
-    resolve
-      ? toast("Cambios guardados", {
-          position: toast.POSITION.BOTTOM_CENTER,
-          className: "profile--update--toast",
-          draggablePercent: 60,
-          autoClose: 1000,
-          icon: () => (
-            <img
-              className="profile--update--toast--icon"
-              src={SuccesIcon}
-              alt="icon"
-            />
-          ),
-        })
-      : toast.error("Ocurrio un error", {
-          position: toast.POSITION.BOTTOM_CENTER,
-          className: "profile--update--toast--error",
-          draggablePercent: 60,
-          autoClose: 1000,
-        });
-
-  return (
-    <UserContext.Provider
-      value={{
-        userCredentials,
-        token,
-        userType,
-        userPlayer,
-        userComplex,
-        updateUser,
-        updateUserPlayer,
-        updateUserComplex,
-        updateToken,
-        PUT_userPlayer,
-        PUT_userComplex,
-        logout,
-        getUserPlayer,
-      }}
-    >
-      {children}
-    </UserContext.Provider>
-  );
+	return (
+		<UserContext.Provider
+			value={{
+				userCredentials,
+				token,
+				userPlayer,
+				userComplex,
+				updateUser,
+				updateToken,
+				PUT_userPlayer,
+				PUT_userComplex,
+				logout,
+				getUserPlayer,
+			}}>
+			{children}
+		</UserContext.Provider>
+	);
 };

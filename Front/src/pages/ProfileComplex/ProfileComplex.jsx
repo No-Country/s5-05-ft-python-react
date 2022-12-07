@@ -3,11 +3,8 @@ import { useParams } from "react-router-dom";
 import CourtsIcon from "../../assets/profile/courts_icon.png";
 import CourtImage from "../../assets/profile/img_complex.jpg";
 import LocationIcon from "../../assets/profile/location_icon.png";
-import PositionIcon from "../../assets/profile/position_icon.png";
-import RoofIcon from "../../assets/profile/roof_icon.png";
-import SurfaceIcon from "../../assets/profile/surface_icon.png";
-import WallIcon from "../../assets/profile/wall_icon.png";
 import WtsIcon from "../../assets/profile/wts_icon.png";
+import { instance } from "../../axios/axiosConfig";
 import { Loading } from "../../components/Loading/Loading";
 import { ErrorComplex } from "../404Complex/ErrorComplex";
 
@@ -19,9 +16,9 @@ export const ProfileComplex = () => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		fetch(`http://127.0.0.1:8000/api/complejo/${idComplex}`)
-			.then((response) => response.json())
-			.then((data) => {
+		instance
+			.get(`complejo/${idComplex}`)
+			.then(({ data }) => {
 				!data.message && setUserComplex(data);
 			})
 			.finally(
@@ -29,7 +26,6 @@ export const ProfileComplex = () => {
 					setLoading(false);
 				}, 2000)
 			);
-		console.log(idComplex);
 	}, [idComplex]);
 
 	return (

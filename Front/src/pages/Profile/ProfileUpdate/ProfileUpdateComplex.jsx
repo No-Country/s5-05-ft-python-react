@@ -10,7 +10,7 @@ import {
 } from "../../../helper/validations";
 
 export const ProfileUpdateComplex = () => {
-	const { userComplex, PUT_userComplex } = useContext(UserContext);
+	const { userComplex, PUT_userComplex, logout } = useContext(UserContext);
 
 	const [disableButton, setDisableButton] = useState(false);
 	const [updateData, setUpdateData] = useState(false);
@@ -371,6 +371,11 @@ export const ProfileUpdateComplex = () => {
 				)}
 			</div>
 			<ToastContainer />
+			<button
+				className='profile--button--logout'
+				onClick={() => logout(userNumber)}>
+				Cerrar Sesion
+			</button>
 		</div>
 	);
 };

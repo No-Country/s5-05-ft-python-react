@@ -10,6 +10,7 @@ import RoofIcon from "../../assets/profile/roof_icon.png";
 import SurfaceIcon from "../../assets/profile/surface_icon.png";
 import WallIcon from "../../assets/profile/wall_icon.png";
 import WtsIcon from "../../assets/profile/wts_icon.png";
+import { instance } from "../../axios/axiosConfig";
 import { Loading } from "../../components/Loading/Loading";
 import { PlayerTimesDisplay } from "../../components/PlayerTimesDisplay/PlayerTimesDisplay";
 import { openInNewTab } from "../../helper/openInNewTab";
@@ -22,9 +23,9 @@ export const ProfilePlayer = () => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		fetch(`http://127.0.0.1:8000/api/jugador/${idPlayer}`)
-			.then((response) => response.json())
-			.then((data) => {
+		instance
+			.get(`jugador/${idPlayer}/`)
+			.then(({ data }) => {
 				!data.message && setUserPlayer(data);
 			})
 			.finally(
