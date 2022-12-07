@@ -17,6 +17,7 @@ export const Profile = () => {
 					<ProfileUpdateComplex />
 				)}
 			</div>
+			<button>Cerrar Sesion</button>
 		</div>
 	);
 };
