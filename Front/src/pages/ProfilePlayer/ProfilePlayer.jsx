@@ -26,7 +26,6 @@ export const ProfilePlayer = () => {
 		instance
 			.get(`jugador/${idPlayer}/`)
 			.then(({ data }) => {
-				console.log(data);
 				!data.message && setUserPlayer(data);
 			})
 			.finally(

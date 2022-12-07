@@ -26,7 +26,6 @@ export const ProfileComplex = () => {
 					setLoading(false);
 				}, 2000)
 			);
-		console.log(idComplex);
 	}, [idComplex]);
 
 	return (
