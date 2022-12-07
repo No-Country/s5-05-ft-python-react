@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { ToastContainer, toast } from 'react-toastify';
 
+import { instance } from "../../axios/axiosConfig";
 import { PlayerList } from "../../components/PlayerList/PlayerList";
 
 import 'react-toastify/dist/ReactToastify.css';
 import classes from "./Players.module.css";
-import { useEffect } from "react";
 
 const {
   main,
@@ -55,7 +55,7 @@ export const Players = () => {
   }
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/jugador').then(res=>res.json()).then(data=>setPlayersTotal(data))
+    instance.get('jugador').then(res=>setPlayersTotal(res.data))
   }, [])
   
 
