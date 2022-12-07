@@ -14,6 +14,7 @@ export const UserProvider = ({ children }) => {
     is_jugador: false,
     is_complejo: false,
     perfil_completo: false,
+    login: false,
   });
 
   // actualizar cuando completa form de login

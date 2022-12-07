@@ -4,6 +4,10 @@ import { Footer } from "../../components/HomePage/Footer/Footer";
 import { HomeButton } from "../../components/HomePage/HomeButton/HomeButton";
 import { HomeCard } from "../../components/HomePage/HomeCard/HomeCard";
 import { Subtitle } from "../../components/HomePage/Subtitle/Subtitle";
+import { UserContext } from "../../context/userContext";
+import { useContext } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Homepage = () => {
   const {
@@ -31,6 +35,21 @@ export const Homepage = () => {
     location__container,
     location__img,
   } = classes;
+
+  const navigate = useNavigate();
+
+  const { userCredentials } = useContext(UserContext);
+  const { login, is_jugador } = userCredentials;
+  let ruta = "";
+  if (login) {
+    is_jugador ? (ruta = "player") : (ruta = "complex");
+  }
+
+  useEffect(() => {
+    if (login) {
+      navigate("form/" + ruta);
+    }
+  }, []);
 
   return (
     <>

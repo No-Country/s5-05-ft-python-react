@@ -25,8 +25,9 @@ export const FormPlayer = () => {
     cells: false,
   });
 
-  const user = useContext(UserContext);
-  console.log(user);
+  const { userCredentials, updateUser } = useContext(UserContext);
+
+  const { id, username, password } = userCredentials;
 
   const changeAvailavility = (data) => {
     setAvailability(data);
@@ -65,7 +66,7 @@ export const FormPlayer = () => {
 
           instance
             .put(
-              "jugador/3/",
+              `jugador/${id}/`,
               {
                 telefono,
                 nivel,
@@ -75,7 +76,7 @@ export const FormPlayer = () => {
                 sexo,
                 grilla: availability.cells,
                 cancha_specs: [...sky, surface].concat(wall).flat(2),
-                usuario: 3,
+                usuario: id,
                 /* [days[0][0]]: days[0][1],
                 [days[1][0]]: days[1][1],
                 [days[2][0]]: days[2][1],
@@ -86,12 +87,15 @@ export const FormPlayer = () => {
               },
               {
                 auth: {
-                  username: "ale@ale.com",
-                  password: 1234,
+                  username,
+                  password,
                 },
               }
             )
-            .then(({ data }) => console.log(data))
+            .then(({ data }) => {
+              console.log(data);
+              updateUser({ ...userCredentials, perfil_completo: true });
+            })
             .catch((err) => console.error(err));
         }
       }}
@@ -240,7 +244,7 @@ export const FormPlayer = () => {
               <div role="group" className={check}>
                 <h3>Superficie</h3>
                 <label>
-                  <Field type="checkbox" name="surface" value="SP" />
+                  <Field type="checkbox" name="surface" value="SC" />
                   Cemento
                 </label>
                 <label>
