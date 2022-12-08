@@ -27,7 +27,6 @@ class UserTokenSerializer(serializers.ModelSerializer):
 
     email = serializers.EmailField(required=False, allow_blank=True)
     password = serializers.CharField(style={'input_type': 'password'})
-    http_method_names = ['get', 'put', 'post','patch', 'delete']
 
     class Meta:
         model = User
@@ -52,6 +51,8 @@ class UserTokenSerializer(serializers.ModelSerializer):
         return attrs
 
 class UserSerializer(serializers.ModelSerializer):
+
+    http_method_names = ['get', 'put', 'post','patch', 'delete']
 
     class Meta:
         model= User
