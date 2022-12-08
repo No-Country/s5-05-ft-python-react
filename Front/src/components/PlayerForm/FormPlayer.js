@@ -1,9 +1,11 @@
 import { Field, Form, Formik } from "formik";
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { array } from "yup";
 
 import { instance } from "../../axios/axiosConfig";
 import { UserContext } from "../../context/userContext";
+import { alertOk } from "../Alerts/alerts";
 import { Modal_selectTime } from "./Modal_selectTime";
 import styles from "./playerForm.module.css";
 import { schemePlayer } from "./schema";
@@ -25,8 +27,11 @@ export const FormPlayer = () => {
     cells: false,
   });
 
-  const user = useContext(UserContext);
-  console.log(user);
+  const navigate = useNavigate();
+
+  const { userCredentials, updateUser } = useContext(UserContext);
+
+  const { id, username, password } = userCredentials;
 
   const changeAvailavility = (data) => {
     setAvailability(data);
@@ -65,7 +70,7 @@ export const FormPlayer = () => {
 
           instance
             .put(
-              "jugador/3/",
+              `jugador/${id}/`,
               {
                 telefono,
                 nivel,
@@ -75,7 +80,7 @@ export const FormPlayer = () => {
                 sexo,
                 grilla: availability.cells,
                 cancha_specs: [...sky, surface].concat(wall).flat(2),
-                usuario: 3,
+                usuario: id,
                 /* [days[0][0]]: days[0][1],
                 [days[1][0]]: days[1][1],
                 [days[2][0]]: days[2][1],
@@ -86,12 +91,18 @@ export const FormPlayer = () => {
               },
               {
                 auth: {
-                  username: "ale@ale.com",
-                  password: 1234,
+                  username,
+                  password,
                 },
               }
             )
-            .then(({ data }) => console.log(data))
+            .then(({ data }) => {
+              updateUser({ ...userCredentials, perfil_completo: true });
+              alertOk("Perfil completado");
+              setTimeout(() => {
+                navigate("/");
+              }, 1600);
+            })
             .catch((err) => console.error(err));
         }
       }}
@@ -144,7 +155,9 @@ export const FormPlayer = () => {
                 />
               </div>
               <div className={errorText}>
-                <p>{errors.numero && touched.numero ? errors.numero : ""}</p>
+                <p>
+                  {errors.telefono && touched.telefono ? errors.telefono : ""}
+                </p>
               </div>
               <div className={input_container}>
                 <label className={label}>Sexo</label>
@@ -211,7 +224,7 @@ export const FormPlayer = () => {
                     Drive
                   </label>
                   <label>
-                    <Field type="radio" name="rol" value="Reves" />
+                    <Field type="radio" name="rol" value="Revés" />
                     Revés
                   </label>
                   <label>
@@ -240,7 +253,7 @@ export const FormPlayer = () => {
               <div role="group" className={check}>
                 <h3>Superficie</h3>
                 <label>
-                  <Field type="checkbox" name="surface" value="SP" />
+                  <Field type="checkbox" name="surface" value="SC" />
                   Cemento
                 </label>
                 <label>
