@@ -22,10 +22,6 @@ const {
 export const Login = () => {
   const { userCredentials, updateUser, updateToken } = useContext(UserContext);
 
-  useEffect(() => {
-    console.log(userCredentials);
-  }, [userCredentials]);
-
   return (
     <section className={container}>
       <div className={form_container}>
@@ -56,8 +52,9 @@ export const Login = () => {
                   password,
                   id: user.id,
                   perfil_completo: user.perfil_completo,
-                  /*  is_jugador: user.is_jugador,
-                  is_complejo: user.is_complejo, */
+                  login: true,
+                  is_jugador: user.is_jugador,
+                  is_complejo: user.is_complejo,
                 });
                 updateToken(token);
               })

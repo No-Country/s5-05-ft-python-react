@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { instance } from "./axios/axiosConfig";
 
@@ -14,29 +14,40 @@ import { ProfilePlayer } from "./pages/ProfilePlayer/ProfilePlayer";
 import { Register } from "./pages/Register/Register";
 
 import { Navbar } from "./components/HomePage/Navbar/Navbar";
+import { PrivatesPages } from "./router/PrivateRoutes";
+import { UserContext } from "./context/userContext";
+import { useContext } from "react";
 
 export const App = () => {
-	return (
-		<>
-			<Navbar />
-			<Routes>
-				<Route path='/' element={<Homepage />} />
-				<Route path='/complex' element={<Complex />} />
-				<Route path='/players' element={<Players />} />
-				<Route
-					path='/profile/complex/:idComplex'
-					element={<ProfileComplex />}
-				/>
-				<Route
-					path='/profile/player/:idPlayer'
-					element={<ProfilePlayer />}
-				/>
-				<Route path='/profile' element={<Profile />} />
-				<Route path='/login' element={<Login />} />
-				<Route path='/register' element={<Register />} />
-				<Route path='/form/complex' element={<ComplexForm />} />
-				<Route path='/form/player' element={<PlayerForm />} />
-			</Routes>
-		</>
-	);
+  const { userCredentials } = useContext(UserContext);
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+
+        <Route element={<PrivatesPages />}>
+          <Route
+            path="/profile/complex/:idComplex"
+            element={<ProfileComplex />}
+          />
+          <Route path="/profile/player/:idPlayer" element={<ProfilePlayer />} />
+          <Route path="/complex" element={<Complex />} />
+          <Route path="/players" element={<Players />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/form/player" element={<PlayerForm />} />
+          <Route path="/form/complex" element={<ComplexForm />} />
+        </Route>
+
+        <Route
+          path="/login"
+          element={userCredentials.login ? <Navigate to={"/"} /> : <Login />}
+        />
+        <Route
+          path="/register"
+          element={userCredentials.login ? <Navigate to={"/"} /> : <Register />}
+        />
+      </Routes>
+    </>
+  );
 };
