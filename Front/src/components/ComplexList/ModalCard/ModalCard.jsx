@@ -1,11 +1,19 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import mapboxgl from 'mapbox-gl';
+
+import { capitalize } from "../../../helper/capitalize";
+
 import classes from "./ModalCard.module.css";
 
 const {
   card,
+  link__profile,
   data__container,
   data__container__info,
   data__map,
   data__map__container,
+  error__map,
   img,
   btn,
   btn__container,
@@ -13,33 +21,79 @@ const {
 
 export const ModalCard = ({ imgUrl, setOpenModal, complex }) => {
 
+  const [longLat, setLongLat] = useState([0,0])
+
+  const [loading, setLoading] = useState(true);
+
+  const [error, setError] = useState("");
+
+const requestOptions = {
+  method: 'GET',
+};
+
+const getQuery = (country, city, address, num) => {
+  return `${country} ${city} ${address} ${num}`.replace(' ','%')
+}
+
+const getMap = () => {
+  mapboxgl.accessToken = 'pk.eyJ1IjoiZ2ZjaGF6YTA5IiwiYSI6ImNsNjQ4MzdsZjBqeHEzY2x2ZmVldGp6aGoifQ.0zXgFuC8Hw_sYkjayVWPzw';
+  const map = new mapboxgl.Map({
+  container: `map`, // container ID
+  style: 'mapbox://styles/mapbox/streets-v12', // style URL
+  center: longLat, // starting position [lng, lat]
+  zoom: 15, // starting zoom
+});
+}
+
+useEffect(() => {
+  setLoading(true);
+  fetch("https://api.geoapify.com/v1/geocode/search?text="+getQuery(complex.pais, complex.ciudad, complex.calle, complex.altura)+"&apiKey=cc7216e09e16417fa15ca39e43073773", requestOptions)
+  .then(response => response.json())
+  .then(result => {
+    setError("");
+    setLongLat([result.features[0].properties.lon, result.features[0].properties.lat])
+    setLoading(false);
+  })
+  .catch(error => {
+    setLongLat([0,0]);
+    setLoading(false);
+    setError("No se encontró ubicación");
+  }); 
+}, [])
+
   return (
     <div className={card}>
       <div>
         <div>
-          <h2>{complex.nombre}</h2>
+          <Link to={`/profile/complex/${complex.usuario}`} className={link__profile}>
+            <h2>{capitalize(complex.nombre)}</h2>
+          </Link>
           <div className={data__container}>
             <div className={data__container__info}>
-              <p>Ciudad: {complex.ciudad}</p>
-              <p>Dirección: {complex.calle} {complex.altura}</p>
+              <p>Ciudad: {capitalize(complex.ciudad)}</p>
+              <p>Dirección: {capitalize(complex.calle)} {complex.altura}</p>
               <p>Teléfono: {complex.telefono}</p>
             </div>
             <div className={data__map__container}>
-              <iframe
-                className={data__map}
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3458329.1641475647!2d-68.76695314656389!3d-32.169869786767286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432a2edbd93a039%3A0xb5e5c18389e6d9de!2sCanchas%20de%20p%C3%A1del%20%7C%20Direcci%C3%B3n%20de%20Deportes!5e0!3m2!1ses!2sar!4v1668988085937!5m2!1ses!2sar"
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="location"
-              ></iframe>
+              {
+                error === "" && <div id={`map`} className={data__map}></div>
+              }
+              {
+                error !== "" && <div className={error__map}>{error}</div>
+              }
+              {
+                error === "" && document.getElementById(`map`) && getMap()
+              }
             </div>
           </div>
         </div>
         <img src={imgUrl} alt="complejo" className={img} />
       </div>
       <div className={btn__container}>
-        <button onClick={() => setOpenModal(false)} className={btn}>
+        <button onClick={() => {
+          setOpenModal(false);
+          setLongLat([0,0]);  
+        }} className={btn}>
           Cerrar
         </button>
       </div>
