@@ -6,6 +6,7 @@ import LocationIcon from "../../assets/profile/location_icon.png";
 import WtsIcon from "../../assets/profile/wts_icon.png";
 import { instance } from "../../axios/axiosConfig";
 import { Loading } from "../../components/Loading/Loading";
+import { openInNewTab } from "../../helper/openInNewTab";
 import { ErrorComplex } from "../404Complex/ErrorComplex";
 
 import "./profileComplex.css";
@@ -72,8 +73,14 @@ export const ProfileComplex = () => {
 							<div className='profileComplex--info--contact--text'>
 								Contacto
 							</div>
-							<div className='profileComplex--info--contact--number'>
-								159159159159
+							<div
+								className='profileComplex--info--contact--number'
+								onClick={() =>
+									openInNewTab(
+										`https://wa.me/${userComplex.telefono}`
+									)
+								}>
+								{userComplex.telefono}
 							</div>
 						</div>
 
