@@ -3,6 +3,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { ToastContainer, toast } from 'react-toastify';
 
 import { instance } from "../../axios/axiosConfig";
+import { capitalize } from "../../helper/capitalize";
 import { PlayerList } from "../../components/PlayerList/PlayerList";
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -82,7 +83,7 @@ export const Players = () => {
                   {playersMatch.length
                     ? playersMatch.map((player) => (
                         <div key={player.usuario} className={player__pos}>
-                          <p>{player.nombre} {player.apellido}</p>
+                          <p>{capitalize(player.nombre)} {capitalize(player.apellido)}</p>
                           <p>Nivel: {player.nivel}</p>
                           <p>Posición: {player.rol}</p>
                           <p>Género: {player.sexo}</p>
