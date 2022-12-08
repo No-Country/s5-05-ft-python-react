@@ -36,8 +36,8 @@ export const App = () => {
           <Route path="/players" element={<Players />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/form/player" element={<PlayerForm />} />
+          <Route path="/form/complex" element={<ComplexForm />} />
         </Route>
-        <Route path="/form/complex" element={<ComplexForm />} />
 
         <Route
           path="/login"
