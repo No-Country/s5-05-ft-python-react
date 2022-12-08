@@ -12,8 +12,6 @@ export const Navbar = () => {
 
   const { userCredentials } = useContext(UserContext);
 
-  console.log(userCredentials.id !== "");
-
   window.onscroll = () => {
     setOpenMenu(false);
   };
@@ -52,22 +50,23 @@ export const Navbar = () => {
         </label>
         <div className={nav__menu} style={{ left: openMenu ? "0px" : "-100%" }}>
           <ul>
-            <li className={location === "/complex" ? resalt__link : ""}>
-              <Link to="/complex">Canchas</Link>
-            </li>
-            <li className={location === "/players" ? resalt__link : ""}>
-              <Link to="/players">Usuarios</Link>
-            </li>
+            {userCredentials.id !== "" ? (
+              userCredentials.is_jugador ? (
+                <li className={location === "/complex" ? resalt__link : ""}>
+                  <Link to="/complex">Canchas</Link>
+                </li>
+              ) : (
+                <li className={location === "/players" ? resalt__link : ""}>
+                  <Link to="/players">Usuarios</Link>
+                </li>
+              )
+            ) : null}
           </ul>
           <div className={menu__buttons__container}>
             {userCredentials.id !== "" ? (
               userCredentials.is_jugador ? (
                 userCredentials.perfil_completo ? (
-                  <HomeButton
-                    name={"Perfil"}
-                    to="/profile"
-                    color="#3282c3"
-                  />
+                  <HomeButton name={"Perfil"} to="/profile" color="#3282c3" />
                 ) : (
                   <HomeButton
                     name={"Completar perfil"}
@@ -76,11 +75,7 @@ export const Navbar = () => {
                   />
                 )
               ) : userCredentials.perfil_completo ? (
-                <HomeButton
-                  name={"Perfil"}
-                  to="/profile"
-                  color="#3282c3"
-                />
+                <HomeButton name={"Perfil"} to="/profile" color="#3282c3" />
               ) : (
                 <HomeButton
                   name={"Completar datos"}

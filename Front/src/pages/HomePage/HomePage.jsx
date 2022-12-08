@@ -27,7 +27,6 @@ export const Homepage = () => {
     motivation,
     motivation__container,
     motivation__info,
-    featured__courts,
     functionality__container__cards,
     card__functionality,
     info__functionality,
@@ -35,7 +34,7 @@ export const Homepage = () => {
     location__container,
     location__img,
   } = classes;
-
+  
   const navigate = useNavigate();
 
   const { userCredentials } = useContext(UserContext);
@@ -68,7 +67,9 @@ export const Homepage = () => {
               podrás pasar un buen tiempo con compañeros, amigos, familiares o
               conocer personas nuevas.
             </p>
-            <HomeButton name={"Registrate ahora"} to="/register" />
+            {userCredentials.id !== "" ? null : (
+              <HomeButton name={"Registrate ahora"} to="/register" />
+            )}
           </div>
         </div>
       </header>
@@ -91,12 +92,23 @@ export const Homepage = () => {
               <img src={images.DescriptionImage3} alt="Cancha 3" />
             </div>
           </div>
-          <HomeButton
-            name={"Explora canchas"}
-            color="#3282c3"
-            to="/complex"
-            w="19px"
-          />
+          {userCredentials.id !== "" ? (
+            userCredentials.is_jugador ? (
+              <HomeButton
+                name={"Explora canchas"}
+                color="#3282c3"
+                to="/complex"
+                w="19px"
+              />
+            ) : (
+              <HomeButton
+                name={"Explora usuarios"}
+                color="#3282c3"
+                to="/players"
+                w="19px"
+              />
+            )
+          ) : null}
         </div>
       </section>
       <section className={services}>
