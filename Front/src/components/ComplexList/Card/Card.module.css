@@ -24,6 +24,16 @@
 .text > p {
     font-size: 14px;
     margin: 6px 0px;
+    font-weight: bold;
+}
+
+.link__profile {
+    color: var(--color--navy);
+    text-decoration: none;
+}
+
+.link__profile:active {
+    color: var(--color--light--blue);
 }
 
 .btn {
@@ -52,7 +62,7 @@
     }
 
     .card:hover .img {
-        filter: opacity(.7) blur(0px);
+        filter: opacity(.5) blur(0px);
     }
 
     .img {

@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 
+import { instance } from "../../../axios/axiosConfig";
+
 import classes from './FilterForm.module.css'
 
 const { form, open, select, reset__btn } = classes;
 
-export const FilterForm = ({openFilter, setPlayers, search}) => {
+export const FilterForm = ({openFilter, setPlayers, setLoading, search}) => {
 
     const initialValues = {
         level: "",
@@ -53,7 +55,7 @@ export const FilterForm = ({openFilter, setPlayers, search}) => {
         if (search === "") {
             return arr;
         } else {
-            return arr.filter(player => player.nombre.includes(search) || player.apellido.includes(search))
+            return arr.filter(player => player.nombre.toUpperCase().includes(search.toUpperCase()) || player.apellido.toUpperCase().includes(search.toUpperCase()))
         }
     }
 
@@ -71,6 +73,7 @@ export const FilterForm = ({openFilter, setPlayers, search}) => {
     }
 
     useEffect(() => {
+        setLoading(true);
         if (filter.level === "" && filter.position === "" && filter.specs === "" && filter.gender === "" && search === "") {
             setPlayers(playersTotal);
         } else {
@@ -82,10 +85,11 @@ export const FilterForm = ({openFilter, setPlayers, search}) => {
             result = filterSearch(result)
             setPlayers(result);
         }
+        setLoading(false);
     }, [filter, search])
     
     useEffect(() => {
-        fetch('http://localhost:8000/api/jugador').then(res=>res.json()).then(data=>setPlayersTotal(data))
+        instance.get('jugador').then(res=>setPlayersTotal(res.data))
     }, [])
     
 

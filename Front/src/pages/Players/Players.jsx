@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { ToastContainer, toast } from 'react-toastify';
 
+import { instance } from "../../axios/axiosConfig";
+import { capitalize } from "../../helper/capitalize";
 import { PlayerList } from "../../components/PlayerList/PlayerList";
 
 import 'react-toastify/dist/ReactToastify.css';
 import classes from "./Players.module.css";
-import { useEffect } from "react";
 
 const {
   main,
@@ -55,7 +56,7 @@ export const Players = () => {
   }
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/jugador').then(res=>res.json()).then(data=>setPlayersTotal(data))
+    instance.get('jugador').then(res=>setPlayersTotal(res.data))
   }, [])
   
 
@@ -82,7 +83,7 @@ export const Players = () => {
                   {playersMatch.length
                     ? playersMatch.map((player) => (
                         <div key={player.usuario} className={player__pos}>
-                          <p>{player.nombre} {player.apellido}</p>
+                          <p>{capitalize(player.nombre)} {capitalize(player.apellido)}</p>
                           <p>Nivel: {player.nivel}</p>
                           <p>Posición: {player.rol}</p>
                           <p>Género: {player.sexo}</p>

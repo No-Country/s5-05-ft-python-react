@@ -8,7 +8,6 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
 	const navigate = useNavigate();
-	// actualizar cuando completa form de login , para poder llamar a PUT
 	const [userCredentials, setUserCredentials] = useState({
 		username: "",
 		password: "",
@@ -16,23 +15,22 @@ export const UserProvider = ({ children }) => {
 		is_jugador: false,
 		is_complejo: false,
 		perfil_completo: false,
+		login: false,
 	});
-
-	// actualizar cuando completa form de login
-	const [token, setToken] = useState();
-
-	useEffect(() => {
-		if (userCredentials.id !== "") {
-			userCredentials.is_jugador && userCredentials.perfil_completo
-				? getUserPlayer(userCredentials.id)
-				: getUserComplex(userCredentials.id);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [userCredentials.id]);
 
 	// actualizar cuando completa form de jugador / complejo
 	const [userPlayer, setUserPLayer] = useState(null);
 	const [userComplex, setUserComplex] = useState(null);
+
+	const [token, setToken] = useState(null);
+
+	useEffect(() => {
+		if (userCredentials.perfil_completo) {
+			userCredentials.is_jugador
+				? getUserPlayer(userCredentials.id)
+				: getUserComplex(userCredentials.id);
+		}
+	}, [userCredentials.perfil_completo]);
 
 	const updateUser = (userValue) => {
 		setUserCredentials(userValue);
@@ -99,7 +97,7 @@ export const UserProvider = ({ children }) => {
 	};
 
 	const getUserComplex = (id) => {
-		instance.get(`jugador/${id}/`).then(({ data }) => {
+		instance.get(`complejo/${id}/`).then(({ data }) => {
 			setUserComplex(data);
 		});
 	};

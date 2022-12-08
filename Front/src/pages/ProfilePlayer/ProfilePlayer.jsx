@@ -35,6 +35,54 @@ export const ProfilePlayer = () => {
 			);
 	}, [idPlayer]);
 
+	const preferencesCourtCover = () => {
+		let valueReturn = "";
+		let T = userPlayer.cancha_specs.includes("T");
+		let AL = userPlayer.cancha_specs.includes("AL");
+		if (T & AL) {
+			valueReturn = "Cubierta Techada o al Aire Libre";
+		} else {
+			if (T) {
+				valueReturn = "Cubierta Techada";
+			} else {
+				valueReturn = "Cubierta al Aire Libre";
+			}
+		}
+		return valueReturn;
+	};
+
+	const preferencesCourtSurface = () => {
+		let valueReturn = "";
+		let SC = userPlayer.cancha_specs.includes("SC");
+		let SS = userPlayer.cancha_specs.includes("SS");
+		if (SC & SS) {
+			valueReturn = "Sup. Cemento o Sintetica";
+		} else {
+			if (SC) {
+				valueReturn = "Sup. Cemento";
+			} else {
+				valueReturn = "Sup. Sintetica";
+			}
+		}
+		return valueReturn;
+	};
+
+	const preferencesCourtWalls = () => {
+		let valueReturn = "";
+		let PC = userPlayer.cancha_specs.includes("PC");
+		let PB = userPlayer.cancha_specs.includes("PB");
+		if (PC & PB) {
+			valueReturn = "Pared Cemento o Blindex";
+		} else {
+			if (PB) {
+				valueReturn = "Pared Blindex";
+			} else {
+				valueReturn = "Pared Cemento";
+			}
+		}
+		return valueReturn;
+	};
+
 	return (
 		<div className='container--section--profilePlayer'>
 			{loading ? (
@@ -79,7 +127,9 @@ export const ProfilePlayer = () => {
 								alt='player level'
 							/>
 							<div className='profilePlayer--position--value'>
-								{userPlayer.rol}
+								{userPlayer.rol === "Ambos"
+									? "Drive y Reves"
+									: userPlayer.rol}
 							</div>
 						</div>
 
@@ -90,7 +140,7 @@ export const ProfilePlayer = () => {
 								alt='surface court'
 							/>
 							<div className='profilePlayer--info--level--text'>
-								Sintetico
+								{preferencesCourtSurface()}
 							</div>
 						</div>
 						<div className='container--profilePlayer--info--level'>
@@ -100,7 +150,7 @@ export const ProfilePlayer = () => {
 								alt='surface court'
 							/>
 							<div className='profilePlayer--info--level--text'>
-								Blindex
+								{preferencesCourtWalls()}
 							</div>
 						</div>
 						<div className='container--profilePlayer--info--level'>
@@ -110,7 +160,7 @@ export const ProfilePlayer = () => {
 								alt='surface court'
 							/>
 							<div className='profilePlayer--info--level--text'>
-								Techada
+								{preferencesCourtCover()}
 							</div>
 						</div>
 
@@ -139,7 +189,9 @@ export const ProfilePlayer = () => {
 
 							<div
 								onClick={() =>
-									openInNewTab(`https://wa.me/123456789`)
+									openInNewTab(
+										`https://wa.me/${userPlayer.telefono}`
+									)
 								}
 								className='profilePlayer--info--contact--number'>
 								{userPlayer.telefono}

@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
-
-import classes from './PlayerList.module.css'
-import { RowData } from './Row/RowData';
-
-import { FilterForm } from './FilterForm/FilterForm';
 import { Droppable } from 'react-beautiful-dnd';
 
-const { container, bar__container, container__btn, filter__btn, search__input, form__container, open, table, row} = classes;
+import { instance } from "../../axios/axiosConfig";
+
+import { RowData } from './Row/RowData';
+import { FilterForm } from './FilterForm/FilterForm';
+
+import classes from './PlayerList.module.css'
+import { Loading } from '../Loading/Loading';
+
+const { container, bar__container, container__btn, filter__btn, search__input, form__container, open, table, row, row__loading} = classes;
 
 export const PlayerList = () => {
 
@@ -16,8 +19,14 @@ export const PlayerList = () => {
 
   const [playersList, setPlayersList] = useState([]);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    fetch('http://localhost:8000/api/jugador').then(res=>res.json()).then(data=>setPlayersList(data))
+    setLoading(true);
+    instance.get('jugador').then(res=>{
+      setPlayersList(res.data);
+      setLoading(false);
+    })
   }, [])
   
 
@@ -33,7 +42,7 @@ export const PlayerList = () => {
                 <input type="text" placeholder="Buscar por nombre..." className={search__input} value={search} onChange={(e)=>setSearch(e.target.value)}/>
               </div>
               <div className={`${form__container} ${openFilter ? open : ""}`}>
-                <FilterForm setPlayers={setPlayersList} openFilter={openFilter} search={search}/>
+                <FilterForm setPlayers={setPlayersList} setLoading={setLoading} openFilter={openFilter} search={search}/>
               </div>
             </div>
 
@@ -47,7 +56,7 @@ export const PlayerList = () => {
                 <div>Género</div>
               </div>
               {
-                playersList.length ? playersList.map(player => <RowData key={player.usuario} player={player}/>) : <div className={row}><p>No hay jugadores</p></div>
+                !loading ? playersList.length ? playersList.map(player => player.nombre!=="" && <RowData key={player.usuario} player={player}/>) : <div className={row}><p>No hay jugadores que coincidan</p></div> : <div className={row__loading}><Loading/></div>
               }
             </div>
           </div>

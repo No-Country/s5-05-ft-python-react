@@ -6,6 +6,8 @@ import { HomeCard } from "../../components/HomePage/HomeCard/HomeCard";
 import { Subtitle } from "../../components/HomePage/Subtitle/Subtitle";
 import { UserContext } from "../../context/userContext";
 import { useContext } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Homepage = () => {
   const {
@@ -32,8 +34,22 @@ export const Homepage = () => {
     location__container,
     location__img,
   } = classes;
+  
+  const navigate = useNavigate();
 
   const { userCredentials } = useContext(UserContext);
+  const { login, is_jugador, perfil_completo } = userCredentials;
+  let ruta = "";
+  if (login) {
+    is_jugador ? (ruta = "player") : (ruta = "complex");
+  }
+
+  console.log(userCredentials);
+  useEffect(() => {
+    if (login && !perfil_completo) {
+      navigate("form/" + ruta);
+    }
+  }, []);
 
   return (
     <>
