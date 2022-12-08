@@ -55,7 +55,7 @@ export const FilterForm = ({openFilter, setPlayers, setLoading, search}) => {
         if (search === "") {
             return arr;
         } else {
-            return arr.filter(player => player.nombre.includes(search) || player.apellido.includes(search))
+            return arr.filter(player => player.nombre.toUpperCase().includes(search.toUpperCase()) || player.apellido.toUpperCase().includes(search.toUpperCase()))
         }
     }
 

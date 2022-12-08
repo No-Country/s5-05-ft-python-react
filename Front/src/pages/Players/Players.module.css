@@ -32,7 +32,7 @@
 .match {
     width: 40rem;
     height: 20rem;
-    border: 1px dashed var(--color--white);
+    border: 2px dashed var(--color--white);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,7 +43,7 @@
 .field {
     width: 40rem;
     height: 20rem;
-    border: 1px solid var(--color--white);
+    border: 2px solid var(--color--white);
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -102,6 +102,10 @@
     .match, .field {
         width: 24rem;
         height: 12rem;
+    }
+
+    .match {
+        font-size: 14px;
     }
 
     .field {
