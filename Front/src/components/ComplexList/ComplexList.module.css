@@ -4,6 +4,7 @@
     justify-content: center;
     background-color: var(--color--light--blue);
     font-family: var(--ff--lato);
+    min-height: 600px;
 }
 
 .card__container {
