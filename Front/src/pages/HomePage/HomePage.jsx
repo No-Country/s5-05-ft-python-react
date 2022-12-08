@@ -4,6 +4,8 @@ import { Footer } from "../../components/HomePage/Footer/Footer";
 import { HomeButton } from "../../components/HomePage/HomeButton/HomeButton";
 import { HomeCard } from "../../components/HomePage/HomeCard/HomeCard";
 import { Subtitle } from "../../components/HomePage/Subtitle/Subtitle";
+import { UserContext } from "../../context/userContext";
+import { useContext } from "react";
 
 export const Homepage = () => {
   const {
@@ -23,7 +25,6 @@ export const Homepage = () => {
     motivation,
     motivation__container,
     motivation__info,
-    featured__courts,
     functionality__container__cards,
     card__functionality,
     info__functionality,
@@ -31,6 +32,8 @@ export const Homepage = () => {
     location__container,
     location__img,
   } = classes;
+
+  const { userCredentials } = useContext(UserContext);
 
   return (
     <>
@@ -48,7 +51,9 @@ export const Homepage = () => {
               podrás pasar un buen tiempo con compañeros, amigos, familiares o
               conocer personas nuevas.
             </p>
-            <HomeButton name={"Registrate ahora"} to="/register" />
+            {userCredentials.id !== "" ? null : (
+              <HomeButton name={"Registrate ahora"} to="/register" />
+            )}
           </div>
         </div>
       </header>
@@ -71,12 +76,23 @@ export const Homepage = () => {
               <img src={images.DescriptionImage3} alt="Cancha 3" />
             </div>
           </div>
-          <HomeButton
-            name={"Explora canchas"}
-            color="#3282c3"
-            to="/complex"
-            w="19px"
-          />
+          {userCredentials.id !== "" ? (
+            userCredentials.is_jugador ? (
+              <HomeButton
+                name={"Explora canchas"}
+                color="#3282c3"
+                to="/complex"
+                w="19px"
+              />
+            ) : (
+              <HomeButton
+                name={"Explora usuarios"}
+                color="#3282c3"
+                to="/players"
+                w="19px"
+              />
+            )
+          ) : null}
         </div>
       </section>
       <section className={services}>
