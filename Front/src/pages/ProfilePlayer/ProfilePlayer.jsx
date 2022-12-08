@@ -189,7 +189,9 @@ export const ProfilePlayer = () => {
 
 							<div
 								onClick={() =>
-									openInNewTab(`https://wa.me/123456789`)
+									openInNewTab(
+										`https://wa.me/${userPlayer.telefono}`
+									)
 								}
 								className='profilePlayer--info--contact--number'>
 								{userPlayer.telefono}
