@@ -18,16 +18,26 @@ def user_api_view(request):
             if user_serializer.is_valid():
                 user_serializer.save()
                 return Response(user_serializer.data, status = status.HTTP_201_CREATED)
-            return Response(user_serializer.errors, status = status.HTTP_303_SEE_OTHER)
+            return Response(user_serializer.errors, status = status.HTTP_303_SEE_OTHER)      
 
-@api_view(['GET'])
+@api_view(['GET','PATCH'])
 def user_detail_view(request,pk=None):
     user = User.objects.filter(id = pk).first()
-    if user:          
+    if user:
         if request.method == 'GET':
             user_serializer = UserSerializer(user)
             print(user_serializer.data)
             return Response(user_serializer.data)
+
+        elif request.method == 'PATCH':
+            if user.id == request.user.id or request.user.is_superuser:
+                user_serializer = UserSerializer(instance=user, data=request.data, partial = True)
+                if user_serializer.is_valid():
+                    user_serializer.save()
+                    return Response(user_serializer.data, status=status.HTTP_200_OK)
+                return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message":"No estas acreditado para actualizar estos datos"}, status=status.HTTP_403_FORBIDDEN)
+        return Response({"message":"No se ha encontrado un usuario con estos datos"}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def jugador_api_view(request):
