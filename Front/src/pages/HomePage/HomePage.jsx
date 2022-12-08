@@ -45,8 +45,9 @@ export const Homepage = () => {
     is_jugador ? (ruta = "player") : (ruta = "complex");
   }
 
+  console.log(userCredentials);
   useEffect(() => {
-    if (login && perfil_completo) {
+    if (login && !perfil_completo) {
       navigate("form/" + ruta);
     }
   }, []);
