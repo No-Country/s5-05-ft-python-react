@@ -11,17 +11,17 @@ export const RowData = ({ player }) => {
   const getSpecs = (charCode) => {
     switch (charCode) {
       case "T":
-        return "Techada";
+        return "Techada-";
       case "AL":
-          return "Aire Libre"
+          return "Aire Libre-"
       case "SC":
-          return "Superficie Cemento"
+          return "Superficie Cemento-"
       case "SS":
-        return "Superficie Sintética"
+        return "Superficie Sintética-"
       case "PC":
-        return "Pared Cemento"
+        return "Pared Cemento-"
       case "PB":
-        return "Pared Blindex"
+        return "Pared Blindex-"
       default:
         break;
     }
@@ -35,7 +35,15 @@ export const RowData = ({ player }) => {
               <Link to={`/profile/player/${player.usuario}`} className={profile__link}>{player.nombre} {player.apellido}</Link>
               <div>{player.nivel}</div>
               <div>{player.rol}</div>
-              <div>{player.cancha_specs.map(cancha=>getSpecs(cancha))}</div>
+              <div>{player.cancha_specs.map((cancha, index)=>{
+                if(player.cancha_specs.length - 1 !== index) {
+                  return getSpecs(cancha)
+                } else {
+                  let str = getSpecs(cancha);
+                  str = str.slice(0,-1);
+                  return str;
+                }
+                })}</div>
               <div>{player.telefono}</div>
               <div>{player.sexo}</div>
           </div>

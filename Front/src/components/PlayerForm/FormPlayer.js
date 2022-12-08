@@ -1,9 +1,11 @@
 import { Field, Form, Formik } from "formik";
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { array } from "yup";
 
 import { instance } from "../../axios/axiosConfig";
 import { UserContext } from "../../context/userContext";
+import { alertOk } from "../Alerts/alerts";
 import { Modal_selectTime } from "./Modal_selectTime";
 import styles from "./playerForm.module.css";
 import { schemePlayer } from "./schema";
@@ -24,6 +26,8 @@ export const FormPlayer = () => {
     election: [],
     cells: false,
   });
+
+  const navigate = useNavigate();
 
   const { userCredentials, updateUser } = useContext(UserContext);
 
@@ -93,8 +97,11 @@ export const FormPlayer = () => {
               }
             )
             .then(({ data }) => {
-              console.log(data);
               updateUser({ ...userCredentials, perfil_completo: true });
+              alertOk("Perfil completado");
+              setTimeout(() => {
+                navigate("/");
+              }, 1600);
             })
             .catch((err) => console.error(err));
         }
@@ -148,7 +155,9 @@ export const FormPlayer = () => {
                 />
               </div>
               <div className={errorText}>
-                <p>{errors.numero && touched.numero ? errors.numero : ""}</p>
+                <p>
+                  {errors.telefono && touched.telefono ? errors.telefono : ""}
+                </p>
               </div>
               <div className={input_container}>
                 <label className={label}>Sexo</label>
@@ -215,7 +224,7 @@ export const FormPlayer = () => {
                     Drive
                   </label>
                   <label>
-                    <Field type="radio" name="rol" value="Reves" />
+                    <Field type="radio" name="rol" value="Revés" />
                     Revés
                   </label>
                   <label>

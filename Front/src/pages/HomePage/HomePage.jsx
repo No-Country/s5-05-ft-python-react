@@ -39,14 +39,14 @@ export const Homepage = () => {
   const navigate = useNavigate();
 
   const { userCredentials } = useContext(UserContext);
-  const { login, is_jugador } = userCredentials;
+  const { login, is_jugador, perfil_completo } = userCredentials;
   let ruta = "";
   if (login) {
     is_jugador ? (ruta = "player") : (ruta = "complex");
   }
 
   useEffect(() => {
-    if (login) {
+    if (login && perfil_completo) {
       navigate("form/" + ruta);
     }
   }, []);

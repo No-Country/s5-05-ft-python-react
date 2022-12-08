@@ -2,6 +2,7 @@ import { Field, Form, Formik } from "formik";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { instance } from "../../axios/axiosConfig";
+import { alertOk, errorAlert } from "../../components/Alerts/alerts";
 
 import styles from "./preRegister.module.css";
 import { scheme } from "./schemaPreRegister";
@@ -45,8 +46,21 @@ export const Register = () => {
               perfil_completo: false,
             })
             // GUARDAR ID en context
-            .then((resp) => navigate("/login"))
-            .catch((err) => console.log(err));
+            .then(({ status }) => {
+              alertOk("Usuario Creado");
+              if (status === 201) {
+                setTimeout(() => {
+                  navigate("/login");
+                }, 1600);
+                if (status === 403) {
+                  errorAlert("Parece haber un usuario con ese correo");
+                }
+              }
+            })
+            .catch((err) => {
+              errorAlert();
+              console.log(err);
+            });
         }}
         validationSchema={scheme}
       >
@@ -101,7 +115,7 @@ export const Register = () => {
                   Contraseña
                 </label>
                 <Field
-                  type="text"
+                  type="password"
                   id="password"
                   name="password"
                   placeholder="Escribir contraseña"
@@ -117,7 +131,7 @@ export const Register = () => {
                   Repetir
                 </label>
                 <Field
-                  type="text"
+                  type="password"
                   id="password2"
                   name="password2"
                   placeholder="Repetir contraseña"

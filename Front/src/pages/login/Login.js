@@ -22,10 +22,6 @@ const {
 export const Login = () => {
   const { userCredentials, updateUser, updateToken } = useContext(UserContext);
 
-  useEffect(() => {
-    console.log(userCredentials);
-  }, [userCredentials]);
-
   return (
     <section className={container}>
       <div className={form_container}>

@@ -12,7 +12,7 @@ import {
 } from "../../../helper/validations";
 
 export const ProfileUpdatePlayer = () => {
-	const { userPlayer, PUT_userPlayer } = useContext(UserContext);
+	const { userPlayer, PUT_userPlayer, logout } = useContext(UserContext);
 
 	//updaters
 	const [nameUpdate, setNameUpdate] = useState(userPlayer.nombre);
@@ -341,6 +341,11 @@ export const ProfileUpdatePlayer = () => {
 				</select>
 			</div>
 			<ToastContainer />
+			<button
+				className='profile--button--logout'
+				onClick={() => logout(userNumber)}>
+				Cerrar Sesion
+			</button>
 		</div>
 	);
 };

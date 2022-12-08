@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import axios from "axios";
 import { instance } from "../../axios/axiosConfig";
@@ -9,6 +9,7 @@ import style from "./clubForm.module.css";
 import { validation } from "./schema";
 import { UserContext } from "../../context/userContext";
 import { useContext } from "react";
+import { alertOk } from "../Alerts/alerts";
 
 const {
   container,
@@ -25,6 +26,8 @@ const {
 } = style;
 export const ClubForm = () => {
   const { userCredentials, updateUser } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const { id, username, password } = userCredentials;
   return (
@@ -72,6 +75,10 @@ export const ClubForm = () => {
             .then((resp) => {
               console.log(resp);
               updateUser({ ...userCredentials, perfil_completo: true });
+              alertOk("Perfil completado");
+              setTimeout(() => {
+                navigate("/");
+              }, 1600);
             })
             .catch((err) => console.error(err));
         }}

@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import SuccesIcon from "../assets/profile/succes_icon.png";
 import { instance } from "../axios/axiosConfig";
@@ -6,7 +7,7 @@ import { instance } from "../axios/axiosConfig";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  // actualizar cuando completa form de login , para poder llamar a PUT
+  const navigate = useNavigate();
   const [userCredentials, setUserCredentials] = useState({
     username: "",
     password: "",
@@ -17,31 +18,14 @@ export const UserProvider = ({ children }) => {
     login: false,
   });
 
-  // actualizar cuando completa form de login
-  const [token, setToken] = useState();
-
-  //para manejar las vistas del usuario
-  const [userType, setUserType] = useState("complex");
+  const [token, setToken] = useState(null);
 
   // actualizar cuando completa form de jugador / complejo
   const [userPlayer, setUserPLayer] = useState(null);
   const [userComplex, setUserComplex] = useState(null);
 
-  useEffect(() => {
-    userPlayer !== null && setUserType("player");
-    userComplex !== null && setUserType("complex");
-  }, [userPlayer, userComplex]);
-
   const updateUser = (userValue) => {
     setUserCredentials(userValue);
-  };
-
-  const updateUserPlayer = (userPlayerValue) => {
-    setUserPLayer(userPlayerValue);
-  };
-
-  const updateUserComplex = (userComplexValue) => {
-    setUserComplex(userComplexValue);
   };
 
   const updateToken = (tokenValue) => {
@@ -49,7 +33,6 @@ export const UserProvider = ({ children }) => {
   };
 
   const PUT_userPlayer = (player) => {
-    console.log(player);
     instance
       .put(`jugador/${player.usuario}/`, player, {
         auth: {
@@ -57,11 +40,11 @@ export const UserProvider = ({ children }) => {
           password: userCredentials.password,
         },
       })
-      .then((resp) => {
-        setUserPLayer(resp.data);
+      .then(({ data }) => {
+        setUserPLayer(data);
         notify(true);
       })
-      .catch((err) => {
+      .catch(() => {
         notify(false);
       });
   };
@@ -74,35 +57,41 @@ export const UserProvider = ({ children }) => {
           password: userCredentials.password,
         },
       })
-      .then((resp) => {
-        setUserComplex(resp.data);
+      .then(({ data }) => {
+        setUserComplex(data);
         notify(true);
       })
-      .catch((err) => {
+      .catch(() => {
         notify(false);
       });
   };
 
   const logout = () => {
-    instance
-      .get(`logout/?token=${token}`)
-      .then((response) => console.log(response));
+    instance.get(`logout/?token=${token}`);
+
+    setUserCredentials({
+      username: "",
+      password: "",
+      id: "",
+      is_jugador: false,
+      is_complejo: false,
+      perfil_completo: false,
+    });
+    setUserPLayer(null);
+    setUserComplex(null);
+    navigate("login");
   };
 
   const getUserPlayer = (id) => {
-    let userSearch = {};
-    instance
-      .put(`jugador/${id}/`)
-      .then((response) => {
-        console.log(response);
-        userSearch = response;
-      })
-      .catch((error) => {
-        console.log(error);
-        userSearch = null;
-      });
+    instance.get(`jugador/${id}/`).then(({ data }) => {
+      setUserPLayer(data);
+    });
+  };
 
-    return userSearch;
+  const getUserComplex = (id) => {
+    instance.get(`jugador/${id}/`).then(({ data }) => {
+      setUserComplex(data);
+    });
   };
 
   const notify = (resolve) =>
@@ -132,12 +121,9 @@ export const UserProvider = ({ children }) => {
       value={{
         userCredentials,
         token,
-        userType,
         userPlayer,
         userComplex,
         updateUser,
-        updateUserPlayer,
-        updateUserComplex,
         updateToken,
         PUT_userPlayer,
         PUT_userComplex,
