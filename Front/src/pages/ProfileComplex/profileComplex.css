@@ -34,12 +34,13 @@
 .profileComplex--name {
 	text-align: center;
 	margin-top: 15px;
-	padding: 10px 20px;
-	font-weight: 500;
-	font-size: 40px;
-	color: var(--color--light--blue);
-	background-color: var(--color--navy);
+	padding: 10px 30px;
+	font-weight: 700;
+	font-size: 30px;
+	color: var(--color--navy);
+	background-color: var(--color--green);
 	border-radius: 25px;
+	text-transform: capitalize;
 }
 .profileComplex--info--icon {
 	width: 40px;
