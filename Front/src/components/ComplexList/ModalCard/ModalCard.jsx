@@ -31,8 +31,8 @@ const requestOptions = {
   method: 'GET',
 };
 
-const getQuery = (country, city, address, num) => {
-  return `${country} ${city} ${address} ${num}`.replace(' ','%')
+const getQuery = (name, country, city, address, num) => {
+  return `${name}, ${num}, ${address}, ${city}, ${country}`
 }
 
 const getMap = () => {
@@ -47,9 +47,10 @@ const getMap = () => {
 
 useEffect(() => {
   setLoading(true);
-  fetch("https://api.geoapify.com/v1/geocode/search?text="+getQuery(complex.pais, complex.ciudad, complex.calle, complex.altura)+"&apiKey=cc7216e09e16417fa15ca39e43073773", requestOptions)
+  fetch("https://api.geoapify.com/v1/geocode/search?text="+getQuery(complex.nombre, complex.pais, complex.ciudad, complex.calle, complex.altura)+"&apiKey=cc7216e09e16417fa15ca39e43073773", requestOptions)
   .then(response => response.json())
   .then(result => {
+    console.log(result)
     setError("");
     setLongLat([result.features[0].properties.lon, result.features[0].properties.lat])
     setLoading(false);
