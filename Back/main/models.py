@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from multiselectfield import MultiSelectField
 
 from django.contrib.postgres.fields import ArrayField
 from datetime import datetime
