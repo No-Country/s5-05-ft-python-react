@@ -90,11 +90,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'padelDb', 
+        'NAME': 'railway', 
         'USER': 'postgres', 
-        'PASSWORD': 'postgre',
-        'HOST': 'localhost', 
-        'PORT': '5432',
+        'PASSWORD': 'Fqq8nYkVs9YWC7CEnHl8',
+        'HOST': 'containers-us-west-23.railway.app', 
+        'PORT': '5808',
     }
 }
 
