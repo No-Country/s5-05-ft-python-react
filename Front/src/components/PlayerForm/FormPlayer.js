@@ -29,7 +29,7 @@ export const FormPlayer = () => {
 
   const navigate = useNavigate();
 
-  const { userCredentials, updateUser } = useContext(UserContext);
+  const { userCredentials, updateUser, token } = useContext(UserContext);
 
   const { id, username, password } = userCredentials;
 
@@ -97,11 +97,28 @@ export const FormPlayer = () => {
               }
             )
             .then(({ data }) => {
-              updateUser({ ...userCredentials, perfil_completo: true });
-              alertOk("Perfil completado");
-              setTimeout(() => {
-                navigate("/");
-              }, 1600);
+              instance
+                .patch(
+                  `/usuario/${id}/`,
+                  {
+                    perfil_completo: true,
+                  },
+                  {
+                    auth: {
+                      username,
+                      password,
+                      token,
+                    },
+                  }
+                )
+                .then((resp) => {
+                  console.log(resp);
+                  updateUser({ ...userCredentials, perfil_completo: true });
+                  alertOk("Perfil completado");
+                  setTimeout(() => {
+                    navigate("/");
+                  }, 1600);
+                });
             })
             .catch((err) => console.error(err));
         }

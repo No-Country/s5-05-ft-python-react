@@ -25,7 +25,7 @@ const {
   error,
 } = style;
 export const ClubForm = () => {
-  const { userCredentials, updateUser } = useContext(UserContext);
+  const { userCredentials, updateUser, token } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -54,7 +54,7 @@ export const ClubForm = () => {
 
           instance
             .put(
-              `complejo/${id}`,
+              `complejo/${id}/`,
               {
                 calle,
                 altura: Number(altura),
@@ -73,12 +73,28 @@ export const ClubForm = () => {
               }
             )
             .then((resp) => {
-              console.log(resp);
               updateUser({ ...userCredentials, perfil_completo: true });
-              alertOk("Perfil completado");
-              setTimeout(() => {
-                navigate("/");
-              }, 1600);
+
+              instance
+                .patch(
+                  `/usuario/${id}/`,
+                  {
+                    perfil_completo: true,
+                  },
+                  {
+                    auth: {
+                      username,
+                      password,
+                      token,
+                    },
+                  }
+                )
+                .then((resp) => {
+                  alertOk("Perfil completado");
+                  setTimeout(() => {
+                    navigate("/");
+                  }, 1600);
+                });
             })
             .catch((err) => console.error(err));
         }}
