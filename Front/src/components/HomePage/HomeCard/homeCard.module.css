@@ -1,0 +1,35 @@
+.card__container {
+  max-width: 280px;
+  aspect-ratio: 1;
+  width: 80%;
+  background-color: var(--color--blue);
+  padding: 25px 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card__container .card__icon {
+  font-size: 30px;
+  padding: 10px;
+  background-color: var(--color--white);
+  border-radius: 50%;
+}
+
+.card__container .card__title {
+  font-size: 30px;
+  color: var(--color--white);
+}
+
+.card__container .card__paragraph {
+  font-size: 15px;
+  color: var(--color--white);
+}
+
+@media (min-width: 640px) {
+  .card__container {
+    width: 100%;
+  }
+}

@@ -1,0 +1,95 @@
+.form {
+  background-image: url("../../assets/pattern.svg");
+  background-size: auto;
+  background-position-y: 130px;
+  width: 100%;
+  max-width: 350px;
+  font-family: var(--ff--lato);
+  border-radius: 30px;
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.17);
+}
+.title {
+  text-align: center;
+  padding: 1.8rem;
+  color: white;
+  font-weight: 400;
+}
+
+.check {
+  display: flex;
+  flex-direction: column;
+}
+
+.form h3 {
+  text-align: center;
+  font-size: small;
+}
+.check label {
+  margin: 5px;
+}
+.check input {
+  margin-right: 4px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.8rem;
+  background-color: var(--background-inputs);
+  border-radius: 45px 0 30px 30px;
+  position: relative;
+  top: 4px;
+}
+
+.input_container {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.radio_container input {
+  margin: 4px;
+}
+.radio_container label {
+  margin-right: 8px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.input_container input[type="text"] {
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  border-bottom: 1px solid transparent;
+}
+.input_container input[type="text"]:focus {
+  border-color: rgba(0, 0, 0, 0.245);
+}
+
+.button {
+  border: none;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: black;
+  color: rgb(215, 213, 213);
+  border-radius: 8px 0 8px 8px;
+  margin-top: 8px;
+}
+.button:hover {
+  opacity: 0.9;
+}
+
+.errorText {
+  min-height: 20px;
+  font-size: 14px;
+  text-align: center;
+  color: brown;
+}
